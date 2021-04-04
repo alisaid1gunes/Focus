@@ -7,7 +7,7 @@ const taskSchema = new mongoose.Schema({
     min: 1,
     max: 25,
   },
-  completed: {
+  done: {
     type: Boolean,
     require: true,
   },
@@ -32,3 +32,4 @@ const userSchema = new mongoose.Schema({
   tasks: [taskSchema],
 });
 module.exports = mongoose.model('User', userSchema);
+
