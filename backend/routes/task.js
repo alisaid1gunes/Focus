@@ -9,6 +9,7 @@ const {
   taskValidationDelete,
   taskValidationGet,
   taskValidationUpdateName,
+  taskValidationUpdateDone,
 } = require('../controllers/validations');
 router.get('/', verify, async (req, res) => {
   const { error } = taskValidationGet(req.body);
@@ -47,9 +48,19 @@ router.put('/updatename', verify, async (req, res) => {
   if (error) return res.status(400).send(error.details[0].message);
 
   const user = await User.findOne({ _id: req.body.user_id });
-  const index = user.tasks.findIndex((obj) => obj._id === req.body.task_Id);
+  const index = user.tasks.findIndex((obj) => obj._id == req.body.task_id);
   user.tasks[index].name = req.body.name;
+  const savedUser = await user.save();
+  res.send({ savedUser });
+});
 
+router.put('/updatedone', verify, async (req, res) => {
+  const { error } = taskValidationUpdateDone(req.body);
+  if (error) return res.status(400).send(error.details[0].message);
+
+  const user = await User.findOne({ _id: req.body.user_id });
+  const index = user.tasks.findIndex((obj) => obj._id == req.body.task_id);
+  user.tasks[index].done = req.body.done;
   const savedUser = await user.save();
   res.send({ savedUser });
 });
