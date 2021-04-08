@@ -26,7 +26,15 @@ const taskValidationSave = (data) => {
 
   return taskSchema.validate(data);
 };
+const taskValidationUpdateName = (data) => {
+  const taskSchema = Joi.object({
+    user_id: Joi.string().min(1),
+    task_id: Joi.string().min(1),
+    name: Joi.string().min(1).max(25).required(),
+  });
 
+  return taskSchema.validate(data);
+};
 const taskValidationDelete = (data) => {
   const taskSchema = Joi.object({
     task_id: Joi.string().min(1),
@@ -47,3 +55,4 @@ module.exports.loginValidation = loginValidation;
 module.exports.taskValidationSave = taskValidationSave;
 module.exports.taskValidationDelete = taskValidationDelete;
 module.exports.taskValidationGet = taskValidationGet;
+module.exports.taskValidationUpdateName = taskValidationUpdateName;
