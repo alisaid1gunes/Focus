@@ -6,6 +6,8 @@ const mongoose = require('mongoose');
 
 const dotenv = require('dotenv');
 
+const cors = require('cors');
+
 const auth = require('./routes/auth');
 
 const task = require('./routes/task');
@@ -20,9 +22,11 @@ mongoose.connect(
 );
 app.use(express.json());
 
-app.use('/api/user', auth);
+app.use(cors());
 
-app.use('/api/task', task);
+app.use('/api/users', auth);
+
+app.use('/api/tasks', task);
 
 app.listen(5000, () => {
   console.log('server running');
