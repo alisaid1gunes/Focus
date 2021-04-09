@@ -32,4 +32,3 @@ const userSchema = new mongoose.Schema({
   tasks: [taskSchema],
 });
 module.exports = mongoose.model('User', userSchema);
-
