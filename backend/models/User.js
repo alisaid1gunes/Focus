@@ -30,5 +30,8 @@ const userSchema = new mongoose.Schema({
     max: 16,
   },
   tasks: [taskSchema],
+  refreshtoken: {
+    type: String,
+  },
 });
 module.exports = mongoose.model('User', userSchema);
