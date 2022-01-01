@@ -4,15 +4,19 @@ class MongooseService {
   }
 
   save(body) {
-    return this.model.save(body);
+    return this.model.create(body);
   }
 
-  getId(id) {
-    return this.model.findOne({ _id: id });
+  get(obj) {
+    return this.model.findOne(obj);
   }
 
-  getEmail(email) {
-    return this.model.findOne({ email });
+  getAllWithQuery(obj) {
+    return this.model.find(obj);
+  }
+
+  getAll() {
+    return this.model.find({});
   }
 
   delete(id) {
@@ -20,7 +24,7 @@ class MongooseService {
   }
 
   update(id, value) {
-    return this.model.findOneAndUpdate({ _id: id }, value);
+    return this.model.findOneAndUpdate({ _id: id }, value, { new: true });
   }
 }
 

@@ -9,7 +9,7 @@ const AuthServiceInstance = new AuthService();
 const register = async (req, res, next) => {
   try {
     const result = await AuthServiceInstance.RegisterUser(req.body);
-    if (result) res.status(StatusCodes.CREATED).send(result);
+    if (result) return res.status(StatusCodes.CREATED).send(result);
   } catch (err) {
     next(
       ApiErrorService.badRequest(

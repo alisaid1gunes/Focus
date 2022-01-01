@@ -1,4 +1,4 @@
-const Joi = require('@hapi/joi');
+const Joi = require('joi-oid');
 
 const registerValidation = (data) => {
   const userSchema = Joi.object({
@@ -19,7 +19,7 @@ const loginValidation = (data) => {
 
 const taskValidationSave = (data) => {
   const taskSchema = Joi.object({
-    user_id: Joi.string().min(1).required(),
+    userId: Joi.objectId().required(),
     name: Joi.string().min(1).max(25).required(),
     done: Joi.boolean().required(),
   });
@@ -28,24 +28,24 @@ const taskValidationSave = (data) => {
 };
 const taskValidationUpdate = (data) => {
   const taskSchema = Joi.object({
-    user_id: Joi.string().min(1).required(),
-    task_id: Joi.string().min(1).required(),
-    done: Joi.boolean().required(),
+    name: Joi.string().min(1).max(25),
+    userId: Joi.objectId(),
+    done: Joi.boolean(),
   });
 
   return taskSchema.validate(data);
 };
 const taskValidationDelete = (data) => {
   const taskSchema = Joi.object({
-    task_id: Joi.string().min(1).required(),
-    user_id: Joi.string().min(1).required(),
+    userId: Joi.objectId().required(),
+    taskId: Joi.objectId().required(),
   });
 
   return taskSchema.validate(data);
 };
 const taskValidationGet = (data) => {
   const taskSchema = Joi.object({
-    user_id: Joi.string().min(1).required(),
+    userId: Joi.objectId().required(),
   });
 
   return taskSchema.validate(data);

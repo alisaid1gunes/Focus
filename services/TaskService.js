@@ -11,7 +11,7 @@ class TaskService {
     this.mongooseTask = new MongooseService(Task);
   }
 
-  async GetId(id) {
+  async Get(id) {
     try {
       const result = await this.mongooseTask.get({ _id: id });
 
@@ -25,12 +25,13 @@ class TaskService {
 
   async GetAll(userId) {
     try {
-      const result = await this.mongooseTask.get({ userId: userId });
-      if (result.length > 0) return result;
+      const result = await this.mongooseTask.getAllWithQuery({ userId });
+
+      if (result) return result;
 
       return 'Hiç kayıt yok';
     } catch (err) {
-      return 'Kayıt bulunamadı. Hata:';
+      return `Kayıt bulunamadı. Hata:${err}`;
     }
   }
 
@@ -54,6 +55,7 @@ class TaskService {
       if (error) return error.details[0].message;
 
       const result = await this.mongooseTask.update(id, body);
+
       if (result) return result;
       return 'güncelleme yapılamadı';
     } catch (err) {

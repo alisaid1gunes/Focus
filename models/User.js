@@ -1,14 +1,5 @@
 const mongoose = require('mongoose');
 
-const { ObjectId } = mongoose.Schema.Types;
-
-const taskSchema = new mongoose.Schema({
-  taskId: {
-    type: ObjectId,
-    ref: 'Task',
-  },
-});
-
 const userSchema = new mongoose.Schema({
   username: {
     type: String,
@@ -26,7 +17,6 @@ const userSchema = new mongoose.Schema({
     min: 8,
     max: 16,
   },
-  tasks: [taskSchema],
 });
 module.exports = mongoose.model('User', userSchema);
 // mySchema.index({field1: 1, field2: 1}, {unique: true});

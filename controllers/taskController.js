@@ -8,7 +8,7 @@ const TaskServiceInstance = new TaskService();
 
 const get = async (req, res, next) => {
   try {
-    const result = await TaskServiceInstance.GetId(req.params.id);
+    const result = await TaskServiceInstance.Get(req.params.id);
     res.json(result);
   } catch (err) {
     next(
@@ -19,10 +19,13 @@ const get = async (req, res, next) => {
 
 const getAll = async (req, res, next) => {
   try {
-    const result = await TaskServiceInstance.GetAll();
-    res.json(result);
+    // eslint-disable-next-line no-underscore-dangle
+    const result = await TaskServiceInstance.GetAll(req.body.userId);
+    res.status(StatusCodes.OK).json(result);
   } catch (err) {
-    ApiErrorService.notFound(`Kayıtlar bulunamadı. İstek yanlış. Hata:${err}`);
+    next(
+      ApiErrorService.notFound(`Kayıtlar bulunamadı. İstek yanlış. Hata:${err}`)
+    );
   }
 };
 

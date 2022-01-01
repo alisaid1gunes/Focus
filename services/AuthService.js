@@ -8,7 +8,7 @@ const RefreshToken = require('../models/RefreshToken');
 
 const MongooseService = require('./MongooseService');
 
-const generateToken = require('../utils/tokenGenerator');
+const { generateToken } = require('../utils/tokenGenerator');
 
 const {
   registerValidation,
@@ -23,19 +23,20 @@ class AuthService {
 
   async RegisterUser(body) {
     const bodyIn = body;
+
     const { error } = registerValidation(bodyIn);
     if (error) return error.details[0].message;
 
-    const emailExist = await this.mongooseUser.getEmail(bodyIn.email);
+    const emailExist = await this.mongooseUser.get({ email: bodyIn.email });
 
     if (emailExist) return 'email already exists';
 
     const salt = await bcrypt.genSalt(10);
     bodyIn.password = await bcrypt.hash(bodyIn.password, salt);
-   
+
     try {
       const result = await this.mongooseUser.save(bodyIn);
-      console.log(result);
+
       return { success: true, body: result };
     } catch (err) {
       return { success: false, error: err };
@@ -50,7 +51,7 @@ class AuthService {
 
       if (error) return error.details[0].message;
 
-      const user = await this.mongooseUser.getEmail(bodyIn.email);
+      const user = await this.mongooseUser.get({ email: bodyIn.email });
 
       if (!user) return 'email or password is wrong';
 
@@ -63,7 +64,7 @@ class AuthService {
         // eslint-disable-next-line no-underscore-dangle
         user._id,
         process.env.ACCESS_TOKEN_SECRET,
-        '15m'
+        '15d'
       );
 
       const refreshToken = generateToken(
@@ -72,6 +73,7 @@ class AuthService {
         process.env.REFRESH_TOKEN_SECRET,
         '15d'
       );
+
       const refreshTokenDb = new RefreshToken({
         token: refreshToken,
       });
@@ -114,7 +116,7 @@ class AuthService {
         const accessToken = generateToken(
           userId,
           process.env.ACCESS_TOKEN_SECRET,
-          '15m'
+          '15d'
         );
 
         return accessToken;
