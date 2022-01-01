@@ -8,15 +8,15 @@ class MongooseService {
   }
 
   get(obj) {
-    return this.model.findOne(obj);
+    return this.model.findOne(obj).lean();
   }
 
   getAllWithQuery(obj) {
-    return this.model.find(obj);
+    return this.model.find(obj).lean();
   }
 
   getAll() {
-    return this.model.find({});
+    return this.model.find({}).lean();
   }
 
   delete(id) {
