@@ -50,6 +50,7 @@ const taskValidationGet = (data) => {
 
   return taskSchema.validate(data);
 };
+
 module.exports.registerValidation = registerValidation;
 module.exports.loginValidation = loginValidation;
 module.exports.taskValidationSave = taskValidationSave;
