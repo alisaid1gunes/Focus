@@ -4,20 +4,16 @@ class ApiErrorService {
     this.message = message;
   }
 
-  static badRequest(message) {
-    return new ApiErrorService(400, message);
+  static badRequest(msg) {
+    return new ApiErrorService(400, msg);
   }
 
-  static unauthorized(message) {
-    return new ApiErrorService(401, message);
+  static unauthorized(msg) {
+    return new ApiErrorService(401, msg);
   }
 
-  static notFound(message) {
-    return new ApiErrorService(404, message);
-  }
-
-  static internalError(message) {
-    return new ApiErrorService(500, message);
+  static internal(msg) {
+    return new ApiErrorService(500, msg);
   }
 }
 

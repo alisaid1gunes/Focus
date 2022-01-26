@@ -17,6 +17,14 @@ const userSchema = new mongoose.Schema({
     min: 8,
     max: 16,
   },
+  isActive: {
+    type: Boolean,
+    default: false,
+  },
+  verificationCode: {
+    type: Number,
+  },
 });
+
 module.exports = mongoose.model('User', userSchema);
 // mySchema.index({field1: 1, field2: 1}, {unique: true});

@@ -10,4 +10,6 @@ router.post('/token', authController.refresh);
 
 router.post('/logout', authController.logout);
 
+router.post('/activate', authController.activate);
+
 module.exports = router;

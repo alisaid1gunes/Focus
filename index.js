@@ -22,6 +22,8 @@ const task = require('./routes/task');
 
 dotenv.config();
 
+require('./subscribers/user');
+
 mongoose
   .connect(process.env.DB_CONNECT, {
     useNewUrlParser: true,

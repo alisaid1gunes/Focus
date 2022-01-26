@@ -1,3 +1,7 @@
+const EventEmitter = require('events');
+
+const eventEmitter = new EventEmitter();
+
 const bcrypt = require('bcryptjs');
 
 const jwt = require('jsonwebtoken');
@@ -34,9 +38,13 @@ class AuthService {
     const salt = await bcrypt.genSalt(10);
     bodyIn.password = await bcrypt.hash(bodyIn.password, salt);
 
+    const code = Math.floor(1000 + Math.random() * 9000);
+
+    bodyIn.verificationCode = code;
+
     try {
       const result = await this.mongooseUser.save(bodyIn);
-
+      eventEmitter.emit('signup', bodyIn.email, bodyIn.username, code);
       return { success: true, body: result };
     } catch (err) {
       return { success: false, error: err };
@@ -49,15 +57,18 @@ class AuthService {
     try {
       const { error } = loginValidation(bodyIn);
 
-      if (error) return error.details[0].message;
+      if (error) return { error: error.details[0].message, success: false };
 
       const user = await this.mongooseUser.get({ email: bodyIn.email });
-
-      if (!user) return 'email or password is wrong';
+      console.log(user);
+      if (!user) return { error: 'email or password is wrong', success: false };
 
       const validPass = await bcrypt.compare(bodyIn.password, user.password);
 
-      if (!validPass) return 'Invalid password';
+      if (!validPass) return { error: 'Invalid password', success: false };
+
+      if (!user.isActive)
+        return { error: 'User is not verified', success: false };
 
       // eslint-disable-next-line no-underscore-dangle
       const accessToken = generateToken(
@@ -79,9 +90,9 @@ class AuthService {
       });
       const savedToken = await this.mongooseRefreshToken.save(refreshTokenDb);
 
-      return { accessToken, refreshToken: savedToken.token };
+      return { accessToken, refreshToken: savedToken.token, success: true };
     } catch (err) {
-      return err;
+      return { error: err, success: false };
     }
   }
 
@@ -112,7 +123,7 @@ class AuthService {
       refreshToken.token,
       process.env.REFRESH_TOKEN_SECRET,
       (err, userId) => {
-        if (err) return console.log(err);
+        if (err) return 'refresh token geçersiz';
         const accessToken = generateToken(
           userId,
           process.env.ACCESS_TOKEN_SECRET,
@@ -123,6 +134,25 @@ class AuthService {
       }
     );
   }
+
+  async Activate(body) {
+    // eslint-disable-next-line no-underscore-dangle
+    const user = await this.mongooseUser.get({ _id: body.id });
+    console.log(user);
+    if (user.verificationCode === body.verificationCode) {
+      user.isActive = true;
+      user.verificationCode = null;
+      try {
+        // eslint-disable-next-line no-underscore-dangle
+        await this.mongooseUser.update(user._id, user);
+        return { success: true, message: 'activated' };
+      } catch (err) {
+        return { error: err, success: false };
+      }
+    } else {
+      return { error: 'kod hatalı', success: false };
+    }
+  }
 }
 
-module.exports = AuthService;
+module.exports = { AuthService, eventEmitter };
