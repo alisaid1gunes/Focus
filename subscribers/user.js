@@ -3,7 +3,6 @@ const sendEmail = require('../services/EmailService');
 const { eventEmitter } = require('../services/AuthService');
 
 eventEmitter.on('signup', async (email, username, code) => {
-  console.log('signup içine');
   const msg = {
     to: email,
     from: process.env.VERIFIED_SENDER,
