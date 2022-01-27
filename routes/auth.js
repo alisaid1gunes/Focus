@@ -12,4 +12,6 @@ router.post('/logout', authController.logout);
 
 router.post('/activate', authController.activate);
 
+router.post('/password/change', authController.changePassword);
+
 module.exports = router;

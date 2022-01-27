@@ -77,10 +77,26 @@ const activate = async (req, res, next) => {
     next(ApiErrorService.badRequest(' Verify işlemi yapılamadı. İstek yanlış'));
   }
 };
+
+const changePassword = async (req, res, next) => {
+  try {
+    const result = await AuthServiceInstance.ChangePassword(req.body);
+
+    if (result.success) {
+      return res.status(StatusCodes.OK).send({
+        result,
+      });
+    }
+    next(ApiErrorService.badRequest(result.error));
+  } catch (err) {
+    next(ApiErrorService.badRequest(`Kullanıcı girişi yapılamadı.${err}`));
+  }
+};
 module.exports = {
   register,
   login,
   refresh,
   logout,
   activate,
+  changePassword,
 };
