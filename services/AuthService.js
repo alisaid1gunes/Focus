@@ -153,6 +153,25 @@ class AuthService {
       return { error: 'kod hatalı', success: false };
     }
   }
+
+  async ChangePassword(body) {
+    // eslint-disable-next-line no-underscore-dangle
+    const user = await this.mongooseUser.get({ _id: body.id });
+    console.log(user);
+    const validPass = await bcrypt.compare(body.oldPassword, user.password);
+    if (!validPass) return { error: 'old password is wrong', success: false };
+
+    const salt = await bcrypt.genSalt(10);
+    user.password = await bcrypt.hash(body.newPassword, salt);
+
+    try {
+      // eslint-disable-next-line no-underscore-dangle
+      await this.mongooseUser.update(user._id, user);
+      return { success: true, message: 'password changed' };
+    } catch (err) {
+      return { error: err, success: false };
+    }
+  }
 }
 
 module.exports = { AuthService, eventEmitter };
