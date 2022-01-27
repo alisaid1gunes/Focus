@@ -33,7 +33,7 @@ class AuthService {
 
     const emailExist = await this.mongooseUser.get({ email: bodyIn.email });
 
-    if (emailExist) return 'email already exists';
+    if (emailExist) return { error: 'email already exists', success: false };
 
     const salt = await bcrypt.genSalt(10);
     bodyIn.password = await bcrypt.hash(bodyIn.password, salt);
@@ -45,7 +45,7 @@ class AuthService {
     try {
       const result = await this.mongooseUser.save(bodyIn);
       eventEmitter.emit('signup', bodyIn.email, bodyIn.username, code);
-      return { success: true, body: result };
+      return { success: true, result };
     } catch (err) {
       return { success: false, error: err };
     }
@@ -104,9 +104,9 @@ class AuthService {
     try {
       await this.mongooseRefreshToken.delete({ token: refreshToken });
 
-      return 'user logged out';
+      return { success: true, message: 'user logged out' };
     } catch (err) {
-      return `logout error occurred${err}`;
+      return { success: false, error: `logout error occurred${err}` };
     }
   }
 
