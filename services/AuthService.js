@@ -117,20 +117,21 @@ class AuthService {
       token: bodyIn.refreshToken,
     });
 
-    if (!refreshToken) return 'refresh token bulunamadı';
+    if (!refreshToken)
+      return { success: false, error: 'refresh token bulunamadı' };
 
     jwt.verify(
       refreshToken.token,
       process.env.REFRESH_TOKEN_SECRET,
       (err, userId) => {
-        if (err) return 'refresh token geçersiz';
+        if (err) return { success: false, error: 'refresh token geçersiz' };
         const accessToken = generateToken(
           userId,
           process.env.ACCESS_TOKEN_SECRET,
           '15d'
         );
 
-        return accessToken;
+        return { accessToken, success: true };
       }
     );
   }
@@ -138,7 +139,7 @@ class AuthService {
   async Activate(body) {
     // eslint-disable-next-line no-underscore-dangle
     const user = await this.mongooseUser.get({ _id: body.id });
-    console.log(user);
+
     if (user.verificationCode === body.verificationCode) {
       user.isActive = true;
       user.verificationCode = null;
@@ -157,7 +158,7 @@ class AuthService {
   async ChangePassword(body) {
     // eslint-disable-next-line no-underscore-dangle
     const user = await this.mongooseUser.get({ _id: body.id });
-    console.log(user);
+
     const validPass = await bcrypt.compare(body.oldPassword, user.password);
     if (!validPass) return { error: 'old password is wrong', success: false };
 

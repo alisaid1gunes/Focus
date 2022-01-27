@@ -10,7 +10,9 @@ const AuthServiceInstance = new AuthService();
 const register = async (req, res, next) => {
   try {
     const result = await AuthServiceInstance.RegisterUser(req.body);
-    if (result) return res.status(StatusCodes.CREATED).send(result);
+    if (result.succes) return res.status(StatusCodes.CREATED).send(result);
+
+    next(ApiErrorService.badRequest(result.error));
   } catch (err) {
     next(
       ApiErrorService.badRequest(
@@ -43,7 +45,9 @@ const logout = async (req, res, next) => {
   try {
     const result = await AuthServiceInstance.LogoutUser(req.body);
 
-    if (result) res.status(StatusCodes.OK).send(result);
+    if (result.succes) res.status(StatusCodes.OK).send(result);
+
+    next(ApiErrorService.badRequest(result.error));
   } catch (err) {
     next(
       ApiErrorService.badRequest(
@@ -56,7 +60,9 @@ const refresh = async (req, res, next) => {
   try {
     const result = await AuthServiceInstance.Refresh(req.body);
 
-    if (result) res.status(StatusCodes.OK).send(result);
+    if (result.success) res.status(StatusCodes.OK).send(result);
+
+    next(ApiErrorService.badRequest(result.error));
   } catch (err) {
     next(
       ApiErrorService.badRequest(
@@ -72,7 +78,7 @@ const activate = async (req, res, next) => {
 
     if (result.success) return res.status(StatusCodes.OK).send(result);
 
-    return res.status(StatusCodes.BAD_REQUEST).send(result);
+    next(ApiErrorService.badRequest(result.error));
   } catch (err) {
     next(ApiErrorService.badRequest(' Verify işlemi yapılamadı. İstek yanlış'));
   }
