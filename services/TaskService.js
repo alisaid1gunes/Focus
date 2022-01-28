@@ -15,11 +15,11 @@ class TaskService {
     try {
       const result = await this.mongooseTask.get({ _id: id });
 
-      if (result) return result;
+      if (result) return { result, success: true };
 
-      return 'kayıt bulunamadı';
+      return { success: false, error: 'kayıt bulunamadı' };
     } catch (err) {
-      return `Kayıt bulunamadı. Hata:${err}`;
+      return { success: false, error: `Kayıt bulunamadı. Hata:${err}` };
     }
   }
 
@@ -27,11 +27,11 @@ class TaskService {
     try {
       const result = await this.mongooseTask.getAllWithQuery({ userId });
 
-      if (result) return result;
+      if (result) return { result, success: true };
 
-      return 'Hiç kayıt yok';
+      return { success: false, error: ' Hiç kayıt yok' };
     } catch (err) {
-      return `Kayıt bulunamadı. Hata:${err}`;
+      return { success: false, error: `Kayıtlar bulunamadı. Hata:${err}` };
     }
   }
 
@@ -41,11 +41,11 @@ class TaskService {
     try {
       const result = await this.mongooseTask.save(body);
 
-      if (result) return 'kayıt yapıldı';
+      if (result) return { success: true, message: 'Kayıt yapıldı.' };
 
-      return 'kayıt yapılamadı';
+      return { success: false, error: 'Kayıt yapılamadı.' };
     } catch (err) {
-      return `Kayıt edilemedi. Hata:${err}`;
+      return { success: false, error: `Kayıt yapılamadı. Hata:${err}` };
     }
   }
 
@@ -56,19 +56,19 @@ class TaskService {
 
       const result = await this.mongooseTask.update(id, body);
 
-      if (result) return result;
-      return 'güncelleme yapılamadı';
+      if (result) return { result, success: true };
+      return { success: false, error: 'Güncelleme yapılamadı.' };
     } catch (err) {
-      return `Kayıt edilemedi. Hata:${err}`;
+      return { success: false, error: `Kayıt güncellenemedi. Hata:${err}` };
     }
   }
 
   async Delete(id) {
     try {
       await this.mongooseTask.delete({ _id: id });
-      return 'Kayıt silindi';
+      return { message: 'Kayıt silindi', success: true };
     } catch (err) {
-      return `hata kayıt silinemedi: ${err}`;
+      return { success: false, error: `Kayıt silinemedi. Hata:${err}` };
     }
   }
 }
