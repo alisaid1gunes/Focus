@@ -80,7 +80,9 @@ const activate = async (req, res, next) => {
 
     next(ApiErrorService.badRequest(result.error));
   } catch (err) {
-    next(ApiErrorService.badRequest(' Verify işlemi yapılamadı. İstek yanlış'));
+    next(
+      ApiErrorService.badRequest(' Aktivasyon işlemi yapılamadı. İstek yanlış')
+    );
   }
 };
 
@@ -98,6 +100,21 @@ const changePassword = async (req, res, next) => {
     next(ApiErrorService.badRequest(`Kullanıcı girişi yapılamadı.${err}`));
   }
 };
+
+const forgetPassword = async (req, res, next) => {
+  try {
+    const result = await AuthServiceInstance.ForgetPassword(req.body);
+
+    if (result.success) {
+      return res.status(StatusCodes.OK).send({
+        result,
+      });
+    }
+    next(ApiErrorService.badRequest(result.error));
+  } catch (err) {
+    next(ApiErrorService.badRequest(`İşlem gerçekleştirilemedi.${err}`));
+  }
+};
 module.exports = {
   register,
   login,
@@ -105,4 +122,5 @@ module.exports = {
   logout,
   activate,
   changePassword,
+  forgetPassword,
 };

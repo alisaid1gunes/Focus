@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 const EventEmitter = require('events');
 
 const eventEmitter = new EventEmitter();
@@ -27,7 +28,6 @@ class AuthService {
 
   async RegisterUser(body) {
     const bodyIn = body;
-
     const { error } = registerValidation(bodyIn);
     if (error) return error.details[0].message;
 
@@ -40,7 +40,7 @@ class AuthService {
 
     const code = Math.floor(1000 + Math.random() * 9000);
 
-    bodyIn.verificationCode = code;
+    bodyIn.activationCode = code;
 
     try {
       const result = await this.mongooseUser.save(bodyIn);
@@ -52,34 +52,29 @@ class AuthService {
   }
 
   async LoginUser(body) {
-    const bodyIn = body;
-
     try {
-      const { error } = loginValidation(bodyIn);
+      const { error } = loginValidation(body);
 
       if (error) return { error: error.details[0].message, success: false };
 
-      const user = await this.mongooseUser.get({ email: bodyIn.email });
-      console.log(user);
+      const user = await this.mongooseUser.get({ email: body.email });
+
       if (!user) return { error: 'email or password is wrong', success: false };
 
-      const validPass = await bcrypt.compare(bodyIn.password, user.password);
+      const validPass = await bcrypt.compare(body.password, user.password);
 
       if (!validPass) return { error: 'Invalid password', success: false };
 
       if (!user.isActive)
-        return { error: 'User is not verified', success: false };
+        return { error: 'User is not activated', success: false };
 
-      // eslint-disable-next-line no-underscore-dangle
       const accessToken = generateToken(
-        // eslint-disable-next-line no-underscore-dangle
         user._id,
         process.env.ACCESS_TOKEN_SECRET,
         '15d'
       );
 
       const refreshToken = generateToken(
-        // eslint-disable-next-line no-underscore-dangle
         user._id,
         process.env.REFRESH_TOKEN_SECRET,
         '15d'
@@ -110,7 +105,6 @@ class AuthService {
     }
   }
 
-  // eslint-disable-next-line consistent-return
   async Refresh(body) {
     const bodyIn = body;
     const refreshToken = await this.mongooseRefreshToken.get({
@@ -137,14 +131,12 @@ class AuthService {
   }
 
   async Activate(body) {
-    // eslint-disable-next-line no-underscore-dangle
     const user = await this.mongooseUser.get({ _id: body.id });
 
-    if (user.verificationCode === body.verificationCode) {
+    if (user.activationCode === body.activationCode) {
       user.isActive = true;
-      user.verificationCode = null;
+      user.activationCode = null;
       try {
-        // eslint-disable-next-line no-underscore-dangle
         await this.mongooseUser.update(user._id, user);
         return { success: true, message: 'activated' };
       } catch (err) {
@@ -156,7 +148,6 @@ class AuthService {
   }
 
   async ChangePassword(body) {
-    // eslint-disable-next-line no-underscore-dangle
     const user = await this.mongooseUser.get({ _id: body.id });
 
     const validPass = await bcrypt.compare(body.oldPassword, user.password);
@@ -166,13 +157,30 @@ class AuthService {
     user.password = await bcrypt.hash(body.newPassword, salt);
 
     try {
-      // eslint-disable-next-line no-underscore-dangle
       await this.mongooseUser.update(user._id, user);
       return { success: true, message: 'password changed' };
     } catch (err) {
       return { error: err, success: false };
     }
   }
-}
 
+  async ForgetPassword(body) {
+    const user = await this.mongooseUser.get({ _id: body.id });
+
+    const code = Math.floor(1000 + Math.random() * 9000);
+
+    user.verificationCode = code;
+
+    try {
+      await this.mongooseUser.update(user._id, user);
+      eventEmitter.emit('forget-password', body.email, body.username, code);
+      return {
+        success: true,
+        message: 'Verification code sent your email to change your password',
+      };
+    } catch (err) {
+      return { success: false, error: err };
+    }
+  }
+}
 module.exports = { AuthService, eventEmitter };

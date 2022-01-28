@@ -21,6 +21,9 @@ const userSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
+  activationCode: {
+    type: Number,
+  },
   verificationCode: {
     type: Number,
   },
