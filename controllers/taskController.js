@@ -9,7 +9,8 @@ const TaskServiceInstance = new TaskService();
 const get = async (req, res, next) => {
   try {
     const result = await TaskServiceInstance.Get(req.params.id);
-    res.json(result);
+    if (result.success) res.status(StatusCodes.OK).json(result);
+    next(ApiErrorService.notFound(result.error));
   } catch (err) {
     next(
       ApiErrorService.notFound(`Kayıt bulunamadı. İstek yanlış. Hata:${err}`)
@@ -21,7 +22,9 @@ const getAll = async (req, res, next) => {
   try {
     // eslint-disable-next-line no-underscore-dangle
     const result = await TaskServiceInstance.GetAll(req.body.userId);
-    res.status(StatusCodes.OK).json(result);
+    if (result.success) res.status(StatusCodes.OK).json(result);
+
+    next(ApiErrorService.notFound(result.error));
   } catch (err) {
     next(
       ApiErrorService.notFound(`Kayıtlar bulunamadı. İstek yanlış. Hata:${err}`)
@@ -32,10 +35,12 @@ const getAll = async (req, res, next) => {
 const save = async (req, res, next) => {
   try {
     const result = await TaskServiceInstance.Save(req.body);
-    res.status(StatusCodes.OK).json(result);
+    if (result.success) res.status(StatusCodes.OK).json(result);
+
+    next(ApiErrorService.badRequest(result.error));
   } catch (err) {
     next(
-      ApiErrorService.notFound(`Kayıt yapılamdı. İstek yanlış. Hata:${err}`)
+      ApiErrorService.badRequest(`Kayıt yapılamdı. İstek yanlış. Hata:${err}`)
     );
   }
 };
@@ -44,10 +49,12 @@ const update = async (req, res, next) => {
   const { id } = req.params;
   try {
     const result = await TaskServiceInstance.Update(req.body, id);
-    res.status(StatusCodes.OK).json(result);
+    if (result.success) res.status(StatusCodes.OK).json(result);
+
+    next(ApiErrorService.badRequest(result.error));
   } catch (err) {
     next(
-      ApiErrorService.notFound(
+      ApiErrorService.badRequest(
         `Kayıt güncellenemedi. İstek yanlış. Hata:${err}`
       )
     );
@@ -58,10 +65,12 @@ const remove = async (req, res, next) => {
   const { id } = req.params;
   try {
     const result = await TaskServiceInstance.Delete(id);
-    res.status(StatusCodes.OK).json(result);
+    if (result.success) res.status(StatusCodes.OK).json(result);
+
+    next(ApiErrorService.badRequest(result.error));
   } catch (err) {
     next(
-      ApiErrorService.notFound(`Kayıt silinemedi. İstek yanlış. Hata:${err}`)
+      ApiErrorService.badRequest(`Kayıt silinemedi. İstek yanlış. Hata:${err}`)
     );
   }
 };
