@@ -10,7 +10,8 @@ const AuthServiceInstance = new AuthService();
 const register = async (req, res, next) => {
   try {
     const result = await AuthServiceInstance.RegisterUser(req.body);
-    if (result.succes) return res.status(StatusCodes.CREATED).send(result);
+
+    if (result.success) return res.status(StatusCodes.CREATED).send(result);
 
     next(ApiErrorService.badRequest(result.error));
   } catch (err) {
@@ -45,7 +46,8 @@ const logout = async (req, res, next) => {
   try {
     const result = await AuthServiceInstance.LogoutUser(req.body);
 
-    if (result.succes) res.status(StatusCodes.OK).send(result);
+    if (result.success)
+      return res.header('auth-token', '').status(StatusCodes.OK).send(result);
 
     next(ApiErrorService.badRequest(result.error));
   } catch (err) {
@@ -115,6 +117,36 @@ const forgetPassword = async (req, res, next) => {
     next(ApiErrorService.badRequest(`İşlem gerçekleştirilemedi.${err}`));
   }
 };
+
+const forgetPasswordVerify = async (req, res, next) => {
+  try {
+    const result = await AuthServiceInstance.ForgetPasswordVerify(req.body);
+
+    if (result.success) {
+      return res.status(StatusCodes.OK).send({
+        result,
+      });
+    }
+    next(ApiErrorService.badRequest(result.error));
+  } catch (err) {
+    next(ApiErrorService.badRequest(`İşlem gerçekleştirilemedi.${err}`));
+  }
+};
+
+const forgetPasswordChange = async (req, res, next) => {
+  try {
+    const result = await AuthServiceInstance.ForgetPasswordChange(req.body);
+
+    if (result.success) {
+      return res.status(StatusCodes.OK).send({
+        result,
+      });
+    }
+    next(ApiErrorService.badRequest(result.error));
+  } catch (err) {
+    next(ApiErrorService.badRequest(`İşlem gerçekleştirilemedi.${err}`));
+  }
+};
 module.exports = {
   register,
   login,
@@ -123,4 +155,6 @@ module.exports = {
   activate,
   changePassword,
   forgetPassword,
+  forgetPasswordVerify,
+  forgetPasswordChange,
 };

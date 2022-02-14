@@ -16,4 +16,8 @@ router.post('/password/change', authController.changePassword);
 
 router.post('/password/forget', authController.forgetPassword);
 
+router.post('/password/forget/verify', authController.forgetPasswordVerify);
+
+router.post('/password/forget/change', authController.forgetPasswordChange);
+
 module.exports = router;

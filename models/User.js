@@ -1,5 +1,31 @@
 const mongoose = require('mongoose');
 
+const verificationSchema = new mongoose.Schema({
+  isVerified: {
+    type: Boolean,
+    default: false,
+  },
+  code: {
+    type: Number,
+  },
+  expireDate: {
+    type: Date,
+  },
+});
+
+const activationSchema = new mongoose.Schema({
+  isActivated: {
+    type: Boolean,
+    default: false,
+  },
+  code: {
+    type: Number,
+  },
+  expireDate: {
+    type: Date,
+  },
+});
+
 const userSchema = new mongoose.Schema({
   username: {
     type: String,
@@ -17,16 +43,9 @@ const userSchema = new mongoose.Schema({
     min: 8,
     max: 16,
   },
-  isActive: {
-    type: Boolean,
-    default: false,
-  },
-  activationCode: {
-    type: Number,
-  },
-  verificationCode: {
-    type: Number,
-  },
+
+  activation: activationSchema,
+  verification: verificationSchema,
 });
 
 module.exports = mongoose.model('User', userSchema);

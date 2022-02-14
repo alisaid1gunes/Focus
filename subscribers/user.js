@@ -3,12 +3,14 @@ const sendEmail = require('../services/EmailService');
 const { eventEmitter } = require('../services/AuthService');
 
 eventEmitter.on('signup', async (email, username, code) => {
+  console.log('on içerde');
   const msg = {
     to: email,
     from: process.env.VERIFIED_SENDER,
     subject: 'Welcome to Todo App',
     text: `Thank you for joining ${username}. This is your activation code: ${code}`,
   };
+
   sendEmail(msg);
 });
 

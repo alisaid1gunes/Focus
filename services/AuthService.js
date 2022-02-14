@@ -28,8 +28,9 @@ class AuthService {
 
   async RegisterUser(body) {
     const bodyIn = body;
+
     const { error } = registerValidation(bodyIn);
-    if (error) return error.details[0].message;
+    if (error) return { error: error.details[0].message, success: false };
 
     const emailExist = await this.mongooseUser.get({ email: bodyIn.email });
 
@@ -40,12 +41,20 @@ class AuthService {
 
     const code = Math.floor(1000 + Math.random() * 9000);
 
-    bodyIn.activationCode = code;
+    const expireDate = new Date();
+    expireDate.setHours(expireDate.getHours() + 24);
+
+    bodyIn.activation = {
+      isActived: false,
+      code,
+      expireDate,
+    };
 
     try {
-      const result = await this.mongooseUser.save(bodyIn);
+      const user = await this.mongooseUser.save(bodyIn);
+
       eventEmitter.emit('signup', bodyIn.email, bodyIn.username, code);
-      return { success: true, result };
+      return { success: true, user };
     } catch (err) {
       return { success: false, error: err };
     }
@@ -65,7 +74,7 @@ class AuthService {
 
       if (!validPass) return { error: 'Invalid password', success: false };
 
-      if (!user.isActive)
+      if (!user.activation.isActivated)
         return { error: 'User is not activated', success: false };
 
       const accessToken = generateToken(
@@ -114,28 +123,30 @@ class AuthService {
     if (!refreshToken)
       return { success: false, error: 'refresh token bulunamadı' };
 
-    jwt.verify(
+    const userId = jwt.verify(
       refreshToken.token,
-      process.env.REFRESH_TOKEN_SECRET,
-      (err, userId) => {
-        if (err) return { success: false, error: 'refresh token geçersiz' };
-        const accessToken = generateToken(
-          userId,
-          process.env.ACCESS_TOKEN_SECRET,
-          '15d'
-        );
-
-        return { accessToken, success: true };
-      }
+      process.env.REFRESH_TOKEN_SECRET
     );
+
+    const accessToken = generateToken(
+      userId,
+      process.env.ACCESS_TOKEN_SECRET,
+      '15d'
+    );
+    return { accessToken, success: true };
   }
 
   async Activate(body) {
     const user = await this.mongooseUser.get({ _id: body.id });
 
-    if (user.activationCode === body.activationCode) {
-      user.isActive = true;
-      user.activationCode = null;
+    const userExpireDate = new Date(user.activation.expireDate);
+
+    if (userExpireDate < Date.now())
+      return { error: 'activation code is expired', success: false };
+
+    if (user.activation.code === body.activationCode) {
+      user.activation.isActivated = true;
+      user.activation.code = null;
       try {
         await this.mongooseUser.update(user._id, user);
         return { success: true, message: 'activated' };
@@ -169,17 +180,61 @@ class AuthService {
 
     const code = Math.floor(1000 + Math.random() * 9000);
 
-    user.verificationCode = code;
+    const expireDate = new Date();
+    expireDate.setHours(expireDate.getHours() + 24);
+
+    user.verification = {
+      isVerified: false,
+      code,
+      expireDate,
+    };
 
     try {
       await this.mongooseUser.update(user._id, user);
-      eventEmitter.emit('forget-password', body.email, body.username, code);
+      eventEmitter.emit('forget-password', user.email, user.username, code);
       return {
         success: true,
         message: 'Verification code sent your email to change your password',
       };
     } catch (err) {
       return { success: false, error: err };
+    }
+  }
+
+  async ForgetPasswordVerify(body) {
+    const user = await this.mongooseUser.get({ _id: body.id });
+
+    const userExpireDate = new Date(user.verification.expireDate);
+
+    if (userExpireDate < Date.now())
+      return { error: 'verification code is expired', success: false };
+
+    if (user.verification.code === body.verificationCode) {
+      user.verification.isVerified = true;
+      user.verification.code = null;
+
+      try {
+        await this.mongooseUser.update(user._id, user);
+        return { success: true, message: 'verified' };
+      } catch (err) {
+        return { error: err, success: false };
+      }
+    } else {
+      return { error: 'verification code is wrong', success: false };
+    }
+  }
+
+  async ForgetPasswordChange(body) {
+    const user = await this.mongooseUser.get({ _id: body.id });
+
+    const salt = await bcrypt.genSalt(10);
+    user.password = await bcrypt.hash(body.newPassword, salt);
+    user.verification.isVerified = false;
+    try {
+      await this.mongooseUser.update(user._id, user);
+      return { success: true, message: 'password changed' };
+    } catch (err) {
+      return { error: err, success: false };
     }
   }
 }
