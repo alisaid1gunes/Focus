@@ -21,4 +21,4 @@ const activate = async (req, res, next) => {
   }
 };
 
-module.exports = { activate };
+module.exports = activate;

@@ -1,45 +1,23 @@
 const router = require('express').Router();
 
-const registerController = require('../controllers/auth/register');
+const authController = require('../controllers/auth');
 
-const loginController = require('../controllers/auth/login');
+router.post('/register', authController.register);
 
-const activateController = require('../controllers/auth/activate');
+router.post('/login', authController.login);
 
-const refreshController = require('../controllers/auth/refresh');
+router.post('/token', authController.refresh);
 
-const logoutController = require('../controllers/auth/logout');
+router.post('/logout', authController.logout);
 
-const changePasswordController = require('../controllers/auth/changePassword');
+router.post('/activate', authController.activate);
 
-const forgetPasswordController = require('../controllers/auth/forgetPassword');
+router.post('/password/change', authController.changePassword);
 
-const forgetPasswordVerifyController = require('../controllers/auth/forgetPasswordVerify');
+router.post('/password/forget', authController.forgetPassword);
 
-const forgetPasswordChangeController = require('../controllers/auth/forgetPasswordChange');
-// eslint-disable-next-line consistent-return
-router.post('/register', registerController.register);
+router.post('/password/forget/verify', authController.forgetPasswordVerify);
 
-router.post('/login', loginController.login);
-
-router.post('/token', refreshController.refresh);
-
-router.post('/logout', logoutController.logout);
-
-router.post('/activate', activateController.activate);
-
-router.post('/password/change', changePasswordController.changePassword);
-
-router.post('/password/forget', forgetPasswordController.forgetPassword);
-
-router.post(
-  '/password/forget/verify',
-  forgetPasswordVerifyController.forgetPasswordVerify
-);
-
-router.post(
-  '/password/forget/change',
-  forgetPasswordChangeController.forgetPasswordChange
-);
+router.post('/password/forget/change', authController.forgetPasswordChange);
 
 module.exports = router;

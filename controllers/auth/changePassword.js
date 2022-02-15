@@ -22,4 +22,4 @@ const changePassword = async (req, res, next) => {
   }
 };
 
-module.exports = { changePassword };
+module.exports = changePassword;

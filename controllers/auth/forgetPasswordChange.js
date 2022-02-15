@@ -24,4 +24,4 @@ const forgetPasswordChange = async (req, res, next) => {
   }
 };
 
-module.exports = { forgetPasswordChange };
+module.exports = forgetPasswordChange;
