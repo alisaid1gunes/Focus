@@ -11,7 +11,7 @@ const MongooseService = require('../MongooseService');
 
 const { registerValidation } = require('../../validations/validations');
 
-class RegisterService {
+class Register {
   constructor() {
     this.mongooseUser = new MongooseService(User);
   }
@@ -51,4 +51,4 @@ class RegisterService {
   }
 }
 
-module.exports = { RegisterService, eventEmitter };
+module.exports = { Register, eventEmitter };

@@ -6,7 +6,7 @@ const User = require('../../models/User');
 
 const MongooseService = require('../MongooseService');
 
-class ForgetPasswordChangeService {
+class ForgetPasswordChange {
   constructor() {
     this.mongooseUser = new MongooseService(User);
   }
@@ -26,4 +26,4 @@ class ForgetPasswordChangeService {
   }
 }
 
-module.exports = ForgetPasswordChangeService;
+module.exports = ForgetPasswordChange;

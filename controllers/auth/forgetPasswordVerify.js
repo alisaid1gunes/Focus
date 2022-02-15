@@ -3,13 +3,13 @@ const { StatusCodes } = require('http-status-codes');
 
 const ApiErrorService = require('../../services/ApiErrorService');
 
-const ForgetPasswordVerifyService = require('../../services/auth/ForgetPasswordVerifyService');
+const ForgetPasswordVerify = require('../../services/auth/ForgetPasswordVerify');
 
-const ForgetPasswordVerifyServiceInstance = new ForgetPasswordVerifyService();
+const ForgetPasswordVerifyService = new ForgetPasswordVerify();
 
 const forgetPasswordVerify = async (req, res, next) => {
   try {
-    const result = await ForgetPasswordVerifyServiceInstance.ForgetPasswordVerify(
+    const result = await ForgetPasswordVerifyService.ForgetPasswordVerify(
       req.body
     );
 

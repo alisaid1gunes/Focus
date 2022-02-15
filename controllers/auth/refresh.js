@@ -3,13 +3,13 @@ const { StatusCodes } = require('http-status-codes');
 
 const ApiErrorService = require('../../services/ApiErrorService');
 
-const RefreshService = require('../../services/auth/RefreshService');
+const Refresh = require('../../services/auth/Refresh');
 
-const RefreshServiceInstance = new RefreshService();
+const RefreshService = new Refresh();
 
 const refresh = async (req, res, next) => {
   try {
-    const result = await RefreshServiceInstance.Refresh(req.body);
+    const result = await RefreshService.Refresh(req.body);
 
     if (result.success) return res.status(StatusCodes.OK).send(result);
 

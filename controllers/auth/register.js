@@ -3,13 +3,13 @@ const { StatusCodes } = require('http-status-codes');
 
 const ApiErrorService = require('../../services/ApiErrorService');
 
-const { RegisterService } = require('../../services/auth/RegisterService');
+const { Register } = require('../../services/auth/Register');
 
-const RegisterServiceInstance = new RegisterService();
+const RegisterService = new Register();
 
 const register = async (req, res, next) => {
   try {
-    const result = await RegisterServiceInstance.RegisterUser(req.body);
+    const result = await RegisterService.RegisterUser(req.body);
 
     if (result.success) return res.status(StatusCodes.CREATED).send(result);
 

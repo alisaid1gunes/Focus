@@ -3,13 +3,13 @@ const { StatusCodes } = require('http-status-codes');
 
 const ApiErrorService = require('../../services/ApiErrorService');
 
-const LoginService = require('../../services/auth/LoginService');
+const Login = require('../../services/auth/Login');
 
-const LoginServiceInstance = new LoginService();
+const LoginService = new Login();
 
 const login = async (req, res, next) => {
   try {
-    const result = await LoginServiceInstance.LoginUser(req.body);
+    const result = await LoginService.LoginUser(req.body);
 
     if (result.success) {
       const { accessToken } = result;

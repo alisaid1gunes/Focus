@@ -10,7 +10,7 @@ const RefreshToken = require('../../models/RefreshToken');
 
 const { generateToken } = require('../../utils/tokenGenerator');
 
-class RefreshService {
+class Refresh {
   constructor() {
     this.mongooseUser = new MongooseService(User);
     this.mongooseRefreshToken = new MongooseService(RefreshToken);
@@ -39,4 +39,4 @@ class RefreshService {
   }
 }
 
-module.exports = RefreshService;
+module.exports = Refresh;

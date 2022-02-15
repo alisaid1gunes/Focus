@@ -3,13 +3,13 @@ const { StatusCodes } = require('http-status-codes');
 
 const ApiErrorService = require('../../services/ApiErrorService');
 
-const ChangePasswordService = require('../../services/auth/ChangePasswordService');
+const ChangePassword = require('../../services/auth/ChangePassword');
 
-const ChangePasswordServiceInstance = new ChangePasswordService();
+const ChangePasswordService = new ChangePassword();
 
 const changePassword = async (req, res, next) => {
   try {
-    const result = await ChangePasswordServiceInstance.ChangePassword(req.body);
+    const result = await ChangePasswordService.ChangePassword(req.body);
 
     if (result.success) {
       return res.status(StatusCodes.OK).send({

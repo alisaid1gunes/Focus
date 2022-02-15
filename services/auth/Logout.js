@@ -6,7 +6,7 @@ const MongooseService = require('../MongooseService');
 
 const RefreshToken = require('../../models/RefreshToken');
 
-class LogoutService {
+class Logout {
   constructor() {
     this.mongooseUser = new MongooseService(User);
     this.mongooseRefreshToken = new MongooseService(RefreshToken);
@@ -27,4 +27,4 @@ class LogoutService {
   }
 }
 
-module.exports = LogoutService;
+module.exports = Logout;

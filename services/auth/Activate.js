@@ -4,7 +4,7 @@ const User = require('../../models/User');
 
 const MongooseService = require('../MongooseService');
 
-class ActivateService {
+class Activate {
   constructor() {
     this.mongooseUser = new MongooseService(User);
   }
@@ -33,4 +33,4 @@ class ActivateService {
   }
 }
 
-module.exports = ActivateService;
+module.exports = Activate;

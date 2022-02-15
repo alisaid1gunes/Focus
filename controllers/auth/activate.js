@@ -3,13 +3,13 @@ const { StatusCodes } = require('http-status-codes');
 
 const ApiErrorService = require('../../services/ApiErrorService');
 
-const ActivateService = require('../../services/auth/ActivateService');
+const Activate = require('../../services/auth/Activate');
 
-const ActivateServiceInstance = new ActivateService();
+const ActivateService = new Activate();
 
 const activate = async (req, res, next) => {
   try {
-    const result = await ActivateServiceInstance.Activate(req.body);
+    const result = await ActivateService.Activate(req.body);
     console.log(result);
     if (result.success) return res.status(StatusCodes.OK).send(result);
 

@@ -3,13 +3,13 @@ const { StatusCodes } = require('http-status-codes');
 
 const ApiErrorService = require('../../services/ApiErrorService');
 
-const LogoutService = require('../../services/auth/LogoutService');
+const Logout = require('../../services/auth/Logout');
 
-const LogoutServiceInstance = new LogoutService();
+const LogoutService = new Logout();
 
 const logout = async (req, res, next) => {
   try {
-    const result = await LogoutServiceInstance.LogoutUser(req.body);
+    const result = await LogoutService.LogoutUser(req.body);
 
     if (result.success)
       return res.header('auth-token', '').status(StatusCodes.OK).send(result);
