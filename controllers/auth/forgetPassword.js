@@ -1,7 +1,7 @@
 /* eslint-disable consistent-return */
 const { StatusCodes } = require('http-status-codes');
 
-const ApiErrorService = require('../../services/ApiErrorService');
+const ApiErrorService = require('../../services/ApiError');
 
 const { ForgetPassword } = require('../../services/auth/ForgetPassword');
 

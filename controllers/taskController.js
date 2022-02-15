@@ -1,8 +1,8 @@
 const { StatusCodes } = require('http-status-codes');
 
-const TaskService = require('../services/TaskService');
+const TaskService = require('../services/Task');
 
-const ApiErrorService = require('../services/ApiErrorService').default;
+const ApiErrorService = require('../services/ApiError').default;
 
 const TaskServiceInstance = new TaskService();
 

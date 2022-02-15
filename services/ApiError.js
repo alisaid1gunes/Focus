@@ -1,4 +1,4 @@
-class ApiErrorService {
+class ApiError {
   constructor(code, message) {
     this.code = code;
     this.message = message;
@@ -17,4 +17,4 @@ class ApiErrorService {
   }
 }
 
-module.exports = ApiErrorService;
+module.exports = ApiError;

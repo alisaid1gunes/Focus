@@ -1,4 +1,4 @@
-const sendEmail = require('../services/EmailService');
+const sendEmail = require('../services/Email');
 
 const { eventEmitter } = require('../services/auth/Register');
 

@@ -2,7 +2,7 @@
 
 const User = require('../../models/User');
 
-const MongooseService = require('../MongooseService');
+const MongooseService = require('../Mongoose');
 
 const RefreshToken = require('../../models/RefreshToken');
 

@@ -7,7 +7,7 @@ const bcrypt = require('bcryptjs');
 
 const User = require('../../models/User');
 
-const MongooseService = require('../MongooseService');
+const MongooseService = require('../Mongoose');
 
 const { registerValidation } = require('../../validations/validations');
 

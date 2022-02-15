@@ -1,5 +1,5 @@
 const Task = require('../models/Task');
-const MongooseService = require('./MongooseService');
+const MongooseService = require('./Mongoose');
 
 const {
   taskValidationSave,
