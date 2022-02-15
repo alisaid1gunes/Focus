@@ -1,6 +1,10 @@
 const sendEmail = require('../services/EmailService');
 
-const { eventEmitter } = require('../services/AuthService');
+const { eventEmitter } = require('../services/auth/RegisterService');
+
+const {
+  ForgeteventEmitter,
+} = require('../services/auth/ForgetPasswordService');
 
 eventEmitter.on('signup', async (email, username, code) => {
   console.log('on içerde');
@@ -14,7 +18,8 @@ eventEmitter.on('signup', async (email, username, code) => {
   sendEmail(msg);
 });
 
-eventEmitter.on('forget-password', async (email, username, code) => {
+ForgeteventEmitter.on('forget-password', async (email, username, code) => {
+  console.log('on içerde');
   const msg = {
     to: email,
     from: process.env.VERIFIED_SENDER,
