@@ -28,4 +28,4 @@ const listSchema = new mongoose.Schema({
 
 listSchema.set('timestamps', true);
 
-module.exports = mongoose.model('Task', listSchema);
+module.exports = mongoose.model('List', listSchema);

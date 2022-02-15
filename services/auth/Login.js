@@ -2,7 +2,7 @@
 
 const bcrypt = require('bcryptjs');
 
-const User = require('../../models/User');
+const { User } = require('../../models');
 
 const MongooseService = require('../Mongoose');
 
@@ -10,7 +10,7 @@ const { loginValidation } = require('../../validations/validations');
 
 const { generateToken } = require('../../utils/tokenGenerator');
 
-const RefreshToken = require('../../models/RefreshToken');
+const { RefreshToken } = require('../../models');
 
 class Login {
   constructor() {

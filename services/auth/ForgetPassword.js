@@ -3,7 +3,7 @@ const EventEmitter = require('events');
 
 const forgetEmitter = new EventEmitter();
 
-const User = require('../../models/User');
+const { User } = require('../../models');
 
 const MongooseService = require('../Mongoose');
 

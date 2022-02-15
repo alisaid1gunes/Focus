@@ -1,10 +1,10 @@
 /* eslint-disable no-underscore-dangle */
 
-const User = require('../../models/User');
+const { User } = require('../../models');
 
 const MongooseService = require('../Mongoose');
 
-const RefreshToken = require('../../models/RefreshToken');
+const { RefreshToken } = require('../../models');
 
 class Logout {
   constructor() {
