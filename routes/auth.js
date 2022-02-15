@@ -1,22 +1,22 @@
 const router = require('express').Router();
 
-const registerController = require('../controllers/auth/registerController');
+const registerController = require('../controllers/auth/register');
 
-const loginController = require('../controllers/auth/loginController');
+const loginController = require('../controllers/auth/login');
 
-const activateController = require('../controllers/auth/activateController');
+const activateController = require('../controllers/auth/activate');
 
-const refreshController = require('../controllers/auth/refreshController');
+const refreshController = require('../controllers/auth/refresh');
 
-const logoutController = require('../controllers/auth/logoutController');
+const logoutController = require('../controllers/auth/logout');
 
-const changePasswordController = require('../controllers/auth/changePasswordController');
+const changePasswordController = require('../controllers/auth/changePassword');
 
-const forgetPasswordController = require('../controllers/auth/forgetPasswordController');
+const forgetPasswordController = require('../controllers/auth/forgetPassword');
 
-const forgetPasswordVerifyController = require('../controllers/auth/forgetPasswordVerifyController');
+const forgetPasswordVerifyController = require('../controllers/auth/forgetPasswordVerify');
 
-const forgetPasswordChangeController = require('../controllers/auth/forgetPasswordChangeController');
+const forgetPasswordChangeController = require('../controllers/auth/forgetPasswordChange');
 // eslint-disable-next-line consistent-return
 router.post('/register', registerController.register);
 
