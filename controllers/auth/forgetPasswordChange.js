@@ -3,7 +3,7 @@ const { StatusCodes } = require('http-status-codes');
 
 const ApiErrorService = require('../../services/ApiError');
 
-const ForgetPasswordChange = require('../../services/auth/ForgetPasswordChange');
+const { ForgetPasswordChange } = require('../../services/auth');
 
 const ForgetPasswordChangeService = new ForgetPasswordChange();
 

@@ -14,6 +14,8 @@ class ChangePassword {
   async ChangePassword(body) {
     const user = await this.mongooseUser.get({ _id: body.id });
 
+    if (!user) return { error: 'user not found', success: false };
+
     const validPass = await bcrypt.compare(body.oldPassword, user.password);
     if (!validPass) return { error: 'old password is wrong', success: false };
 

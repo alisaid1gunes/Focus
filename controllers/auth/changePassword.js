@@ -3,7 +3,7 @@ const { StatusCodes } = require('http-status-codes');
 
 const ApiErrorService = require('../../services/ApiError');
 
-const ChangePassword = require('../../services/auth/ChangePassword');
+const { ChangePassword } = require('../../services/auth');
 
 const ChangePasswordService = new ChangePassword();
 
@@ -18,7 +18,7 @@ const changePassword = async (req, res, next) => {
     }
     next(ApiErrorService.badRequest(result.error));
   } catch (err) {
-    next(ApiErrorService.badRequest(`Kullanıcı girişi yapılamadı.${err}`));
+    next(ApiErrorService.badRequest(`şifre değiştirilemedi.${err}`));
   }
 };
 

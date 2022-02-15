@@ -2,6 +2,8 @@ const router = require('express').Router();
 
 const authController = require('../controllers/auth');
 
+const verify = require('../middlewares/verifyToken');
+
 router.post('/register', authController.register);
 
 router.post('/login', authController.login);
@@ -12,7 +14,7 @@ router.post('/logout', authController.logout);
 
 router.post('/activate', authController.activate);
 
-router.post('/password/change', authController.changePassword);
+router.post('/password/change', verify, authController.changePassword);
 
 router.post('/password/forget', authController.forgetPassword);
 

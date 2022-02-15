@@ -3,7 +3,7 @@ const { StatusCodes } = require('http-status-codes');
 
 const ApiErrorService = require('../../services/ApiError');
 
-const Login = require('../../services/auth/Login');
+const { Login } = require('../../services/auth');
 
 const LoginService = new Login();
 

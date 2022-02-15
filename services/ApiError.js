@@ -5,15 +5,15 @@ class ApiError {
   }
 
   static badRequest(msg) {
-    return new ApiErrorService(400, msg);
+    return new ApiError(400, msg);
   }
 
   static unauthorized(msg) {
-    return new ApiErrorService(401, msg);
+    return new ApiError(401, msg);
   }
 
   static internal(msg) {
-    return new ApiErrorService(500, msg);
+    return new ApiError(500, msg);
   }
 }
 

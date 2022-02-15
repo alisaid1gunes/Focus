@@ -1,7 +1,7 @@
 /* eslint-disable no-underscore-dangle */
 const EventEmitter = require('events');
 
-const eventEmitter = new EventEmitter();
+const registerEmitter = new EventEmitter();
 
 const bcrypt = require('bcryptjs');
 
@@ -43,7 +43,8 @@ class Register {
     try {
       const user = await this.mongooseUser.save(bodyIn);
 
-      eventEmitter.emit('signup', bodyIn.email, bodyIn.username, code);
+      registerEmitter.emit('signup', bodyIn.email, bodyIn.username, code);
+
       return { success: true, user };
     } catch (err) {
       return { success: false, error: err };
@@ -51,4 +52,4 @@ class Register {
   }
 }
 
-module.exports = { Register, eventEmitter };
+module.exports = { Register, registerEmitter };

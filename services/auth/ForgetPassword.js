@@ -1,7 +1,7 @@
 /* eslint-disable no-underscore-dangle */
 const EventEmitter = require('events');
 
-const ForgeteventEmitter = new EventEmitter();
+const forgetEmitter = new EventEmitter();
 
 const User = require('../../models/User');
 
@@ -28,12 +28,7 @@ class ForgetPassword {
 
     try {
       await this.mongooseUser.update(user._id, user);
-      ForgeteventEmitter.emit(
-        'forget-password',
-        user.email,
-        user.username,
-        code
-      );
+      forgetEmitter.emit('forget-password', user.email, user.username, code);
       return {
         success: true,
         message: 'Verification code sent your email to change your password',
@@ -44,4 +39,4 @@ class ForgetPassword {
   }
 }
 
-module.exports = { ForgetPassword, ForgeteventEmitter };
+module.exports = { ForgetPassword, forgetEmitter };
