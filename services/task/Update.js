@@ -12,7 +12,7 @@ class Update {
   async UpdateTask(body, id) {
     try {
       const { error } = taskValidationUpdate(body);
-      if (error) return error.details[0].message;
+      if (error) return { success: false, error: error.details[0].message };
 
       const result = await this.mongooseTask.update(id, body);
 

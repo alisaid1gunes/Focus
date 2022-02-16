@@ -10,9 +10,9 @@ class Save {
   }
 
   async SaveTask(body) {
-
     const { error } = taskValidationSave(body);
-    if (error) return error.details[0].message;
+    if (error) return { success: false, error: error.details[0].message };
+
     try {
       const result = await this.mongooseTask.save(body);
 
