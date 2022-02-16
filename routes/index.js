@@ -4,4 +4,6 @@ const task = require('./task');
 
 const user = require('./user');
 
-module.exports = { auth, task, user };
+const list = require('./list');
+
+module.exports = { auth, task, user, list };
