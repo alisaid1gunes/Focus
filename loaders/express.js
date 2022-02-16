@@ -8,7 +8,7 @@ const cors = require('cors');
 
 const apiErrorHandler = require('../middlewares/apiErrorHandler');
 
-const { auth, task } = require('../routes');
+const { auth, task, user } = require('../routes');
 
 module.exports = (app) => {
   app.use(express.urlencoded({ extended: true }));
@@ -17,6 +17,8 @@ module.exports = (app) => {
   app.use(compression({ threshold: 6 }));
 
   app.use(cors());
+
+  app.use('/api/users/', auth);
 
   app.use('/api/users/auth', auth);
 
