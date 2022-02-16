@@ -9,7 +9,7 @@ const UserService = new Update();
 const update = async (req, res, next) => {
   const { id } = req.params;
   try {
-    const result = await UserService.UpdateTask(req.body, id);
+    const result = await UserService.UpdateUser(req.body, id);
     if (result.success) return res.status(StatusCodes.OK).json(result);
 
     next(ApiErrorService.badRequest(result.error));

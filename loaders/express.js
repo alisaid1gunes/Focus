@@ -18,7 +18,7 @@ module.exports = (app) => {
 
   app.use(cors());
 
-  app.use('/api/users/', auth);
+  app.use('/api/users/', user);
 
   app.use('/api/users/auth', auth);
 

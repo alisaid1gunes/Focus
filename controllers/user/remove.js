@@ -10,7 +10,7 @@ const UserService = new Remove();
 const remove = async (req, res, next) => {
   const { id } = req.params;
   try {
-    const result = await UserService.RemoveTask(id);
+    const result = await UserService.RemoveUser(id);
     if (result.success) return res.status(StatusCodes.OK).json(result);
 
     next(ApiErrorService.badRequest(result.error));
