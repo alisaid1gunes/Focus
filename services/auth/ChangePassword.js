@@ -6,12 +6,17 @@ const { User } = require('../../models');
 
 const MongooseService = require('../Mongoose');
 
+const { changePasswordValidation } = require('../../validations/auth');
+
 class ChangePassword {
   constructor() {
     this.mongooseUser = new MongooseService(User);
   }
 
   async ChangePassword(body) {
+    const { error } = changePasswordValidation(body);
+    if (error) return { success: false, error: error.details[0].message };
+
     const user = await this.mongooseUser.get({ _id: body.id });
 
     if (!user) return { error: 'user not found', success: false };

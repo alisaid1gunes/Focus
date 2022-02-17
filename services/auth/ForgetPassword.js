@@ -7,12 +7,17 @@ const { User } = require('../../models');
 
 const MongooseService = require('../Mongoose');
 
+const { forgetPasswordValidation } = require('../../validations/auth');
+
 class ForgetPassword {
   constructor() {
     this.mongooseUser = new MongooseService(User);
   }
 
   async ForgetPassword(body) {
+    const { error } = forgetPasswordValidation(body);
+    if (error) return { success: false, error: error.details[0].message };
+
     const user = await this.mongooseUser.get({ _id: body.id });
 
     const code = Math.floor(1000 + Math.random() * 9000);

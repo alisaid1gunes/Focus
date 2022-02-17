@@ -4,12 +4,17 @@ const { User } = require('../../models');
 
 const MongooseService = require('../Mongoose');
 
+const { activateValidation } = require('../../validations/auth');
+
 class Activate {
   constructor() {
     this.mongooseUser = new MongooseService(User);
   }
 
   async Activate(body) {
+    const { error } = activateValidation(body);
+    if (error) return { success: false, error: error.details[0].message };
+
     const user = await this.mongooseUser.get({ _id: body.id });
 
     const userExpireDate = new Date(user.activation.expireDate);

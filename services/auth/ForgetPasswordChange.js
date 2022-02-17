@@ -6,12 +6,17 @@ const { User } = require('../../models');
 
 const MongooseService = require('../Mongoose');
 
+const { forgetPasswordChangeValidation } = require('../../validations/auth');
+
 class ForgetPasswordChange {
   constructor() {
     this.mongooseUser = new MongooseService(User);
   }
 
   async ForgetPasswordChange(body) {
+    const { error } = forgetPasswordChangeValidation(body);
+    if (error) return { success: false, error: error.details[0].message };
+
     const user = await this.mongooseUser.get({ _id: body.id });
 
     const salt = await bcrypt.genSalt(10);

@@ -6,7 +6,9 @@ const saveValidation = require('./save');
 
 const updateValidation = require('./update');
 
-const removeValidation = require('./update');
+const removeValidation = require('./remove');
+
+const idValidation = require('./id');
 
 module.exports = {
   getOneValidation,
@@ -14,4 +16,5 @@ module.exports = {
   saveValidation,
   updateValidation,
   removeValidation,
+  idValidation,
 };

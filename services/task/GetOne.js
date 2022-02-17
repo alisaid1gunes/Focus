@@ -2,12 +2,17 @@ const { Task } = require('../../models');
 
 const MongooseService = require('../Mongoose');
 
+const { getOneValidation } = require('../../validations/task');
+
 class GetOne {
   constructor() {
     this.mongooseTask = new MongooseService(Task);
   }
 
   async GetTask(id) {
+    const { error } = getOneValidation(id);
+    if (error) return { success: false, error: error.details[0].message };
+
     try {
       const result = await this.mongooseTask.get({ _id: id });
 
