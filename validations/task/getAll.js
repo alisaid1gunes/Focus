@@ -1,6 +1,6 @@
 const Joi = require('joi-oid');
 
-const get = (data) => {
+const getAll = (data) => {
   const taskSchema = Joi.object({
     userId: Joi.objectId().required(),
   });
@@ -8,4 +8,4 @@ const get = (data) => {
   return taskSchema.validate(data);
 };
 
-module.exports = get;
+module.exports = getAll;
