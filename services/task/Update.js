@@ -2,7 +2,7 @@ const { Task } = require('../../models');
 
 const MongooseService = require('../Mongoose');
 
-const { taskValidationUpdate } = require('../../validations/validations');
+const { updateValidation } = require('../../validations/task');
 
 class Update {
   constructor() {
@@ -11,7 +11,7 @@ class Update {
 
   async UpdateTask(body, id) {
     try {
-      const { error } = taskValidationUpdate(body);
+      const { error } = updateValidation(body);
       if (error) return { success: false, error: error.details[0].message };
 
       const result = await this.mongooseTask.update(id, body);

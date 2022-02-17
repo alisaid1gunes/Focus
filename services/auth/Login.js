@@ -6,7 +6,7 @@ const { User } = require('../../models');
 
 const MongooseService = require('../Mongoose');
 
-const { loginValidation } = require('../../validations/validations');
+const { loginValidation } = require('../../validations/auth');
 
 const { generateToken } = require('../../utils/tokenGenerator');
 

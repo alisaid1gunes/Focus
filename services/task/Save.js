@@ -2,7 +2,7 @@ const { Task } = require('../../models');
 
 const MongooseService = require('../Mongoose');
 
-const { taskValidationSave } = require('../../validations/validations');
+const { saveValidation } = require('../../validations/task');
 
 class Save {
   constructor() {
@@ -10,7 +10,7 @@ class Save {
   }
 
   async SaveTask(body) {
-    const { error } = taskValidationSave(body);
+    const { error } = saveValidation(body);
     if (error) return { success: false, error: error.details[0].message };
 
     try {

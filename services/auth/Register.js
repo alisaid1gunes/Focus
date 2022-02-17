@@ -9,7 +9,7 @@ const { User } = require('../../models');
 
 const MongooseService = require('../Mongoose');
 
-const { registerValidation } = require('../../validations/validations');
+const { registerValidation } = require('../../validations/auth');
 
 class Register {
   constructor() {
