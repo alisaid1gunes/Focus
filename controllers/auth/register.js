@@ -9,7 +9,7 @@ const RegisterService = new Register();
 
 const register = async (req, res, next) => {
   try {
-    const result = await RegisterService.RegisterUser(req.body);
+    const result = await RegisterService.RegisterUser(req);
 
     if (result.success) return res.status(StatusCodes.CREATED).send(result);
 

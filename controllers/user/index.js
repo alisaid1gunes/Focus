@@ -4,4 +4,6 @@ const update = require('./update');
 
 const remove = require('./remove');
 
-module.exports = { get, update, remove };
+const getProfilePic = require('./getProfilePic');
+
+module.exports = { get, update, remove, getProfilePic };

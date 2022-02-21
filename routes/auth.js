@@ -1,10 +1,12 @@
 const router = require('express').Router();
 
+const upload = require('../utils/uploadProfile');
+
 const authController = require('../controllers/auth');
 
 const verify = require('../middlewares/verifyToken');
 
-router.post('/register', authController.register);
+router.post('/register', upload.single('profile'), authController.register);
 
 router.post('/login', authController.login);
 

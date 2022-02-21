@@ -16,11 +16,17 @@ class Register {
     this.mongooseUser = new MongooseService(User);
   }
 
-  async RegisterUser(body) {
-    const bodyIn = body;
+  async RegisterUser(req) {
+    const bodyIn = req.body;
+    const { file } = req;
+    if (!file)
+      return {
+        error: ' File type must be jpg or png and file size must less than 5MB',
+        success: false,
+      };
 
-    const { error } = registerValidation(bodyIn);
-    if (error) return { error: error.details[0].message, success: false };
+    // const { error } = registerValidation(bodyIn);
+    // if (error) return { error: error.details[0].message, success: false };
 
     const emailExist = await this.mongooseUser.get({ email: bodyIn.email });
 
@@ -39,6 +45,8 @@ class Register {
       code,
       expireDate,
     };
+
+    bodyIn.profileUrl = file.path;
 
     try {
       const user = await this.mongooseUser.save(bodyIn);
