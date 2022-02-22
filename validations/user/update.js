@@ -5,6 +5,7 @@ const update = (data) => {
     username: Joi.string().min(3).max(10),
     email: Joi.string().email(),
     password: Joi.string().min(8).max(10),
+    profileUrl: Joi.string(),
   });
 
   return userSchema.validate(data);

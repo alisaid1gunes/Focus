@@ -26,6 +26,10 @@ class MongooseService {
   update(id, value) {
     return this.model.findOneAndUpdate({ _id: id }, value, { new: true });
   }
+
+  updateAndReturnOld(id, value) {
+    return this.model.findOneAndUpdate({ _id: id }, value);
+  }
 }
 
 module.exports = MongooseService;

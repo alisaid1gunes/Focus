@@ -25,8 +25,8 @@ class Register {
         success: false,
       };
 
-    // const { error } = registerValidation(bodyIn);
-    // if (error) return { error: error.details[0].message, success: false };
+    const { error } = registerValidation(bodyIn);
+    if (error) return { error: error.details[0].message, success: false };
 
     const emailExist = await this.mongooseUser.get({ email: bodyIn.email });
 
@@ -45,8 +45,9 @@ class Register {
       code,
       expireDate,
     };
+    const fileUrl = req.file.path.replace(/\\/g, '/');
 
-    bodyIn.profileUrl = file.path;
+    bodyIn.profileUrl = fileUrl;
 
     try {
       const user = await this.mongooseUser.save(bodyIn);

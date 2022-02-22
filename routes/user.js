@@ -4,14 +4,14 @@ const userController = require('../controllers/user');
 
 const verify = require('../middlewares/verifyToken');
 
-router.get('/profile', userController.getProfilePic);
+const upload = require('../utils/uploadProfile');
+
+router.get('/profile', verify, userController.getProfilePic);
 
 router.get('/:id', verify, userController.get);
 
-// todo:add verify
-
 router.delete('/:id', verify, userController.remove);
 
-router.put('/:id', verify, userController.update);
+router.put('/:id', verify, upload.single('profile'), userController.update);
 
 module.exports = router;
