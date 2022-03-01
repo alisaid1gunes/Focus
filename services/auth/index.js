@@ -16,6 +16,12 @@ const Refresh = require('./Refresh');
 
 const { Register, registerEmitter } = require('./Register');
 
+const GoogleLogin = require('./GoogleLogin');
+
+const { GoogleRegister, googleEmitter } = require('./GoogleRegister');
+
+const GoogleAuth = require('./GoogleAuth');
+
 module.exports = {
   Activate,
   ChangePassword,
@@ -28,4 +34,8 @@ module.exports = {
   Register,
   registerEmitter,
   forgetEmitter,
+  GoogleLogin,
+  GoogleRegister,
+  GoogleAuth,
+  googleEmitter,
 };

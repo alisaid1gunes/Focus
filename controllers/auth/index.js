@@ -16,6 +16,8 @@ const forgetPasswordVerify = require('./forgetPasswordVerify');
 
 const forgetPasswordChange = require('./forgetPasswordChange');
 
+const googleAuth = require('./googleAuth');
+
 module.exports = {
   register,
   login,
@@ -26,4 +28,5 @@ module.exports = {
   forgetPassword,
   forgetPasswordVerify,
   forgetPasswordChange,
+  googleAuth,
 };

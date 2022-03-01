@@ -1,13 +1,14 @@
 const express = require('express');
-
+const dotenv = require('dotenv');
 const helmet = require('helmet');
+
+dotenv.config({ path: './config/.env' });
 
 const compression = require('compression');
 
 const cors = require('cors');
 
 const apiErrorHandler = require('../middlewares/apiErrorHandler');
-
 const { auth, task, user, list } = require('../routes');
 
 module.exports = (app) => {

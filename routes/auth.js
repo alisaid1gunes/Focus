@@ -24,4 +24,6 @@ router.post('/password/forget/verify', authController.forgetPasswordVerify);
 
 router.post('/password/forget/change', authController.forgetPasswordChange);
 
+router.post('/google', authController.googleAuth);
+
 module.exports = router;
