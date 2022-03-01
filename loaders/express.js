@@ -9,6 +9,7 @@ const compression = require('compression');
 const cors = require('cors');
 
 const apiErrorHandler = require('../middlewares/apiErrorHandler');
+
 const { auth, task, user, list } = require('../routes');
 
 module.exports = (app) => {

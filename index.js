@@ -1,7 +1,5 @@
 const express = require('express');
 
-const dotenv = require('dotenv');
-
 const loaders = require('./loaders');
 
 const startServer = async () => {

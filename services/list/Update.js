@@ -4,9 +4,15 @@ const MongooseService = require('../Mongoose');
 
 const { updateValidation, idValidation } = require('../../validations/list');
 
+const RedisCache = require('../redis/RedisCache');
+
+const keyFormat = 'list.id=';
+
+const expirationTime = 300;
 class Update {
   constructor() {
     this.mongooseList = new MongooseService(List);
+    this.redisCacheService = new RedisCache(keyFormat, expirationTime);
   }
 
   async UpdateList(body, id) {
@@ -20,7 +26,10 @@ class Update {
     try {
       const result = await this.mongooseList.update(id, body);
 
-      if (result) return { result, success: true };
+      if (result) {
+        this.redisCacheService.setCache(id, result);
+        return { success: true, message: 'Kayıt yapıldı.' };
+      }
       return { success: false, error: 'Güncelleme yapılamadı.' };
     } catch (err) {
       return { success: false, error: `Kayıt güncellenemedi. Hata:${err}` };

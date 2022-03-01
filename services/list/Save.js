@@ -4,9 +4,15 @@ const MongooseService = require('../Mongoose');
 
 const { saveValidation } = require('../../validations/list');
 
+const RedisCache = require('../redis/RedisCache');
+
+const keyFormat = 'list.id=';
+
+const expirationTime = 300;
 class Save {
   constructor() {
     this.mongooseList = new MongooseService(List);
+    this.redisCacheService = new RedisCache(keyFormat, expirationTime);
   }
 
   async SaveList(body) {
@@ -16,7 +22,11 @@ class Save {
     try {
       const result = await this.mongooseList.save(body);
 
-      if (result) return { success: true, message: 'Kayıt yapıldı.' };
+      if (result) {
+        // eslint-disable-next-line no-underscore-dangle
+        this.redisCacheService.setCache(result._id, result);
+        return { success: true, message: 'Kayıt yapıldı.' };
+      }
 
       return { success: false, error: 'Kayıt yapılamadı.' };
     } catch (err) {
