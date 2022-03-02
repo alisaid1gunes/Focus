@@ -6,9 +6,9 @@ const { updateValidation, idValidation } = require('../../validations/task');
 
 const RedisCache = require('../redis/RedisCache');
 
-const keyFormat = 'task.id=';
+const keyFormat = 'task._id=';
 
-const expirationTime = 300;
+const expirationTime = 600000;
 class Update {
   constructor() {
     this.mongooseTask = new MongooseService(Task);

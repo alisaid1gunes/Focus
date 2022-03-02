@@ -6,9 +6,9 @@ const { removeValidation } = require('../../validations/task');
 
 const RedisCache = require('../redis/RedisCache');
 
-const keyFormat = 'task.id=';
+const keyFormat = 'task._id=';
 
-const expirationTime = 300;
+const expirationTime = 600000;
 class Remove {
   constructor() {
     this.mongooseTask = new MongooseService(Task);
@@ -22,9 +22,7 @@ class Remove {
     try {
       await this.mongooseTask.delete({ _id: id });
 
-      (async () => {
-        await this.redisCacheService.clearCache(id);
-      })();
+      await this.redisCacheService.clearCache(id);
 
       return { message: 'Kayıt silindi', success: true };
     } catch (err) {

@@ -1,11 +1,5 @@
 const Joi = require('joi-oid');
 
-const getOne = (data) => {
-  const listSchema = Joi.object({
-    userId: Joi.objectId().required(),
-  });
-
-  return listSchema.validate(data);
-};
+const getOne = (data) => Joi.objectId().required().validate(data);
 
 module.exports = getOne;

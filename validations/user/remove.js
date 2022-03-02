@@ -1,11 +1,5 @@
 const Joi = require('joi-oid');
 
-const remove = (data) => {
-  const userSchema = Joi.object({
-    id: Joi.objectId().required(),
-  });
-
-  return userSchema.validate(data);
-};
+const remove = (data) => Joi.objectId().required().validate(data);
 
 module.exports = remove;

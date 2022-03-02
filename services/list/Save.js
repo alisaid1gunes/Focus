@@ -6,9 +6,9 @@ const { saveValidation } = require('../../validations/list');
 
 const RedisCache = require('../redis/RedisCache');
 
-const keyFormat = 'list.id=';
+const keyFormat = 'list._id=';
 
-const expirationTime = 300;
+const expirationTime = 600000;
 class Save {
   constructor() {
     this.mongooseList = new MongooseService(List);
