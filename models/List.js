@@ -28,4 +28,6 @@ const listSchema = new mongoose.Schema({
 
 listSchema.set('timestamps', true);
 
+listSchema.index({ userId: 1 });
+
 module.exports = mongoose.model('List', listSchema);

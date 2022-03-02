@@ -53,4 +53,3 @@ const userSchema = new mongoose.Schema({
 });
 
 module.exports = mongoose.model('User', userSchema);
-// mySchema.index({field1: 1, field2: 1}, {unique: true});
