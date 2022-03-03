@@ -10,7 +10,7 @@ router.get('/:id', verify, taskController.getOne);
 
 router.post('/', verify, taskController.save);
 
-router.delete('/:id',verify, taskController.remove);
+router.delete('/:id', verify, taskController.remove);
 
 router.put('/:id', verify, taskController.update);
 
