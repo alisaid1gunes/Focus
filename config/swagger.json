@@ -1,0 +1,1095 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "This is a documentation for Todo server.",
+    "version": "1.0.0",
+    "title": "Todo App",
+    "contact": {
+      "email": "alisaidgunes1@gmail.com"
+    }
+  },
+  "basePath": "/api",
+  "tags": [
+    {
+      "name": "auth",
+      "description": "Operations about authentication"
+    },
+    {
+      "name": "user",
+      "description": "Operations about user"
+    },
+    {
+      "name": "tasks",
+      "description": "Everything about your Tasks"
+    },
+    {
+      "name": "list",
+      "description": "Everything about your List"
+    }
+  ],
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/users/auth/register": {
+      "post": {
+        "tags": [
+          "auth"
+        ],
+        "summary": "register a user",
+        "operationId": "registerUser",
+        "consumes": [
+          "multipart/form-data",
+          "application/json"
+        ],
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "username",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "name": "email",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "name": "password",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "name": "profile",
+            "description": "it must be png or jpg and less than 5mb",
+            "required": true,
+            "type": "file"
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid user supplied"
+          },
+          "404": {
+            "description": "User not found"
+          }
+        }
+      }
+    },
+    "/users/auth/login": {
+      "post": {
+        "tags": [
+          "auth"
+        ],
+        "summary": "login as a user",
+        "operationId": "loginUser",
+        "consumes": [
+          "multipart/form-data",
+          "application/json"
+        ],
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "email",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "name": "password",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid user supplied"
+          },
+          "404": {
+            "description": "User not found"
+          }
+        }
+      }
+    },
+    "/users/auth/logout": {
+      "post": {
+        "tags": [
+          "auth"
+        ],
+        "summary": "logout as a user",
+        "operationId": "logoutUser",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "refreshToken",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "refreshToken": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid refreshToken supplied"
+          },
+          "404": {
+            "description": "User not found"
+          }
+        }
+      }
+    },
+    "/users/auth/activate": {
+      "post": {
+        "tags": [
+          "auth"
+        ],
+        "summary": "activate a user",
+        "operationId": "activateUser",
+        "consumes": [
+          "multipart/form-data",
+          "application/json"
+        ],
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "id",
+            "required": true,
+            "type": "string",
+            "description": "it must be user id"
+          },
+          {
+            "in": "formData",
+            "name": "activationCode",
+            "required": true,
+            "type": "integer",
+            "description": "The system sends activation code to user's email. It is integer."
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid id or refreshToken supplied"
+          },
+          "404": {
+            "description": "refreshToken not found"
+          }
+        }
+      }
+    },
+    "/users/auth/token": {
+      "post": {
+        "tags": [
+          "auth"
+        ],
+        "summary": "To get a new refreshToken",
+        "operationId": "tokenUser",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "refreshToken",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "refreshToken": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid refreshToken supplied"
+          },
+          "404": {
+            "description": "User not found"
+          }
+        }
+      }
+    },
+    "/users/auth/password/change": {
+      "post": {
+        "tags": [
+          "auth"
+        ],
+        "summary": "change user password",
+        "operationId": "changePassword",
+        "consumes": [
+          "multipart/form-data",
+          "application/json"
+        ],
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "id",
+            "required": true,
+            "type": "string",
+            "description": "it must be user id"
+          },
+          {
+            "in": "formData",
+            "name": "oldPassword",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "name": "newPassword",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid id or oldPassword is wrong"
+          },
+          "404": {
+            "description": "User not found"
+          }
+        },
+        "security": [
+          {
+            "todo_auth": []
+          }
+        ]
+      }
+    },
+    "/users/auth/password/forget": {
+      "post": {
+        "tags": [
+          "auth"
+        ],
+        "summary": "When user forget the password",
+        "operationId": "forgetPassword",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "id",
+            "required": true,
+            "description": "it must be user id",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid id supplied"
+          },
+          "404": {
+            "description": "User not found"
+          }
+        }
+      }
+    },
+    "/users/auth/password/forget/change": {
+      "post": {
+        "tags": [
+          "auth"
+        ],
+        "summary": "Second step of forget password(In this step user can change the password)",
+        "operationId": "forgetPasswordChange",
+        "consumes": [
+          "multipart/form-data",
+          "application/json"
+        ],
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "id",
+            "required": true,
+            "type": "string",
+            "description": "it must be user id"
+          },
+          {
+            "in": "formData",
+            "name": "newPassword",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid id"
+          },
+          "404": {
+            "description": "User not found"
+          }
+        }
+      }
+    },
+    "/users/auth/password/forget/verify": {
+      "post": {
+        "tags": [
+          "auth"
+        ],
+        "summary": "Third step of forget password(In this step user must be verify)",
+        "operationId": "forgetPasswordChangeVerify",
+        "consumes": [
+          "multipart/form-data",
+          "application/json"
+        ],
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "id",
+            "required": true,
+            "type": "string",
+            "description": "it must be user id"
+          },
+          {
+            "in": "formData",
+            "name": "verficationCode",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid id or verficationCode"
+          },
+          "404": {
+            "description": "User not found"
+          }
+        }
+      }
+    },
+    "/users/auth/google": {
+      "post": {
+        "tags": [
+          "auth"
+        ],
+        "summary": "To google auth",
+        "operationId": "googleAuth",
+        "consumes": [
+          "multipart/form-data",
+          "application/json"
+        ],
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "email",
+            "required": true,
+            "type": "string",
+            "description": "it must be user email"
+          },
+          {
+            "in": "formData",
+            "name": "name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "name": "imageUrl",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid id or verficationCode"
+          },
+          "404": {
+            "description": "User not found"
+          }
+        }
+      }
+    },
+    "/tasks/all/{id}": {
+      "get": {
+        "tags": [
+          "tasks"
+        ],
+        "summary": "Returns all choosen user's tasks inventories by user id",
+        "operationId": "getAllTasks",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "allOf": [
+                  {
+                    "$ref": "#/definitions/Task"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "todo_auth": []
+          }
+        ]
+      }
+    },
+    "/tasks/{id}": {
+      "get": {
+        "tags": [
+          "tasks"
+        ],
+        "summary": "Returns a task by task id",
+        "operationId": "getTask",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Task"
+            }
+          }
+        },
+        "security": [
+          {
+            "todo_auth": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "tasks"
+        ],
+        "summary": "Delete task order by ID",
+        "description": "For valid response try integer IDs with positive integer value.         Negative or non-integer values will generate API errors",
+        "operationId": "deleteTask",
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of the task that needs to be deleted",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "Task not found"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "tasks"
+        ],
+        "summary": "Update an existing task",
+        "description": "",
+        "operationId": "updateTask",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of the task that needs to be deleted",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "in": "body",
+            "name": "task",
+            "description": "Task object that needs to be added to the store",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Task"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "Task not found"
+          },
+          "405": {
+            "description": "Validation exception"
+          }
+        },
+        "security": [
+          {
+            "todo_auth": []
+          }
+        ]
+      }
+    },
+    "/tasks": {
+      "post": {
+        "tags": [
+          "tasks"
+        ],
+        "summary": "Create a Task",
+        "operationId": "createTask",
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Task",
+            "schema": {
+              "$ref": "#/definitions/Task"
+            },
+            "in": "body",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Task"
+            }
+          }
+        },
+        "security": [
+          {
+            "todo_auth": []
+          }
+        ]
+      }
+    },
+    "/list/all/{id}": {
+      "get": {
+        "tags": [
+          "list"
+        ],
+        "summary": "Returns all choosen user's list inventories by user id",
+        "operationId": "getAllList",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "allOf": [
+                  {
+                    "$ref": "#/definitions/List"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "todo_auth": []
+          }
+        ]
+      }
+    },
+    "/list/{id}": {
+      "get": {
+        "tags": [
+          "list"
+        ],
+        "summary": "Returns a list by list id",
+        "operationId": "getList",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/List"
+            }
+          }
+        },
+        "security": [
+          {
+            "todo_auth": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "list"
+        ],
+        "summary": "Delete list order by ID",
+        "description": "For valid response try integer IDs with positive integer value.         Negative or non-integer values will generate API errors",
+        "operationId": "deleteList",
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of the list that needs to be deleted",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "List not found"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "list"
+        ],
+        "summary": "Update an existing list",
+        "description": "",
+        "operationId": "updatelist",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of the task that needs to be deleted",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "in": "body",
+            "name": "task",
+            "description": "Task object that needs to be added to the store",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/List"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "Task not found"
+          },
+          "405": {
+            "description": "Validation exception"
+          }
+        },
+        "security": [
+          {
+            "todo_auth": []
+          }
+        ]
+      }
+    },
+    "/list": {
+      "post": {
+        "tags": [
+          "list"
+        ],
+        "summary": "Create a list",
+        "operationId": "createList",
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Task",
+            "schema": {
+              "$ref": "#/definitions/List"
+            },
+            "in": "body",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/List"
+            }
+          }
+        },
+        "security": [
+          {
+            "todo_auth": []
+          }
+        ]
+      }
+    },
+    "/user/profile": {
+      "get": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Get user profile picture by profileUrl(it must be in body)",
+        "description": "This can only be done by the logged in user.",
+        "operationId": "getUserProfilePictureByProfileURL",
+        "produces": [
+          "application/image"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "profileUrl",
+            "description": "to get user's profile picture.",
+            "schema": {
+              "type": "object",
+              "required": [
+                "profileUrl"
+              ],
+              "properties": {
+                "profileUrl": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Logo image in PNG format",
+            "schema": {
+              "type": "file"
+            }
+          }
+        }
+      }
+    },
+    "/user/{id}": {
+      "get": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Get user by user id",
+        "description": "This can only be done by the logged in user.",
+        "operationId": "getUserById",
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          },
+          "400": {
+            "description": "Invalid id supplied"
+          },
+          "404": {
+            "description": "User not found"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Updated user",
+        "operationId": "updateUser",
+        "description": "This can only be done by the logged in user.",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id that need to be updated",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "name": "username",
+            "description": "new username",
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "name": "profile",
+            "description": "it must be png or jpg and less than 5mb",
+            "type": "file"
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid user supplied"
+          },
+          "404": {
+            "description": "User not found"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Delete user",
+        "description": "This can only be done by the logged in user.",
+        "operationId": "deleteUser",
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The name that needs to be deleted",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid username supplied"
+          },
+          "404": {
+            "description": "User not found"
+          }
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "todo_auth": {
+      "type": "apiKey",
+      "in": "header",
+      "name": "auth-token"
+    }
+  },
+  "definitions": {
+    "Task": {
+      "type": "object",
+      "required": [
+        "name",
+        "userId",
+        "done"
+      ],
+      "properties": {
+        "userId": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "done": {
+          "type": "boolean"
+        }
+      },
+      "xml": {
+        "name": "Task"
+      }
+    },
+    "List": {
+      "type": "object",
+      "required": [
+        "name",
+        "userId",
+        "taskId"
+      ],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "taskId": {
+          "type": "string",
+          "format": "array"
+        },
+        "userId": {
+          "type": "string"
+        }
+      },
+      "xml": {
+        "name": "Category"
+      }
+    },
+    "User": {
+      "type": "object",
+      "required": [
+        "username",
+        "email",
+        "profileUrl"
+      ],
+      "properties": {
+        "username": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "activation": {
+          "type": "object",
+          "properties": {
+            "isActivated": {
+              "type": "boolean"
+            },
+            "code": {
+              "type": "integer"
+            },
+            "expireDate": {
+              "type": "string",
+              "format": "date-time"
+            }
+          }
+        },
+        "verification": {
+          "type": "object",
+          "properties": {
+            "isVerfied": {
+              "type": "boolean"
+            },
+            "code": {
+              "type": "integer"
+            },
+            "expireDate": {
+              "type": "string",
+              "format": "date-time"
+            }
+          }
+        },
+        "profileUrl": {
+          "type": "string"
+        }
+      },
+      "xml": {
+        "name": "User"
+      }
+    }
+  }
+}

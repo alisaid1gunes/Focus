@@ -4,14 +4,14 @@ const listController = require('../controllers/list');
 
 const verify = require('../middlewares/verifyToken');
 
-router.get('/all/:id', listController.getAll);
+router.get('/all/:id', verify, listController.getAll);
 
-router.get('/:id',  listController.getOne);
+router.get('/:id', verify, listController.getOne);
 
-router.post('/',  listController.save);
+router.post('/', verify, listController.save);
 
-router.delete('/:id',  listController.remove);
+router.delete('/:id', verify, listController.remove);
 
-router.put('/:id',  listController.update);
+router.put('/:id', verify, listController.update);
 
 module.exports = router;

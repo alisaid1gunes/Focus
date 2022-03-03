@@ -4,14 +4,14 @@ const taskController = require('../controllers/task');
 
 const verify = require('../middlewares/verifyToken');
 
-router.get('/all/:id', taskController.getAll);
+router.get('/all/:id', verify, taskController.getAll);
 
-router.get('/:id', taskController.getOne);
+router.get('/:id', verify, taskController.getOne);
 
-router.post('/', taskController.save);
+router.post('/', verify, taskController.save);
 
-router.delete('/:id', taskController.remove);
+router.delete('/:id',verify, taskController.remove);
 
-router.put('/:id', taskController.update);
+router.put('/:id', verify, taskController.update);
 
 module.exports = router;
