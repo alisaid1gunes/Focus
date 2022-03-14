@@ -1,10 +1,6 @@
 const express = require('express');
 
-const dotenv = require('dotenv');
-
 const helmet = require('helmet');
-
-dotenv.config({ path: './config/.env' });
 
 const compression = require('compression');
 

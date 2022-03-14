@@ -12,6 +12,11 @@ const { generateToken } = require('../../utils/tokenGenerator');
 
 const { RefreshToken } = require('../../models');
 
+const {
+  ACCESS_TOKEN_SECRET,
+  REFRESH_TOKEN_SECRET,
+} = require('../../config/config');
+
 class Login {
   constructor() {
     this.mongooseUser = new MongooseService(User);
@@ -37,13 +42,13 @@ class Login {
 
       const accessToken = generateToken(
         user._id,
-        process.env.ACCESS_TOKEN_SECRET,
+        ACCESS_TOKEN_SECRET,
         '15d'
       );
 
       const refreshToken = generateToken(
         user._id,
-        process.env.REFRESH_TOKEN_SECRET,
+        REFRESH_TOKEN_SECRET,
         '15d'
       );
 

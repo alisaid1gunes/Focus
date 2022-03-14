@@ -45,7 +45,7 @@ class Register {
       code,
       expireDate,
     };
-    const fileUrl = req.file.path.replace(/\\/g, '/');
+    const fileUrl = req.file.path;
 
     bodyIn.profileUrl = fileUrl;
 

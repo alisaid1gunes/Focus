@@ -1,21 +1,19 @@
 const express = require('express');
 
-const dotenv = require('dotenv');
-
 const loaders = require('./src/loaders');
 
-dotenv.config({ path: './src/config/.env' });
+const { PORT } = require('./src/config/config.js');
 
 const startServer = async () => {
-  const PORT = process.env.PORT || 5000;
+  const port = PORT;
 
   const app = express();
 
   await loaders({ expressApp: app });
 
   app
-    .listen(PORT, () => {
-      console.log(`Server listening at http://localhost:${PORT}`);
+    .listen(port, () => {
+      console.log(`Server listening at http://localhost:${port}`);
     })
     .on('error', (err) => {
       console.log(err.message);

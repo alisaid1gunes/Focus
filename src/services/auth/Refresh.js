@@ -12,6 +12,11 @@ const { generateToken } = require('../../utils/tokenGenerator');
 
 const { refreshValidation } = require('../../validations/auth');
 
+const {
+  ACCESS_TOKEN_SECRET,
+  REFRESH_TOKEN_SECRET,
+} = require('../../config/config');
+
 class Refresh {
   constructor() {
     this.mongooseUser = new MongooseService(User);
@@ -31,16 +36,9 @@ class Refresh {
     if (!refreshToken)
       return { success: false, error: 'refresh token bulunamadı' };
 
-    const userId = jwt.verify(
-      refreshToken.token,
-      process.env.REFRESH_TOKEN_SECRET
-    );
+    const userId = jwt.verify(refreshToken.token, REFRESH_TOKEN_SECRET);
 
-    const accessToken = generateToken(
-      userId,
-      process.env.ACCESS_TOKEN_SECRET,
-      '15d'
-    );
+    const accessToken = generateToken(userId, ACCESS_TOKEN_SECRET, '15d');
     return { accessToken, success: true };
   }
 }
