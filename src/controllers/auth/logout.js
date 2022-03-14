@@ -18,7 +18,7 @@ const logout = async (req, res, next) => {
   } catch (err) {
     next(
       ApiErrorService.badRequest(
-        'Kullanıcı çıkış işlemi yapılamadı. İstek yanlış'
+        `User could not be logged out. Request is wrong. Error:${err}`
       )
     );
   }

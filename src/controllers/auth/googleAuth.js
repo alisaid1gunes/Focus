@@ -27,7 +27,11 @@ const googleAuth = async (req, res, next) => {
         }
         next(ApiErrorService.badRequest(result.error));
       } catch (err) {
-        next(ApiErrorService.badRequest(`İşlem gerçekleştirilemedi.${err}`));
+        next(
+          ApiErrorService.badRequest(
+            `Google authentication could not be completed. Request is wrong. Error:${err}`
+          )
+        );
       }
     });
 };

@@ -17,7 +17,7 @@ const register = async (req, res, next) => {
   } catch (err) {
     next(
       ApiErrorService.badRequest(
-        'Kullanıcı kayıt işlemi yapılamadı. İstek yanlış'
+        `User could not be registered. Request is wrong. Error:${err}`
       )
     );
   }

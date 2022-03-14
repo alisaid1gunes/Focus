@@ -18,7 +18,11 @@ const changePassword = async (req, res, next) => {
     }
     next(ApiErrorService.badRequest(result.error));
   } catch (err) {
-    next(ApiErrorService.badRequest(`şifre değiştirilemedi.${err}`));
+    next(
+      ApiErrorService.badRequest(
+        `Password could not be changed. Request is wrong. Error:${err}`
+      )
+    );
   }
 };
 

@@ -5,7 +5,6 @@ const { GetAll } = require('../../services/task');
 const ApiErrorService = require('../../services/ApiError');
 
 const TaskService = new GetAll();
-
 // eslint-disable-next-line consistent-return
 const getAll = async (req, res, next) => {
   try {
@@ -15,7 +14,9 @@ const getAll = async (req, res, next) => {
     next(ApiErrorService.notFound(result.error));
   } catch (err) {
     next(
-      ApiErrorService.notFound(`Kayıt bulunamadı. İstek yanlış. Hata:${err}`)
+      ApiErrorService.notFound(
+        `Tasks could not be found. Request is wrong. Error:${err}`
+      )
     );
   }
 };

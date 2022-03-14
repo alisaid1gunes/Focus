@@ -38,7 +38,7 @@ class Update {
     try {
       const result = await this.mongooseUser.update(id, body);
 
-      if (result) return { result, success: true message: 'User updated' };s
+      if (result) return { result, success: true, message: 'User updated' };s
       return { success: false, message: 'User could not be updated.' };
     } catch (err) {
       return { success: false, message: `User could not be updated. Error:${err}` };

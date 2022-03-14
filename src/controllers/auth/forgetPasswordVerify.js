@@ -20,7 +20,7 @@ const forgetPasswordVerify = async (req, res, next) => {
     }
     next(ApiErrorService.badRequest(result.error));
   } catch (err) {
-    next(ApiErrorService.badRequest(`İşlem gerçekleştirilemedi.${err}`));
+    next(ApiErrorService.badRequest(`Request is wrong. Error:${err}`));
   }
 };
 

@@ -14,7 +14,9 @@ const save = async (req, res, next) => {
     next(ApiErrorService.badRequest(result.error));
   } catch (err) {
     next(
-      ApiErrorService.badRequest(`Kayıt yapılamadı. İstek yanlış. Hata:${err}`)
+      ApiErrorService.badRequest(
+        `List could not be saved. Request is wrong. Error:${err}`
+      )
     );
   }
 };

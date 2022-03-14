@@ -14,7 +14,9 @@ const get = async (req, res, next) => {
     next(ApiErrorService.notFound(result.error));
   } catch (err) {
     next(
-      ApiErrorService.notFound(`Kayıt bulunamadı. İstek yanlış. Hata:${err}`)
+      ApiErrorService.notFound(
+        `User could not be found. Request is wrong. Error:${err}`
+      )
     );
   }
 };

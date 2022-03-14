@@ -14,7 +14,7 @@ const getOne = async (req, res, next) => {
     next(ApiErrorService.notFound(result.error));
   } catch (err) {
     next(
-      ApiErrorService.notFound(`Kayıt bulunamadı. İstek yanlış. Hata:${err}`)
+      ApiErrorService.notFound(`List could not be found. Request is wrong. Error:${err}`)
     );
   }
 };

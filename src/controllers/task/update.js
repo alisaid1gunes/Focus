@@ -16,7 +16,7 @@ const update = async (req, res, next) => {
   } catch (err) {
     next(
       ApiErrorService.badRequest(
-        `Kayıt güncellenemedi. İstek yanlış. Hata:${err}`
+        `Task could not be updated. Request is wrong. Error:${err}`
       )
     );
   }

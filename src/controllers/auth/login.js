@@ -15,15 +15,20 @@ const login = async (req, res, next) => {
       const { accessToken } = result;
       const { refreshToken } = result;
       return res.header('auth-token', accessToken).status(StatusCodes.OK).send({
+        username: result.username,
         accessToken,
         refreshToken,
-        error: result.error,
+        message: result.message,
         succes: result.success,
       });
     }
     next(ApiErrorService.unauthorized(result.error));
   } catch (err) {
-    next(ApiErrorService.unauthorized(`Kullanıcı girişi yapılamadı.${err}`));
+    next(
+      ApiErrorService.unauthorized(
+        `User could not be logged in. Request is wrong. Error:${err}`
+      )
+    );
   }
 };
 

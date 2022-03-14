@@ -16,7 +16,9 @@ const remove = async (req, res, next) => {
     next(ApiErrorService.badRequest(result.error));
   } catch (err) {
     next(
-      ApiErrorService.badRequest(`Kayıt silinemedi. İstek yanlış. Hata:${err}`)
+      ApiErrorService.badRequest(
+        `Task could not be deleted. Request is wrong. Error:${err}`
+      )
     );
   }
 };

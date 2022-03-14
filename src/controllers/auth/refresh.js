@@ -17,7 +17,7 @@ const refresh = async (req, res, next) => {
   } catch (err) {
     next(
       ApiErrorService.badRequest(
-        'Token yenileme işlemi yapılamadı. İstek yanlış'
+        `Token coud not be retrieved. Request is wrong. Error:${err}`
       )
     );
   }

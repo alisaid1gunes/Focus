@@ -16,7 +16,9 @@ const activate = async (req, res, next) => {
     next(ApiErrorService.badRequest(result.error));
   } catch (err) {
     next(
-      ApiErrorService.badRequest(' Aktivasyon işlemi yapılamadı. İstek yanlış')
+      ApiErrorService.badRequest(
+        `User could not be activated. Request is wrong. Error:${err}`
+      )
     );
   }
 };
