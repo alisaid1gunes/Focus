@@ -17,7 +17,7 @@ class Save {
 
   async SaveList(body) {
     const { error } = saveValidation(body);
-    if (error) return { success: false, error: error.details[0].message };
+    if (error) return { success: false, message: error.details[0].message };
 
     try {
       const result = await this.mongooseList.save(body);
@@ -25,12 +25,15 @@ class Save {
       if (result) {
         // eslint-disable-next-line no-underscore-dangle
         this.redisCacheService.setCache(result._id, result);
-        return { success: true, message: 'Kayıt yapıldı.' };
+        return { success: true, message: 'List saved.' };
       }
 
-      return { success: false, error: 'Kayıt yapılamadı.' };
+      return { success: false, message: 'List could not be saved.' };
     } catch (err) {
-      return { success: false, error: `Kayıt yapılamadı. Hata:${err}` };
+      return {
+        success: false,
+        message: `List could not be saved. Error:${err}`,
+      };
     }
   }
 }

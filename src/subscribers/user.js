@@ -1,5 +1,7 @@
 const sendEmail = require('../services/Email');
 
+const { VERIFIED_SENDER } = require('../../config/config');
+
 const {
   registerEmitter,
   forgetEmitter,

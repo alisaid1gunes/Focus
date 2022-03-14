@@ -27,19 +27,19 @@ class Refresh {
     const bodyIn = body;
 
     const { error } = refreshValidation(bodyIn);
-    if (error) return { success: false, error: error.details[0].message };
+    if (error) return { success: false, message: error.details[0].message };
 
     const refreshToken = await this.mongooseRefreshToken.get({
       token: bodyIn.refreshToken,
     });
 
     if (!refreshToken)
-      return { success: false, error: 'refresh token bulunamadı' };
+      return { success: false, message: 'RefreshToken could not be retrieved' };
 
     const userId = jwt.verify(refreshToken.token, REFRESH_TOKEN_SECRET);
 
     const accessToken = generateToken(userId, ACCESS_TOKEN_SECRET, '15d');
-    return { accessToken, success: true };
+    return { accessToken, success: true, message: 'RefreshToken retrieved' };
   }
 }
 

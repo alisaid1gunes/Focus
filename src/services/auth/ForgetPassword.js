@@ -16,7 +16,7 @@ class ForgetPassword {
 
   async ForgetPassword(body) {
     const { error } = forgetPasswordValidation(body);
-    if (error) return { success: false, error: error.details[0].message };
+    if (error) return { success: false, message: error.details[0].message };
 
     const user = await this.mongooseUser.get({ _id: body.id });
 
@@ -39,7 +39,7 @@ class ForgetPassword {
         message: 'Verification code sent your email to change your password',
       };
     } catch (err) {
-      return { success: false, error: err };
+      return { success: false, message: err };
     }
   }
 }

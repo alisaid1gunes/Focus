@@ -17,7 +17,7 @@ class Remove {
 
   async RemoveList(id) {
     const { error } = removeValidation(id);
-    if (error) return { success: false, error: error.details[0].message };
+    if (error) return { success: false, message: error.details[0].message };
 
     await this.mongooseTask.delete({ _id: id });
 
@@ -25,9 +25,12 @@ class Remove {
 
     try {
       await this.mongooseList.delete({ _id: id });
-      return { message: 'Kayıt silindi', success: true };
+      return { message: 'List deleted.', success: true };
     } catch (err) {
-      return { success: false, error: `Kayıt silinemedi. Hata:${err}` };
+      return {
+        success: false,
+        message: `List could not be deleted. Error:${err}`,
+      };
     }
   }
 }

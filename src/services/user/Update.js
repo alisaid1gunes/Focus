@@ -1,4 +1,5 @@
 const fs = require('fs');
+
 const { promisify } = require('util');
 
 const { User } = require('../../models');
@@ -25,11 +26,11 @@ class Update {
     }
 
     const { idError } = idValidation(id);
-    if (idError) return { success: false, error: idError.details[0].message };
+    if (idError) return { success: false, message: idError.details[0].message };
 
     const { updateError } = updateValidation(body);
     if (updateError)
-      return { success: false, error: updateError.details[0].message };
+      return { success: false, message: updateError.details[0].message };
     const user = await this.mongooseUser.get({ _id: id });
 
     if (user) await unlinkAsync(user.profileUrl);
@@ -37,10 +38,10 @@ class Update {
     try {
       const result = await this.mongooseUser.update(id, body);
 
-      if (result) return { result, success: true };
-      return { success: false, error: 'Güncelleme yapılamadı.' };
+      if (result) return { result, success: true message: 'User updated' };s
+      return { success: false, message: 'User could not be updated.' };
     } catch (err) {
-      return { success: false, error: `Kayıt güncellenemedi. Hata:${err}` };
+      return { success: false, message: `User could not be updated. Error:${err}` };
     }
   }
 }

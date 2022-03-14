@@ -24,9 +24,12 @@ class Remove {
 
     try {
       await this.mongooseUser.delete({ _id: id });
-      return { message: 'Kayıt silindi', success: true };
+      return { message: 'User deleted', success: true };
     } catch (err) {
-      return { success: false, error: `Kayıt silinemedi. Hata:${err}` };
+      return {
+        success: false,
+        message: `User could not be deleted. Error:${err}`,
+      };
     }
   }
 }

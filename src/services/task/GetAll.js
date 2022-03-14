@@ -18,8 +18,8 @@ class GetAll {
 
   async GetTask(userId) {
     const { error } = getAllValidation(userId);
-    if (error) return { success: false, error: error.details[0].message };
-    
+    if (error) return { success: false, message: error.details[0].message };
+
     const data = await this.redisCacheService.getCache(userId);
     if (data != null) return { data, success: true };
 
@@ -31,9 +31,9 @@ class GetAll {
         return { result, success: true };
       }
 
-      return { success: false, error: ' Hiç kayıt yok' };
+      return { success: false, message: 'There is no task' };
     } catch (err) {
-      return { success: false, error: `Kayıtlar bulunamadı. Hata:${err}` };
+      return { success: false, message: `There is no task. Error:${err}` };
     }
   }
 }

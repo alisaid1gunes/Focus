@@ -13,14 +13,14 @@ class ForgetPasswordVerify {
 
   async ForgetPasswordVerify(body) {
     const { error } = forgetPasswordVerifyValidation(body);
-    if (error) return { success: false, error: error.details[0].message };
+    if (error) return { success: false, message: error.details[0].message };
 
     const user = await this.mongooseUser.get({ _id: body.id });
 
     const userExpireDate = new Date(user.verification.expireDate);
 
     if (userExpireDate < Date.now())
-      return { error: 'verification code is expired', success: false };
+      return { message: 'Verification code is expired', success: false };
 
     if (user.verification.code === body.verificationCode) {
       user.verification.isVerified = true;
@@ -28,12 +28,12 @@ class ForgetPasswordVerify {
 
       try {
         await this.mongooseUser.update(user._id, user);
-        return { success: true, message: 'verified' };
+        return { success: true, message: 'Verified' };
       } catch (err) {
-        return { error: err, success: false };
+        return { message: err, success: false };
       }
     } else {
-      return { error: 'verification code is wrong', success: false };
+      return { message: 'Verification code is wrong', success: false };
     }
   }
 }

@@ -13,14 +13,14 @@ class Activate {
 
   async Activate(body) {
     const { error } = activateValidation(body);
-    if (error) return { success: false, error: error.details[0].message };
+    if (error) return { success: false, message: error.details[0].message };
 
     const user = await this.mongooseUser.get({ _id: body.id });
 
     const userExpireDate = new Date(user.activation.expireDate);
 
     if (userExpireDate < Date.now())
-      return { error: 'activation code is expired', success: false };
+      return { message: 'activation code is expired', success: false };
 
     if (user.activation.code === body.activationCode) {
       user.activation.isActivated = true;
@@ -28,12 +28,12 @@ class Activate {
 
       try {
         await this.mongooseUser.update(user._id, user);
-        return { success: true, message: 'activated' };
+        return { success: true, message: 'User activated.' };
       } catch (err) {
-        return { error: err, success: false };
+        return { message: err, success: false };
       }
     } else {
-      return { error: 'kod hatalı', success: false };
+      return { message: 'Activation code is invalid', success: false };
     }
   }
 }

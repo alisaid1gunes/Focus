@@ -11,16 +11,19 @@ class Get {
 
   async GetUser(id) {
     const { error } = getValidation(id);
-    if (error) return { success: false, error: error.details[0].message };
+    if (error) return { success: false, message: error.details[0].message };
 
     try {
       const result = await this.mongooseUser.get({ _id: id });
 
-      if (result) return { result, success: true };
+      if (result) return { result, success: true, message: 'User found' };
 
-      return { success: false, error: 'kayıt bulunamadı' };
+      return { success: false, message: 'User could not be found' };
     } catch (err) {
-      return { success: false, error: `Kayıt bulunamadı. Hata:${err}` };
+      return {
+        success: false,
+        message: `User could not be found. Error:${err}`,
+      };
     }
   }
 }

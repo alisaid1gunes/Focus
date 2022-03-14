@@ -18,21 +18,25 @@ class Update {
   async UpdateTask(body, id) {
     try {
       const { idError } = idValidation(body);
-      if (idError) return { success: false, error: idError.details[0].message };
+      if (idError)
+        return { success: false, message: idError.details[0].message };
 
       const { updateError } = updateValidation(body);
       if (updateError)
-        return { success: false, error: updateError.details[0].message };
+        return { success: false, message: updateError.details[0].message };
 
       const result = await this.mongooseTask.update(id, body);
 
       if (result) {
         this.redisCacheService.setCache(id, result);
-        return { success: true, message: 'Kayıt yapıldı.' };
+        return { success: true, message: 'Task updated.' };
       }
-      return { success: false, error: 'Güncelleme yapılamadı.' };
+      return { success: false, message: 'Task could not be updated.' };
     } catch (err) {
-      return { success: false, error: `Kayıt güncellenemedi. Hata:${err}` };
+      return {
+        success: false,
+        message: `Task could not be updated. Error:${err}`,
+      };
     }
   }
 }

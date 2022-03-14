@@ -16,7 +16,7 @@ class GoogleLogin {
 
   async Login(user) {
     if (!user.activation.isActivated)
-      return { error: 'User is not activated', success: false };
+      return { message: 'User could not be activated', success: false };
 
     const accessToken = generateToken(
       user._id,
@@ -34,7 +34,12 @@ class GoogleLogin {
     });
     const savedToken = await this.mongooseRefreshToken.save(refreshTokenDb);
 
-    return { accessToken, refreshToken: savedToken.token, success: true };
+    return {
+      accessToken,
+      refreshToken: savedToken.token,
+      success: true,
+      message: 'User logged in',
+    };
   }
 }
 

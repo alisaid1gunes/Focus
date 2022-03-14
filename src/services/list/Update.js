@@ -17,22 +17,25 @@ class Update {
 
   async UpdateList(body, id) {
     const { idError } = idValidation(body);
-    if (idError) return { success: false, error: idError.details[0].message };
+    if (idError) return { success: false, message: idError.details[0].message };
 
     const { updateError } = updateValidation(body);
     if (updateError)
-      return { success: false, error: updateError.details[0].message };
+      return { success: false, message: updateError.details[0].message };
 
     try {
       const result = await this.mongooseList.update(id, body);
 
       if (result) {
         this.redisCacheService.setCache(id, result);
-        return { success: true, message: 'Kayıt yapıldı.' };
+        return { success: true, message: 'List updated.' };
       }
-      return { success: false, error: 'Güncelleme yapılamadı.' };
+      return { success: false, message: 'List could not be saved.' };
     } catch (err) {
-      return { success: false, error: `Kayıt güncellenemedi. Hata:${err}` };
+      return {
+        success: false,
+        message: `List could not be saved. Error:${err}`,
+      };
     }
   }
 }

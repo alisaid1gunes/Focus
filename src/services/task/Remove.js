@@ -17,16 +17,19 @@ class Remove {
 
   async RemoveTask(id) {
     const { error } = removeValidation(id);
-    if (error) return { success: false, error: error.details[0].message };
+    if (error) return { success: false, message: error.details[0].message };
 
     try {
       await this.mongooseTask.delete({ _id: id });
 
       await this.redisCacheService.clearCache(id);
 
-      return { message: 'Kayıt silindi', success: true };
+      return { message: 'Task deleted', success: true };
     } catch (err) {
-      return { success: false, error: `Kayıt silinemedi. Hata:${err}` };
+      return {
+        success: false,
+        message: `Tasks could not be deleted. Error:${err}`,
+      };
     }
   }
 }

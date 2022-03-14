@@ -15,18 +15,23 @@ class ForgetPasswordChange {
 
   async ForgetPasswordChange(body) {
     const { error } = forgetPasswordChangeValidation(body);
-    if (error) return { success: false, error: error.details[0].message };
+    if (error) return { success: false, message: error.details[0].message };
 
     const user = await this.mongooseUser.get({ _id: body.id });
 
     const salt = await bcrypt.genSalt(10);
     user.password = await bcrypt.hash(body.newPassword, salt);
     user.verification.isVerified = false;
+
     try {
       await this.mongooseUser.update(user._id, user);
-      return { success: true, message: 'password changed' };
+      return { success: true, message: 'Password changed' };
     } catch (err) {
-      return { error: err, success: false };
+      return {
+        error: err,
+        success: false,
+        message: `Password could not be changed. Error: ${err}`,
+      };
     }
   }
 }

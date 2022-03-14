@@ -30,9 +30,9 @@ class GoogleRegister {
 
       googleEmitter.emit('google-auth', email, name, code);
 
-      return { success: true, result };
+      return { success: true, result, message: 'User created' };
     } catch (err) {
-      return { success: false, error: err };
+      return { success: false, message: err };
     }
   }
 }

@@ -17,22 +17,22 @@ class GetAll {
 
   async GetList(userId) {
     const { error } = getAllValidation(userId);
-    if (error) return { success: false, error: error.details[0].message };
+    if (error) return { success: false, message: error.details[0].message };
 
     const data = await this.redisCacheService.getCache(userId);
-    if (data != null) return { data, success: true };
+    if (data != null) return { data, success: true, message: 'List found.' };
 
     try {
       const result = await this.mongooseList.getAllWithQuery({ userId });
 
       if (result) {
         this.redisCacheService.setCache(userId, result);
-        return { result, success: true };
+        return { result, success: true, message: 'List found.' };
       }
 
-      return { success: false, error: ' Hiç kayıt yok' };
+      return { success: false, message: 'There is no List' };
     } catch (err) {
-      return { success: false, error: `Kayıtlar bulunamadı. Hata:${err}` };
+      return { success: false, message: `There is no List.  Error:${err}` };
     }
   }
 }

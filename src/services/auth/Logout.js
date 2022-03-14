@@ -18,16 +18,19 @@ class Logout {
     const bodyIn = body;
 
     const { error } = logoutValidation(bodyIn);
-    if (error) return { success: false, error: error.details[0].message };
+    if (error) return { success: false, message: error.details[0].message };
 
     const { refreshToken } = bodyIn;
 
     try {
       await this.mongooseRefreshToken.delete({ token: refreshToken });
 
-      return { success: true, message: 'user logged out' };
+      return { success: true, message: 'User logged out' };
     } catch (err) {
-      return { success: false, error: `logout error occurred${err}` };
+      return {
+        success: false,
+        message: `User could not be logged out Error:${err}`,
+      };
     }
   }
 }
