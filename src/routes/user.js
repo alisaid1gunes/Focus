@@ -8,8 +8,8 @@ const upload = require('../utils/uploadProfile');
 
 router.get('/:id', verify, userController.get);
 
-router.delete('/:id', verify, userController.remove);
+router.delete('/:id', userController.remove);
 
-router.put('/:id', verify, upload.single('profile'), userController.update);
+router.put('/:id',  upload.single('profile'), userController.update);
 
 module.exports = router;

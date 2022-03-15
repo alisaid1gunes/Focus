@@ -1,14 +1,10 @@
-const fs = require('fs');
-
-const { promisify } = require('util');
-
 const { User } = require('../../models');
 
 const MongooseService = require('../Mongoose');
 
-const unlinkAsync = promisify(fs.unlink);
-
 const { updateValidation, idValidation } = require('../../validations/user');
+
+const cloudinary = require('../../utils/cloudinary');
 
 class Update {
   constructor() {
@@ -21,7 +17,7 @@ class Update {
     const { file } = req;
 
     if (file) {
-      const fileUrl = req.file.path.replace(/\\/g, '/');
+      const fileUrl = req.file.path;
       body.profileUrl = fileUrl;
     }
 
@@ -33,15 +29,29 @@ class Update {
       return { success: false, message: updateError.details[0].message };
     const user = await this.mongooseUser.get({ _id: id });
 
-    if (user) await unlinkAsync(user.profileUrl);
+    if (user) {
+      let fileName = user.profileUrl.replace(/.*\//, '');
+
+      fileName = fileName.replace(/\.[^/.]+$/, '');
+      console.log(fileName);
+
+      cloudinary.uploader.destroy(fileName, { invalidate: true }, (result) => {
+        console.log(result);
+      });
+      
+    }
 
     try {
       const result = await this.mongooseUser.update(id, body);
 
-      if (result) return { result, success: true, message: 'User updated' };s
+      if (result) return { result, success: true, message: 'User updated' };
+
       return { success: false, message: 'User could not be updated.' };
     } catch (err) {
-      return { success: false, message: `User could not be updated. Error:${err}` };
+      return {
+        success: false,
+        message: `User could not be updated. Error:${err}`,
+      };
     }
   }
 }

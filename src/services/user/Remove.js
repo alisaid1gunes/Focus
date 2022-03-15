@@ -1,12 +1,6 @@
-const fs = require('fs');
-
-const { promisify } = require('util');
-
 const { User } = require('../../models');
 
 const MongooseService = require('../Mongoose');
-
-const unlinkAsync = promisify(fs.unlink);
 
 const { removeValidation } = require('../../validations/user');
 
@@ -20,7 +14,16 @@ class Remove {
     if (error) return { success: false, error: error.details[0].message };
     const user = await this.mongooseUser.get({ _id: id });
 
-    if (user) await unlinkAsync(user.profileUrl);
+    if (user) {
+      let fileName = user.profileUrl.replace(/.*\//, '');
+
+      fileName = fileName.replace(/\.[^/.]+$/, '');
+      console.log(fileName);
+
+      cloudinary.uploader.destroy(fileName, { invalidate: true }, (result) => {
+        console.log(result);
+      });
+    }
 
     try {
       await this.mongooseUser.delete({ _id: id });
