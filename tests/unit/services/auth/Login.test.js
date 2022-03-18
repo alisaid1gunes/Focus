@@ -13,7 +13,7 @@ describe('Login Service Unit Tests', () => {
     it('it should successfuly login if parameters are valid ', async () => {
       const stubValue = {
         email: hoaxer.internet.email(),
-        password: 'alisaid123',
+        password: hoaxer.internet.password(),
       };
 
       const returnValue = {

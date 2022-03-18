@@ -13,7 +13,7 @@ describe('Register Service Unit Tests', () => {
     it('it should successfuly add a new user if parameters are valid ', async () => {
       const stubValue = {
         email: hoaxer.internet.email(),
-        password: 'alisaid123',
+        password: hoaxer.internet.password(),
         username: hoaxer.name.findName(),
       };
 

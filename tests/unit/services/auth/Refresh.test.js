@@ -8,7 +8,7 @@ const sinon = require('sinon');
 
 describe('Refresh Service Unit Tests', () => {
   describe('Refresh Functionality', () => {
-    it('it should successfuly refresh acces token if refresh token is valid ', async () => {
+    it('it should successfuly refresh token if refresh token is valid ', async () => {
       const stubValue = {
         refreshToken: 'refreshToken',
       };
