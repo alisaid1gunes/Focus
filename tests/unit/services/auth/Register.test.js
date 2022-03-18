@@ -2,13 +2,11 @@ const { expect } = require('chai');
 
 const hoaxer = require('hoaxer');
 
-const { Register } = require('../../../../src/services/auth/Register');
+const { Register } = require('../../../../src/services/auth');
 
 const RegisterService = new Register();
 
 const sinon = require('sinon');
-
-const { registerValidation } = require('../../../../src/validations/auth');
 
 describe('Register Service Unit Tests', () => {
   describe('RegisterUser Functionality', () => {
