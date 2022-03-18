@@ -28,7 +28,6 @@ class ForgetPasswordChange {
       return { success: true, message: 'Password changed' };
     } catch (err) {
       return {
-        error: err,
         success: false,
         message: `Password could not be changed. Error: ${err}`,
       };
