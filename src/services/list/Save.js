@@ -1,7 +1,5 @@
 const { List } = require('../../models');
 
-const MongooseService = require('../Mongoose');
-
 const { saveValidation } = require('../../validations/list');
 
 const RedisCache = require('../redis/RedisCache');
@@ -10,7 +8,7 @@ const keyFormat = 'list._id=';
 
 const expirationTime = 600000;
 class Save {
-  constructor() {
+  constructor(MongooseService) {
     this.mongooseList = new MongooseService(List);
     this.redisCacheService = new RedisCache(keyFormat, expirationTime);
   }

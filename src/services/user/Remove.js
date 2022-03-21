@@ -1,11 +1,9 @@
 const { User } = require('../../models');
 
-const MongooseService = require('../Mongoose');
-
 const { removeValidation } = require('../../validations/user');
 
 class Remove {
-  constructor() {
+  constructor(MongooseService) {
     this.mongooseUser = new MongooseService(User);
   }
 

@@ -5,7 +5,9 @@ const ApiErrorService = require('../../services/ApiError');
 
 const { Register } = require('../../services/auth');
 
-const RegisterService = new Register();
+const MongooseService = require('../../services/Mongoose');
+
+const RegisterService = new Register(MongooseService);
 
 const register = async (req, res, next) => {
   try {

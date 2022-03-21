@@ -2,12 +2,11 @@
 
 const { User } = require('../../models');
 
-const MongooseService = require('../Mongoose');
 
 const { forgetPasswordVerifyValidation } = require('../../validations/auth');
 
 class ForgetPasswordVerify {
-  constructor() {
+  constructor(MongooseService) {
     this.mongooseUser = new MongooseService(User);
   }
 

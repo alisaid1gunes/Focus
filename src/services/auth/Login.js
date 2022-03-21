@@ -4,8 +4,6 @@ const bcrypt = require('bcryptjs');
 
 const { User } = require('../../models');
 
-const MongooseService = require('../Mongoose');
-
 const { loginValidation } = require('../../validations/auth');
 
 const { generateToken } = require('../../utils/tokenGenerator');
@@ -18,7 +16,7 @@ const {
 } = require('../../config/config');
 
 class Login {
-  constructor() {
+  constructor(MongooseService) {
     this.mongooseUser = new MongooseService(User);
     this.mongooseRefreshToken = new MongooseService(RefreshToken);
   }

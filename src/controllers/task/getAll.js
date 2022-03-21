@@ -4,7 +4,9 @@ const { GetAll } = require('../../services/task');
 
 const ApiErrorService = require('../../services/ApiError');
 
-const TaskService = new GetAll();
+const MongooseService = require('../../services/Mongoose');
+
+const TaskService = new GetAll(MongooseService);
 // eslint-disable-next-line consistent-return
 const getAll = async (req, res, next) => {
   try {

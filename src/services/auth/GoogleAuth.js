@@ -2,17 +2,15 @@
 
 const { User } = require('../../models');
 
-const MongooseService = require('../Mongoose');
-
 const { GoogleRegister } = require('./GoogleRegister');
 
 const GoogleLogin = require('./GoogleLogin');
 
 class GoogleAuth {
-  constructor() {
+  constructor(MongooseService) {
     this.mongooseUser = new MongooseService(User);
-    this.googleRegister = new GoogleRegister();
-    this.googleLogin = new GoogleLogin();
+    this.googleRegister = new GoogleRegister(MongooseService);
+    this.googleLogin = new GoogleLogin(MongooseService);
   }
 
   async Auth(email, name, imageUrl) {

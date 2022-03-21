@@ -5,7 +5,9 @@ const ApiErrorService = require('../../services/ApiError');
 
 const { ForgetPasswordChange } = require('../../services/auth');
 
-const ForgetPasswordChangeService = new ForgetPasswordChange();
+const MongooseService = require('../../services/Mongoose');
+
+const ForgetPasswordChangeService = new ForgetPasswordChange(MongooseService);
 
 const forgetPasswordChange = async (req, res, next) => {
   try {

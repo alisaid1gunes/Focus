@@ -2,14 +2,12 @@
 
 const { User } = require('../../models');
 
-const MongooseService = require('../Mongoose');
-
 const { RefreshToken } = require('../../models');
 
 const { logoutValidation } = require('../../validations/auth');
 
 class Logout {
-  constructor() {
+  constructor(MongooseService) {
     this.mongooseUser = new MongooseService(User);
     this.mongooseRefreshToken = new MongooseService(RefreshToken);
   }

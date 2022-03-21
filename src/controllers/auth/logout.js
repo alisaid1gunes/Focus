@@ -5,7 +5,9 @@ const ApiErrorService = require('../../services/ApiError');
 
 const { Logout } = require('../../services/auth');
 
-const LogoutService = new Logout();
+const MongooseService = require('../../services/Mongoose');
+
+const LogoutService = new Logout(MongooseService);
 
 const logout = async (req, res, next) => {
   try {

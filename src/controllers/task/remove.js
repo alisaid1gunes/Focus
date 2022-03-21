@@ -4,7 +4,9 @@ const { Remove } = require('../../services/task');
 
 const ApiErrorService = require('../../services/ApiError');
 
-const TaskService = new Remove();
+const MongooseService = require('../../services/Mongoose');
+
+const TaskService = new Remove(MongooseService);
 
 // eslint-disable-next-line consistent-return
 const remove = async (req, res, next) => {

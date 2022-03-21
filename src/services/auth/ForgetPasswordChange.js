@@ -4,12 +4,10 @@ const bcrypt = require('bcryptjs');
 
 const { User } = require('../../models');
 
-const MongooseService = require('../Mongoose');
-
 const { forgetPasswordChangeValidation } = require('../../validations/auth');
 
 class ForgetPasswordChange {
-  constructor() {
+  constructor(MongooseService) {
     this.mongooseUser = new MongooseService(User);
   }
 

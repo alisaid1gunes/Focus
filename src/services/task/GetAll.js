@@ -1,7 +1,5 @@
 const { Task } = require('../../models');
 
-const MongooseService = require('../Mongoose');
-
 const { getAllValidation } = require('../../validations/task/getAll');
 
 const RedisCache = require('../redis/RedisCache');
@@ -11,7 +9,7 @@ const keyFormat = 'user._id=';
 const expirationTime = 600000;
 
 class GetAll {
-  constructor() {
+  constructor(MongooseService) {
     this.mongooseTask = new MongooseService(Task);
     this.redisCacheService = new RedisCache(keyFormat, expirationTime);
   }

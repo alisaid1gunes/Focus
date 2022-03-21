@@ -5,7 +5,9 @@ const ApiErrorService = require('../../services/ApiError');
 
 const { Refresh } = require('../../services/auth');
 
-const RefreshService = new Refresh();
+const MongooseService = require('../../services/Mongoose');
+
+const RefreshService = new Refresh(MongooseService);
 
 const refresh = async (req, res, next) => {
   try {

@@ -5,7 +5,9 @@ const ApiErrorService = require('../../services/ApiError');
 
 const { Login } = require('../../services/auth');
 
-const LoginService = new Login();
+const MongooseService = require('../../services/Mongoose');
+
+const LoginService = new Login(MongooseService);
 
 const login = async (req, res, next) => {
   try {

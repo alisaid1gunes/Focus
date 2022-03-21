@@ -5,12 +5,10 @@ const forgetEmitter = new EventEmitter();
 
 const { User } = require('../../models');
 
-const MongooseService = require('../Mongoose');
-
 const { forgetPasswordValidation } = require('../../validations/auth');
 
 class ForgetPassword {
-  constructor() {
+  constructor(MongooseService) {
     this.mongooseUser = new MongooseService(User);
   }
 

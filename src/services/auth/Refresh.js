@@ -4,8 +4,6 @@ const jwt = require('jsonwebtoken');
 
 const { User } = require('../../models');
 
-const MongooseService = require('../Mongoose');
-
 const { RefreshToken } = require('../../models');
 
 const { generateToken } = require('../../utils/tokenGenerator');
@@ -18,7 +16,7 @@ const {
 } = require('../../config/config');
 
 class Refresh {
-  constructor() {
+  constructor(MongooseService) {
     this.mongooseUser = new MongooseService(User);
     this.mongooseRefreshToken = new MongooseService(RefreshToken);
   }

@@ -1,13 +1,11 @@
 const { User } = require('../../models');
 
-const MongooseService = require('../Mongoose');
-
 const { updateValidation, idValidation } = require('../../validations/user');
 
 const cloudinary = require('../../utils/cloudinary');
 
 class Update {
-  constructor() {
+  constructor(MongooseService) {
     this.mongooseUser = new MongooseService(User);
   }
 

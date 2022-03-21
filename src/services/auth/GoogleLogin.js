@@ -2,14 +2,12 @@
 
 const { User } = require('../../models');
 
-const MongooseService = require('../Mongoose');
-
 const { generateToken } = require('../../utils/tokenGenerator');
 
 const { RefreshToken } = require('../../models');
 
 class GoogleLogin {
-  constructor() {
+  constructor(MongooseService) {
     this.mongooseUser = new MongooseService(User);
     this.mongooseRefreshToken = new MongooseService(RefreshToken);
   }

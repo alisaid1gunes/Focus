@@ -4,7 +4,9 @@ const { Update } = require('../../services/list');
 
 const ApiErrorService = require('../../services/ApiError');
 
-const ListService = new Update();
+const MongooseService = require('../../services/Mongoose');
+
+const ListService = new Update(MongooseService);
 // eslint-disable-next-line consistent-return
 const update = async (req, res, next) => {
   const { id } = req.params;

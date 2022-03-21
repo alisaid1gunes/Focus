@@ -2,12 +2,10 @@
 
 const { User } = require('../../models');
 
-const MongooseService = require('../Mongoose');
-
 const { activateValidation } = require('../../validations/auth');
 
 class Activate {
-  constructor() {
+  constructor(MongooseService) {
     this.mongooseUser = new MongooseService(User);
   }
 

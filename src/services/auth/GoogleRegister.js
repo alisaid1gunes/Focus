@@ -5,10 +5,8 @@ const googleEmitter = new EventEmitter();
 
 const { User } = require('../../models');
 
-const MongooseService = require('../Mongoose');
-
 class GoogleRegister {
-  constructor() {
+  constructor(MongooseService) {
     this.mongooseUser = new MongooseService(User);
   }
 

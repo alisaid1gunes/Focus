@@ -8,7 +8,9 @@ const ApiErrorService = require('../../services/ApiError');
 
 const { GoogleAuth } = require('../../services/auth');
 
-const GoogleAuthService = new GoogleAuth();
+const MongooseService = require('../../services/Mongoose');
+
+const GoogleAuthService = new GoogleAuth(MongooseService);
 
 const googleAuth = async (req, res, next) => {
   const { tokenId, imageUrl } = req.body;
