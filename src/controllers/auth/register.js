@@ -7,7 +7,9 @@ const { Register } = require('../../services/auth');
 
 const MongooseService = require('../../services/Mongoose');
 
-const RegisterService = new Register(MongooseService);
+const { User, RefreshToken } = require('../../models');
+
+const RegisterService = new Register(new MongooseService(User));
 
 const register = async (req, res, next) => {
   try {

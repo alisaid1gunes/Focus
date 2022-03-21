@@ -16,9 +16,9 @@ const {
 } = require('../../config/config');
 
 class Login {
-  constructor(MongooseService) {
-    this.mongooseUser = new MongooseService(User);
-    this.mongooseRefreshToken = new MongooseService(RefreshToken);
+  constructor(MongooseUser, MongooseRefresh) {
+    this.mongooseUser = MongooseUser;
+    this.mongooseRefreshToken = MongooseRefresh;
   }
 
   async LoginUser(body) {

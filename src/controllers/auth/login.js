@@ -7,7 +7,12 @@ const { Login } = require('../../services/auth');
 
 const MongooseService = require('../../services/Mongoose');
 
-const LoginService = new Login(MongooseService);
+const { User, RefreshToken } = require('../../models');
+
+const LoginService = new Login(
+  new MongooseService(User),
+  new MongooseService(RefreshToken)
+);
 
 const login = async (req, res, next) => {
   try {

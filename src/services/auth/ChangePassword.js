@@ -8,7 +8,7 @@ const { changePasswordValidation } = require('../../validations/auth');
 
 class ChangePassword {
   constructor(MongooseService) {
-    this.mongooseUser = new MongooseService(User);
+    this.mongooseUser = MongooseService;
   }
 
   async ChangePassword(body) {

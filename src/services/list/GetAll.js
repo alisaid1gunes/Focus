@@ -9,7 +9,7 @@ const keyFormat = 'user._id=';
 const expirationTime = 600000;
 class GetAll {
   constructor(MongooseService) {
-    this.mongooseList = new MongooseService(List);
+    this.mongooseList = MongooseService;
     this.redisCacheService = new RedisCache(keyFormat, expirationTime);
   }
 

@@ -10,7 +10,12 @@ const { GoogleAuth } = require('../../services/auth');
 
 const MongooseService = require('../../services/Mongoose');
 
-const GoogleAuthService = new GoogleAuth(MongooseService);
+const { User, RefreshToken } = require('../../models');
+
+const GoogleAuthService = new GoogleAuth(
+  new MongooseService(User),
+  new MongooseService(RefreshToken)
+);
 
 const googleAuth = async (req, res, next) => {
   const { tokenId, imageUrl } = req.body;

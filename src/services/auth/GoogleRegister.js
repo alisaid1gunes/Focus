@@ -7,7 +7,7 @@ const { User } = require('../../models');
 
 class GoogleRegister {
   constructor(MongooseService) {
-    this.mongooseUser = new MongooseService(User);
+    this.mongooseUser = MongooseService;
   }
 
   async Register(email, name, imageUrl) {

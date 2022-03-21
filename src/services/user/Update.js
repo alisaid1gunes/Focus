@@ -6,7 +6,7 @@ const cloudinary = require('../../utils/cloudinary');
 
 class Update {
   constructor(MongooseService) {
-    this.mongooseUser = new MongooseService(User);
+    this.mongooseUser = MongooseService;
   }
 
   async UpdateUser(req, id) {

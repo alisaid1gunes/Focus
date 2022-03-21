@@ -7,7 +7,9 @@ const { Activate } = require('../../services/auth');
 
 const MongooseService = require('../../services/Mongoose');
 
-const ActivateService = new Activate(MongooseService);
+const { User } = require('../../models');
+
+const ActivateService = new Activate(new MongooseService(User));
 
 const activate = async (req, res, next) => {
   try {

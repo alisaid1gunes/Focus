@@ -4,7 +4,7 @@ const { getValidation } = require('../../validations/user');
 
 class Get {
   constructor(MongooseService) {
-    this.mongooseUser = new MongooseService(User);
+    this.mongooseUser = MongooseService;
   }
 
   async GetUser(id) {

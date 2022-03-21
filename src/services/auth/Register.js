@@ -11,7 +11,7 @@ const { registerValidation } = require('../../validations/auth');
 
 class Register {
   constructor(MongooseService) {
-    this.mongooseUser = new MongooseService(User);
+    this.mongooseUser = MongooseService;
   }
 
   async RegisterUser(req) {

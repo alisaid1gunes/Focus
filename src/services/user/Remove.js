@@ -4,7 +4,7 @@ const { removeValidation } = require('../../validations/user');
 
 class Remove {
   constructor(MongooseService) {
-    this.mongooseUser = new MongooseService(User);
+    this.mongooseUser = MongooseService;
   }
 
   async RemoveUser(id) {

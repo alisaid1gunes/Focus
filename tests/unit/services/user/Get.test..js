@@ -1,12 +1,16 @@
 const { expect } = require('chai');
 
-const { Get } = require('../../../../src/services/user');
+const { Get } = require('../../../src/services/user');
 
-const GetService = new Get();
+const { User } = require('../../../src/models');
 
 const hoaxer = require('hoaxer');
 
 const sinon = require('sinon');
+
+const MongooseService = require('../../../src/services/Mongoose');
+
+const GetService = new Get(MongooseService);
 
 describe('GetService Unit Tests', () => {
   describe('GetUser Functionality', () => {
@@ -31,10 +35,11 @@ describe('GetService Unit Tests', () => {
           },
           profileUrl: hoaxer.internet.avatar(),
         },
-        success: true, message: 'User found' ,
+        success: true,
+        message: 'User found',
       };
 
-      const stub = sinon.stub(GetService, 'GetUser').returns(returnValue);
+      const stub = sinon.stub(MongooseService, 'get').returns(returnValue);
 
       const result = await GetService.GetUser(id);
 

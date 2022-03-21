@@ -6,7 +6,7 @@ const { activateValidation } = require('../../validations/auth');
 
 class Activate {
   constructor(MongooseService) {
-    this.mongooseUser = new MongooseService(User);
+    this.mongooseUser = MongooseService;
   }
 
   async Activate(body) {

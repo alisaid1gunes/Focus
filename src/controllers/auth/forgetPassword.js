@@ -7,7 +7,9 @@ const { ForgetPassword } = require('../../services/auth');
 
 const MongooseService = require('../../services/Mongoose');
 
-const ForgetPasswordService = new ForgetPassword(MongooseService);
+const { User } = require('../../models');
+
+const ForgetPasswordService = new ForgetPassword(new MongooseService(User));
 
 const forgetPassword = async (req, res, next) => {
   try {

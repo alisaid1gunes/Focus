@@ -9,7 +9,7 @@ const keyFormat = 'task._id=';
 const expirationTime = 600000;
 class Save {
   constructor(MongooseService) {
-    this.mongooseTask = new MongooseService(Task);
+    this.mongooseTask = MongooseService;
     this.redisCacheService = new RedisCache(keyFormat, expirationTime);
   }
 

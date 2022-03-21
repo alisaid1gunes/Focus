@@ -7,7 +7,7 @@ const { forgetPasswordVerifyValidation } = require('../../validations/auth');
 
 class ForgetPasswordVerify {
   constructor(MongooseService) {
-    this.mongooseUser = new MongooseService(User);
+    this.mongooseUser = MongooseService;
   }
 
   async ForgetPasswordVerify(body) {

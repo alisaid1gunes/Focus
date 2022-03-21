@@ -10,6 +10,6 @@ router.get('/:id', verify, userController.get);
 
 router.delete('/:id', verify, userController.remove);
 
-router.put('/:id', verify,  upload.single('profile'), userController.update);
+router.put('/:id', verify, upload.single('profile'), userController.update);
 
 module.exports = router;

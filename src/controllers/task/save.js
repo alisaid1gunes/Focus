@@ -6,7 +6,9 @@ const ApiErrorService = require('../../services/ApiError');
 
 const MongooseService = require('../../services/Mongoose');
 
-const TaskService = new Save(MongooseService);
+const { Task } = require('../../models');
+
+const TaskService = new Save(new MongooseService(Task));
 // eslint-disable-next-line consistent-return
 const save = async (req, res, next) => {
   try {
