@@ -28,12 +28,12 @@ describe('GetService Unit Tests', () => {
         email: hoaxer.internet.email(),
         verification: {
           isVerified: true,
-          verificationCode: 'code',
+          code: 5151,
           expireDate: hoaxer.date.future(),
         },
         activation: {
           isActivated: true,
-          activationCode: 'code',
+          code: 6161,
           expireDate: hoaxer.date.future(),
         },
       };

@@ -27,12 +27,12 @@ describe('UpdateService Unit Tests', () => {
         email: hoaxer.internet.email(),
         verification: {
           isVerified: true,
-          verificationCode: 'code',
+          code: 5555,
           expireDate: hoaxer.date.future(),
         },
         activation: {
           isActivated: true,
-          activationCode: 'code',
+          code: 5555,
           expireDate: hoaxer.date.future(),
         },
         profileUrl: hoaxer.internet.avatar(),

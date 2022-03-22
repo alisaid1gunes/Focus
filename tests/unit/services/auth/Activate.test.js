@@ -2,7 +2,15 @@ const { expect } = require('chai');
 
 const { Activate } = require('../../../../src/services/auth');
 
-const ActivateService = new Activate();
+const MongooseService = require('../../../../src/services/Mongoose');
+
+const { User } = require('../../../../src/models');
+
+const MongooseServiceInstance = new MongooseService(User);
+
+const ActivateService = new Activate(MongooseServiceInstance);
+
+const mongoose = require('mongoose');
 
 const hoaxer = require('hoaxer');
 
@@ -11,20 +19,43 @@ const sinon = require('sinon');
 describe('Activate Service Unit Tests', () => {
   describe('Activate Functionality', () => {
     it('it should successfuly activate user if activation code is valid', async () => {
+      const id = new mongoose.Types.ObjectId();
       const stubValue = {
-        id: 'id',
-        activationCode: hoaxer.internet.password(),
+        id,
+        activationCode: 2561,
       };
 
-      const returnValue = { success: true, message: 'User activated.' };
+      const returnValue = {
+        _id: id,
+        username: hoaxer.internet.userName(),
+        password: hoaxer.internet.password(),
+        email: hoaxer.internet.email(),
+        verification: {
+          isVerified: true,
+          code: 2561,
+          expireDate: hoaxer.date.future(),
+        },
+        activation: {
+          isActivated: true,
+          code: 2561,
+          expireDate: hoaxer.date.future(),
+        },
+      };
 
-      const stub = sinon.stub(ActivateService, 'Activate').returns(returnValue);
+      const getStub = sinon
+        .stub(MongooseServiceInstance, 'get')
+        .returns(returnValue);
+
+      const updateStub = sinon
+        .stub(MongooseServiceInstance, 'update')
+        .returns(returnValue);
 
       const result = await ActivateService.Activate(stubValue);
-
-      expect(stub.calledOnce).to.be.true;
+    
+      expect(getStub.calledOnce).to.be.true;
+      expect(updateStub.calledOnce).to.be.true;
       expect(result.success).to.equal(true);
-      expect(result.message).to.equal(returnValue.message);
+      expect(result.message).to.equal('User activated.');
     });
   });
 });
