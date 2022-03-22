@@ -1,6 +1,6 @@
 const { Task } = require('../../models');
 
-const { getAllValidation } = require('../../validations/task/getAll');
+const { getAllValidation } = require('../../validations/task');
 
 const RedisCache = require('../redis/RedisCache');
 
@@ -26,7 +26,7 @@ class GetAll {
 
       if (result) {
         this.redisCacheService.setCache(userId, result);
-        return { result, success: true };
+        return { result, success: true, message: 'Tasks found' };
       }
 
       return { success: false, message: 'There is no task' };
