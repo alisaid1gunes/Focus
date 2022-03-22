@@ -2,27 +2,58 @@ const { expect } = require('chai');
 
 const { Remove } = require('../../../../src/services/user');
 
-const RemoveService = new Remove();
+const MongooseService = require('../../../../src/services/Mongoose');
+
+const { User } = require('../../../../src/models');
+
+const MongooseServiceInstance = new MongooseService(User);
+
+const RemoveService = new Remove(MongooseServiceInstance);
+
+const mongoose = require('mongoose');
 
 const sinon = require('sinon');
+
+const hoaxer = require('hoaxer');
 
 describe('RemoveService Unit Tests', () => {
   describe('RemoveUser Functionality', () => {
     it('it should successfuly remove a relevant user if id is correct', async () => {
-      const id = 'id';
+      const id = new mongoose.Types.ObjectId();
 
       const returnValue = {
-        message: 'User deleted.',
-        success: true,
+        _id: id,
+        username: hoaxer.internet.userName(),
+        password: hoaxer.internet.password(),
+        email: hoaxer.internet.email(),
+        verification: {
+          isVerified: true,
+          verificationCode: 'code',
+          expireDate: hoaxer.date.future(),
+        },
+        activation: {
+          isActivated: true,
+          activationCode: 'code',
+          expireDate: hoaxer.date.future(),
+        },
+        profileUrl: hoaxer.internet.avatar(),
       };
 
-      const stub = sinon.stub(RemoveService, 'RemoveUser').returns(returnValue);
+      const deleteStub = sinon
+        .stub(MongooseServiceInstance, 'delete')
+        .returns(null);
+
+      const getStub = sinon
+        .stub(MongooseServiceInstance, 'get')
+        .returns(returnValue);
 
       const result = await RemoveService.RemoveUser(id);
 
-      expect(stub.calledOnce).to.be.true;
+      expect(deleteStub.calledOnce).to.be.true;
+      expect(getStub.calledOnce).to.be.true;
+
       expect(result.success).to.equal(true);
-      expect(result.message).to.equal(returnValue.message);
+      expect(result.message).to.equal('User deleted');
     });
   });
 });
