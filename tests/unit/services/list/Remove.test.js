@@ -4,21 +4,29 @@ const { Remove } = require('../../../../src/services/list');
 
 const hoaxer = require('hoaxer');
 
-const RemoveService = new Remove();
+const { List } = require('../../../../src/models');
+
+const MongooseService = require('../../../../src/services/Mongoose');
+
+const MongooseServiceInstance = new MongooseService(List);
+
+const RemoveService = new Remove(MongooseServiceInstance);
+
+const mongoose = require('mongoose');
 
 const sinon = require('sinon');
 
 describe('RemoveService Unit Tests', () => {
   describe('RemoveList Functionality', () => {
     it('it should successfuly remove a relevant list if id is correct', async () => {
-      const id = 'id';
+      const id = new mongoose.Types.ObjectId();
 
       const returnValue = {
         message: 'List deleted.',
         success: true,
       };
 
-      const stub = sinon.stub(RemoveService, 'RemoveList').returns(returnValue);
+      const stub = sinon.stub(MongooseServiceInstance, 'delete').returns(null);
 
       const result = await RemoveService.RemoveList(id);
 

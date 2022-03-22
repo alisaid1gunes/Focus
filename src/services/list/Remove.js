@@ -17,12 +17,10 @@ class Remove {
     const { error } = removeValidation(id);
     if (error) return { success: false, message: error.details[0].message };
 
-    await this.mongooseTask.delete({ _id: id });
-
-    await this.redisCacheService.clearCache(id);
-
     try {
       await this.mongooseList.delete({ _id: id });
+
+      await this.redisCacheService.clearCache(id);
       return { message: 'List deleted.', success: true };
     } catch (err) {
       return {
