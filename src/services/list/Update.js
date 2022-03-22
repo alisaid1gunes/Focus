@@ -28,11 +28,11 @@ class Update {
         this.redisCacheService.setCache(id, result);
         return { success: true, message: 'List updated.' };
       }
-      return { success: false, message: 'List could not be saved.' };
+      return { success: false, message: 'List could not be updated.' };
     } catch (err) {
       return {
         success: false,
-        message: `List could not be saved. Error:${err}`,
+        message: `List could not be updated. Error:${err}`,
       };
     }
   }
