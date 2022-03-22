@@ -2,7 +2,15 @@ const { expect } = require('chai');
 
 const { GetOne } = require('../../../../src/services/list');
 
-const GetOneService = new GetOne();
+const { List } = require('../../../../src/models');
+
+const MongooseService = require('../../../../src/services/Mongoose');
+
+const MongooseServiceInstance = new MongooseService(List);
+
+const GetOneService = new GetOne(MongooseServiceInstance);
+
+const mongoose = require('mongoose');
 
 const hoaxer = require('hoaxer');
 
@@ -11,27 +19,29 @@ const sinon = require('sinon');
 describe('GetOneService Unit Tests', () => {
   describe('GetOne Functionality', () => {
     it('it should successfuly return a relevant list if id is correct', async () => {
-      const id = 'id';
+      const id = new mongoose.Types.ObjectId();
+
+      const userId = new mongoose.Types.ObjectId();
+
+      const taskId = new mongoose.Types.ObjectId();
 
       const returnValue = {
-        result: {
-          _id: 'id',
-          name: hoaxer.name.findName(),
-          userId: 'id',
-          tasks: ['id'],
-        },
-        success: true,
-        message: 'List found.',
+        _id: id,
+        name: hoaxer.name.findName(),
+        userId,
+        tasks: [taskId],
       };
 
-      const stub = sinon.stub(GetOneService, 'GetList').returns(returnValue);
+      const stub = sinon
+        .stub(MongooseServiceInstance, 'get')
+        .returns(returnValue);
 
       const result = await GetOneService.GetList(id);
 
       expect(stub.calledOnce).to.be.true;
       expect(result.success).to.equal(true);
-      expect(result.message).to.equal(returnValue.message);
-      expect(result.result).to.equal(returnValue.result);
+      expect(result.message).to.equal('List found.');
+      expect(result.result).to.equal(returnValue);
     });
   });
 });
