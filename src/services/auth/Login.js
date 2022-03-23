@@ -2,8 +2,6 @@
 
 const bcrypt = require('bcryptjs');
 
-const { User } = require('../../models');
-
 const { loginValidation } = require('../../validations/auth');
 
 const { generateToken } = require('../../utils/tokenGenerator');

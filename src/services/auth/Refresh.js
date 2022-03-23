@@ -2,10 +2,6 @@
 
 const jwt = require('jsonwebtoken');
 
-const { User } = require('../../models');
-
-const { RefreshToken } = require('../../models');
-
 const { generateToken } = require('../../utils/tokenGenerator');
 
 const { refreshValidation } = require('../../validations/auth');

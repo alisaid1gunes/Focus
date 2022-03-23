@@ -3,8 +3,6 @@ const EventEmitter = require('events');
 
 const forgetEmitter = new EventEmitter();
 
-const { User } = require('../../models');
-
 const { forgetPasswordValidation } = require('../../validations/auth');
 
 class ForgetPassword {

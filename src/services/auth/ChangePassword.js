@@ -2,8 +2,6 @@
 
 const bcrypt = require('bcryptjs');
 
-const { User } = require('../../models');
-
 const { changePasswordValidation } = require('../../validations/auth');
 
 class ChangePassword {

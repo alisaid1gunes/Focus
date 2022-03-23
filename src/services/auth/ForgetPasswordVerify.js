@@ -1,8 +1,4 @@
 /* eslint-disable no-underscore-dangle */
-
-const { User } = require('../../models');
-
-
 const { forgetPasswordVerifyValidation } = require('../../validations/auth');
 
 class ForgetPasswordVerify {

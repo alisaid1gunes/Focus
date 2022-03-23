@@ -16,12 +16,6 @@ const mongoose = require('mongoose');
 
 const sinon = require('sinon');
 
-const { generateToken } = require('../../../../src/utils/tokenGenerator');
-
-const {
-  ACCESS_TOKEN_SECRET,
-  REFRESH_TOKEN_SECRET,
-} = require('../../../../src/config/config');
 
 describe('Register Service Unit Tests', () => {
   describe('RegisterUser Functionality', () => {
@@ -62,7 +56,7 @@ describe('Register Service Unit Tests', () => {
         .returns(saveReturn);
 
       const result = await RegisterService.RegisterUser(stubValue);
-      console.log(result);
+
       expect(getStub.calledOnce).to.be.true;
       expect(saveStub.calledOnce).to.be.true;
       expect(result.user).to.equal(saveReturn);

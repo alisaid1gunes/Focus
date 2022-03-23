@@ -1,9 +1,5 @@
 /* eslint-disable no-underscore-dangle */
-
-const { User } = require('../../models');
-
 const { activateValidation } = require('../../validations/auth');
-
 class Activate {
   constructor(MongooseService) {
     this.mongooseUser = MongooseService;

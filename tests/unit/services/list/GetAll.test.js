@@ -21,8 +21,6 @@ describe('GetAllService Unit Tests', () => {
     it('it should successfuly return relevant users list if user is correct', async () => {
       const id = new mongoose.Types.ObjectId();
 
-      const userId = new mongoose.Types.ObjectId();
-
       const taskId = new mongoose.Types.ObjectId();
 
       const returnValue = [

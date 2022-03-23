@@ -1,5 +1,3 @@
-const { User } = require('../../models');
-
 const { updateValidation, idValidation } = require('../../validations/user');
 
 const cloudinary = require('../../utils/cloudinary');

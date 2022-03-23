@@ -2,8 +2,6 @@ const { expect } = require('chai');
 
 const { Remove } = require('../../../../src/services/list');
 
-const hoaxer = require('hoaxer');
-
 const { List } = require('../../../../src/models');
 
 const MongooseService = require('../../../../src/services/Mongoose');

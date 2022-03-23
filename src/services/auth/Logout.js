@@ -1,9 +1,5 @@
 /* eslint-disable no-underscore-dangle */
 
-const { User } = require('../../models');
-
-const { RefreshToken } = require('../../models');
-
 const { logoutValidation } = require('../../validations/auth');
 
 class Logout {

@@ -21,7 +21,7 @@ describe('MongooseService Unit Tests', () => {
       const result = await new MongooseService(TestModel).save(
         returnValue.name
       );
-      console.log(result);
+      
       expect(stub.calledOnce).to.be.true;
       expect(result._id).to.equal(returnValue._id);
       expect(result.name).to.equal(returnValue.name);

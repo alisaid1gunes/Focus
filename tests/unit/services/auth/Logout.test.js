@@ -10,8 +10,6 @@ const MongooseServiceInstance = new MongooseService(RefreshToken);
 
 const LogoutService = new Logout(MongooseServiceInstance);
 
-const bcrypt = require('bcryptjs');
-
 const mongoose = require('mongoose');
 
 const sinon = require('sinon');

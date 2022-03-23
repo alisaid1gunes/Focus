@@ -1,7 +1,4 @@
 /* eslint-disable no-underscore-dangle */
-
-const { User } = require('../../models');
-
 const { generateToken } = require('../../utils/tokenGenerator');
 
 const { RefreshToken } = require('../../models');

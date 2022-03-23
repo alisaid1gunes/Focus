@@ -1,7 +1,4 @@
 /* eslint-disable no-underscore-dangle */
-
-const { User } = require('../../models');
-
 const { GoogleRegister } = require('./GoogleRegister');
 
 const GoogleLogin = require('./GoogleLogin');

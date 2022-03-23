@@ -1,5 +1,3 @@
-const { Task } = require('../../models');
-
 const { saveValidation } = require('../../validations/task');
 
 const RedisCache = require('../redis/RedisCache');

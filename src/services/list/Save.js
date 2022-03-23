@@ -1,5 +1,3 @@
-const { List } = require('../../models');
-
 const { saveValidation } = require('../../validations/list');
 
 const RedisCache = require('../redis/RedisCache');

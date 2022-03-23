@@ -1,5 +1,3 @@
-const { User } = require('../../models');
-
 const { getValidation } = require('../../validations/user');
 
 class Get {

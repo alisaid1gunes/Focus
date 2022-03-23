@@ -2,8 +2,6 @@ const { expect } = require('chai');
 
 const { Remove } = require('../../../../src/services/task');
 
-const hoaxer = require('hoaxer');
-
 const MongooseService = require('../../../../src/services/Mongoose');
 
 const { Task } = require('../../../../src/models');
@@ -29,7 +27,7 @@ describe('RemoveService Unit Tests', () => {
       const stub = sinon.stub(MongooseServiceInstance, 'delete').returns(null);
 
       const result = await RemoveService.RemoveTask(id);
-      console.log(result);
+     
       expect(stub.calledOnce).to.be.true;
       expect(result.success).to.equal(true);
       expect(result.message).to.equal(returnValue.message);

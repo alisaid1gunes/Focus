@@ -5,8 +5,6 @@ const registerEmitter = new EventEmitter();
 
 const bcrypt = require('bcryptjs');
 
-const { User } = require('../../models');
-
 const { registerValidation } = require('../../validations/auth');
 
 class Register {
