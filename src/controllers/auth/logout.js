@@ -7,12 +7,9 @@ const { Logout } = require('../../services/auth');
 
 const MongooseService = require('../../services/Mongoose');
 
-const { User, RefreshToken } = require('../../models');
+const { User } = require('../../models');
 
-const LogoutService = new Logout(
-  new MongooseService(User),
-  new MongooseService(RefreshToken)
-);
+const LogoutService = new Logout(new MongooseService(User));
 
 const logout = async (req, res, next) => {
   try {
