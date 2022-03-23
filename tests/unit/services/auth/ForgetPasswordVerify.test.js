@@ -14,8 +14,6 @@ const ForgetPasswordVerifyService = new ForgetPasswordVerify(
 
 const mongoose = require('mongoose');
 
-const bcrypt = require('bcryptjs');
-
 const hoaxer = require('hoaxer');
 
 const sinon = require('sinon');
@@ -44,6 +42,7 @@ describe('ForgetPasswordVerifyService Unit Tests', () => {
           code: 2561,
           expireDate: hoaxer.date.future(),
         },
+        profileUrl: hoaxer.internet.avatar(),
       };
 
       const getStub = sinon

@@ -46,6 +46,7 @@ describe('ChangePassword Service Unit Tests', () => {
           code: 2561,
           expireDate: hoaxer.date.future(),
         },
+        profileUrl: hoaxer.internet.avatar(),
       };
 
       const getStub = sinon
@@ -57,7 +58,7 @@ describe('ChangePassword Service Unit Tests', () => {
         .returns(returnValue);
 
       const result = await ChangePasswordService.ChangePassword(stubValue);
-      
+
       expect(getStub.calledOnce).to.be.true;
       expect(updateStub.calledOnce).to.be.true;
       expect(result.success).to.equal(true);

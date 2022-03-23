@@ -20,7 +20,7 @@ describe('Activate Service Unit Tests', () => {
   describe('Activate Functionality', () => {
     it('it should successfuly activate user if activation code is valid', async () => {
       const id = new mongoose.Types.ObjectId();
-      
+
       const stubValue = {
         id,
         activationCode: 2561,
@@ -41,6 +41,7 @@ describe('Activate Service Unit Tests', () => {
           code: 2561,
           expireDate: hoaxer.date.future(),
         },
+        profileUrl: hoaxer.internet.avatar(),
       };
 
       const getStub = sinon
@@ -52,7 +53,7 @@ describe('Activate Service Unit Tests', () => {
         .returns(returnValue);
 
       const result = await ActivateService.Activate(stubValue);
-    
+
       expect(getStub.calledOnce).to.be.true;
       expect(updateStub.calledOnce).to.be.true;
       expect(result.success).to.equal(true);

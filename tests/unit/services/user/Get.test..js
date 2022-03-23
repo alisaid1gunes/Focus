@@ -36,6 +36,7 @@ describe('GetService Unit Tests', () => {
           code: 6161,
           expireDate: hoaxer.date.future(),
         },
+        profileUrl: hoaxer.internet.avatar(),
       };
 
       const stub = sinon

@@ -39,6 +39,7 @@ describe('ForgetPassword Service Unit Tests', () => {
           code: 2561,
           expireDate: hoaxer.date.future(),
         },
+        profileUrl: hoaxer.internet.avatar(),
       };
 
       const getStub = sinon
