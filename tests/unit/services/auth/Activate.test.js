@@ -20,6 +20,7 @@ describe('Activate Service Unit Tests', () => {
   describe('Activate Functionality', () => {
     it('it should successfuly activate user if activation code is valid', async () => {
       const id = new mongoose.Types.ObjectId();
+      
       const stubValue = {
         id,
         activationCode: 2561,
