@@ -12,8 +12,6 @@ const ForgetPasswordService = new ForgetPassword(MongooseServiceInstance);
 
 const mongoose = require('mongoose');
 
-const bcrypt = require('bcryptjs');
-
 const hoaxer = require('hoaxer');
 
 const sinon = require('sinon');
