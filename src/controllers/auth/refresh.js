@@ -7,12 +7,9 @@ const { Refresh } = require('../../services/auth');
 
 const MongooseService = require('../../services/Mongoose');
 
-const { User, RefreshToken } = require('../../models');
+const { RefreshToken } = require('../../models');
 
-const RefreshService = new Refresh(
-  new MongooseService(User),
-  new MongooseService(RefreshToken)
-);
+const RefreshService = new Refresh(new MongooseService(RefreshToken));
 
 const refresh = async (req, res, next) => {
   try {

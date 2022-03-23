@@ -64,6 +64,7 @@ describe('Login Service Unit Tests', () => {
         profileUrl: hoaxer.internet.avatar(),
       };
       const tokenReturn = {
+        _id: id,
         token: generateToken(id, REFRESH_TOKEN_SECRET, '15d'),
         userId: id,
       };
@@ -77,7 +78,7 @@ describe('Login Service Unit Tests', () => {
         .returns(tokenReturn);
 
       const result = await LoginService.LoginUser(stubValue);
-   
+
       expect(userStub.calledOnce).to.be.true;
       expect(tokenStub.calledOnce).to.be.true;
       expect(result.accessToken).to.equal(expectedReturn.accessToken);

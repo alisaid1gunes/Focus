@@ -4,7 +4,7 @@ const registerValidation = require('./register');
 
 const logoutValidation = require('./logout');
 
-const refreshvalidation = require('./refresh');
+const refreshValidation = require('./refresh');
 
 const activateValidation = require('./activate');
 
@@ -20,7 +20,7 @@ module.exports = {
   registerValidation,
   loginValidation,
   logoutValidation,
-  refreshvalidation,
+  refreshValidation,
   activateValidation,
   changePasswordValidation,
   forgetPasswordValidation,

@@ -16,8 +16,7 @@ const {
 } = require('../../config/config');
 
 class Refresh {
-  constructor(MongooseUser, MongooseRefresh) {
-    this.mongooseUser = MongooseUser;
+  constructor(MongooseRefresh) {
     this.mongooseRefreshToken = MongooseRefresh;
   }
 
@@ -36,7 +35,8 @@ class Refresh {
 
     const userId = jwt.verify(refreshToken.token, REFRESH_TOKEN_SECRET);
 
-    const accessToken = generateToken(userId, ACCESS_TOKEN_SECRET, '15d');
+    const accessToken = generateToken(userId._id, ACCESS_TOKEN_SECRET, '15d');
+
     return { accessToken, success: true, message: 'RefreshToken retrieved' };
   }
 }
