@@ -3,15 +3,7 @@ const { StatusCodes } = require('http-status-codes');
 
 const ApiErrorService = require('../../services/ApiError');
 
-const { ChangePassword } = require('../../services/auth');
-
-const MongooseService = require('../../services/Mongoose');
-
-const { User } = require('../../models');
-
-const ChangePasswordService = new ChangePassword(new MongooseService(User));
-
-const changePassword = async (req, res, next) => {
+const changePassword = async (req, res, next, ChangePasswordService) => {
   try {
     const result = await ChangePasswordService.ChangePassword(req.body);
 

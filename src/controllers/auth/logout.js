@@ -3,15 +3,7 @@ const { StatusCodes } = require('http-status-codes');
 
 const ApiErrorService = require('../../services/ApiError');
 
-const { Logout } = require('../../services/auth');
-
-const MongooseService = require('../../services/Mongoose');
-
-const { User } = require('../../models');
-
-const LogoutService = new Logout(new MongooseService(User));
-
-const logout = async (req, res, next) => {
+const logout = async (req, res, next, LogoutService) => {
   try {
     const result = await LogoutService.LogoutUser(req.body);
 

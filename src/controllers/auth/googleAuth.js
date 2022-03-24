@@ -6,18 +6,7 @@ const { StatusCodes } = require('http-status-codes');
 
 const ApiErrorService = require('../../services/ApiError');
 
-const { GoogleAuth } = require('../../services/auth');
-
-const MongooseService = require('../../services/Mongoose');
-
-const { User, RefreshToken } = require('../../models');
-
-const GoogleAuthService = new GoogleAuth(
-  new MongooseService(User),
-  new MongooseService(RefreshToken)
-);
-
-const googleAuth = async (req, res, next) => {
+const googleAuth = async (req, res, next, GoogleAuthService) => {
   const { tokenId, imageUrl } = req.body;
 
   client

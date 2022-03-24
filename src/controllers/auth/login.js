@@ -3,18 +3,7 @@ const { StatusCodes } = require('http-status-codes');
 
 const ApiErrorService = require('../../services/ApiError');
 
-const { Login } = require('../../services/auth');
-
-const MongooseService = require('../../services/Mongoose');
-
-const { User, RefreshToken } = require('../../models');
-
-const LoginService = new Login(
-  new MongooseService(User),
-  new MongooseService(RefreshToken)
-);
-
-const login = async (req, res, next) => {
+const login = async (req, res, next, LoginService) => {
   try {
     const result = await LoginService.LoginUser(req.body);
 

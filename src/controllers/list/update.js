@@ -1,16 +1,9 @@
 const { StatusCodes } = require('http-status-codes');
 
-const { Update } = require('../../services/list');
-
 const ApiErrorService = require('../../services/ApiError');
 
-const MongooseService = require('../../services/Mongoose');
-
-const { List } = require('../../models');
-
-const ListService = new Update(new MongooseService(List));
 // eslint-disable-next-line consistent-return
-const update = async (req, res, next) => {
+const update = async (req, res, next, ListService) => {
   const { id } = req.params;
 
   try {

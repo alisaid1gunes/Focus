@@ -3,15 +3,7 @@ const { StatusCodes } = require('http-status-codes');
 
 const ApiErrorService = require('../../services/ApiError');
 
-const { Activate } = require('../../services/auth');
-
-const MongooseService = require('../../services/Mongoose');
-
-const { User } = require('../../models');
-
-const ActivateService = new Activate(new MongooseService(User));
-
-const activate = async (req, res, next) => {
+const activate = async (req, res, next, ActivateService) => {
   try {
     const result = await ActivateService.Activate(req.body);
     console.log(result);

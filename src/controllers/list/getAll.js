@@ -1,17 +1,9 @@
 const { StatusCodes } = require('http-status-codes');
 
-const { GetAll } = require('../../services/list');
-
 const ApiErrorService = require('../../services/ApiError');
 
-const MongooseService = require('../../services/Mongoose');
-
-const { List } = require('../../models');
-
-const ListService = new GetAll(new MongooseService(List));
-
 // eslint-disable-next-line consistent-return
-const getAll = async (req, res, next) => {
+const getAll = async (req, res, next, ListService) => {
   try {
     const result = await ListService.GetList(req.params.id);
     if (result.success) return res.status(StatusCodes.OK).json(result);
@@ -19,7 +11,9 @@ const getAll = async (req, res, next) => {
     next(ApiErrorService.notFound(result.error));
   } catch (err) {
     next(
-      ApiErrorService.notFound(`List could not be found. Request is wrong. Error:${err}`)
+      ApiErrorService.notFound(
+        `List could not be found. Request is wrong. Error:${err}`
+      )
     );
   }
 };

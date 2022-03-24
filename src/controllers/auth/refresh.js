@@ -3,15 +3,7 @@ const { StatusCodes } = require('http-status-codes');
 
 const ApiErrorService = require('../../services/ApiError');
 
-const { Refresh } = require('../../services/auth');
-
-const MongooseService = require('../../services/Mongoose');
-
-const { RefreshToken } = require('../../models');
-
-const RefreshService = new Refresh(new MongooseService(RefreshToken));
-
-const refresh = async (req, res, next) => {
+const refresh = async (req, res, next, RefreshService) => {
   try {
     const result = await RefreshService.Refresh(req.body);
 

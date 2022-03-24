@@ -3,15 +3,7 @@ const { StatusCodes } = require('http-status-codes');
 
 const ApiErrorService = require('../../services/ApiError');
 
-const { ForgetPassword } = require('../../services/auth');
-
-const MongooseService = require('../../services/Mongoose');
-
-const { User } = require('../../models');
-
-const ForgetPasswordService = new ForgetPassword(new MongooseService(User));
-
-const forgetPassword = async (req, res, next) => {
+const forgetPassword = async (req, res, next, ForgetPasswordService) => {
   try {
     const result = await ForgetPasswordService.ForgetPassword(req.body);
 

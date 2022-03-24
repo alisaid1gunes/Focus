@@ -1,17 +1,9 @@
 const { StatusCodes } = require('http-status-codes');
 
-const { Remove } = require('../../services/user');
-
 const ApiErrorService = require('../../services/ApiError');
 
-const MongooseService = require('../../services/Mongoose');
-
-const { User } = require('../../models');
-
-const UserService = new Remove(new MongooseService(User));
-
 // eslint-disable-next-line consistent-return
-const remove = async (req, res, next) => {
+const remove = async (req, res, next, UserService) => {
   const { id } = req.params;
   try {
     const result = await UserService.RemoveUser(id);
