@@ -17,9 +17,9 @@ const googleAuth = async (req, res, next, GoogleAuthService) => {
         const result = GoogleAuthService.Auth(email, name, imageUrl);
 
         if (result.success) {
-          return res.status(StatusCodes.OK).send({
-            result,
-          });
+          res.status(StatusCodes.OK);
+          res.json(result);
+          return res;
         }
         next(ApiErrorService.badRequest(result.error));
       } catch (err) {

@@ -6,7 +6,11 @@ const ApiErrorService = require('../../services/ApiError');
 const save = async (req, res, next, TaskService) => {
   try {
     const result = await TaskService.SaveTask(req.body);
-    if (result.success) return res.status(StatusCodes.OK).json(result);
+    if (result.success) {
+      res.status(StatusCodes.OK);
+      res.json(result);
+      return res;
+    }
 
     next(ApiErrorService.badRequest(result.error));
   } catch (err) {

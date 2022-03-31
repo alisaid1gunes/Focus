@@ -7,7 +7,11 @@ const update = async (req, res, next, TaskService) => {
   const { id } = req.params;
   try {
     const result = await TaskService.UpdateTask(req.body, id);
-    if (result.success) return res.status(StatusCodes.OK).json(result);
+    if (result.success) {
+      res.status(StatusCodes.OK);
+      res.json(result);
+      return res;
+    }
 
     next(ApiErrorService.badRequest(result.error));
   } catch (err) {

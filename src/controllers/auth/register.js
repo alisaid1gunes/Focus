@@ -7,7 +7,11 @@ const register = async (req, res, next, RegisterService) => {
   try {
     const result = await RegisterService.RegisterUser(req);
 
-    if (result.success) return res.status(StatusCodes.CREATED).send(result);
+    if (result.success) {
+      res.status(StatusCodes.CREATED);
+      res.json(result);
+      return res;
+    }
 
     next(ApiErrorService.badRequest(result.error));
   } catch (err) {

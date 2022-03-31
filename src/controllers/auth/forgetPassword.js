@@ -8,9 +8,9 @@ const forgetPassword = async (req, res, next, ForgetPasswordService) => {
     const result = await ForgetPasswordService.ForgetPassword(req.body);
 
     if (result.success) {
-      return res.status(StatusCodes.OK).send({
-        result,
-      });
+      res.status(StatusCodes.OK);
+      res.json(result);
+      return res;
     }
     next(ApiErrorService.badRequest(result.error));
   } catch (err) {

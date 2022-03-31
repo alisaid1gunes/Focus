@@ -6,7 +6,12 @@ const ApiErrorService = require('../../services/ApiError');
 const get = async (req, res, next, UserService) => {
   try {
     const result = await UserService.GetUser(req.params.id);
-    if (result.success) return res.status(StatusCodes.OK).json(result);
+    if (result.success) {
+      res.status(StatusCodes.OK);
+      res.json(result);
+      return res;
+    }
+
     next(ApiErrorService.notFound(result.error));
   } catch (err) {
     next(

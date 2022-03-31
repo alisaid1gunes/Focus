@@ -10,13 +10,16 @@ const login = async (req, res, next, LoginService) => {
     if (result.success) {
       const { accessToken } = result;
       const { refreshToken } = result;
-      return res.header('auth-token', accessToken).status(StatusCodes.OK).send({
+      res.header('auth-token', accessToken);
+      res.status(StatusCodes.OK);
+      res.json({
         username: result.username,
         accessToken,
         refreshToken,
         message: result.message,
         succes: result.success,
       });
+      return res;
     }
     next(ApiErrorService.unauthorized(result.error));
   } catch (err) {

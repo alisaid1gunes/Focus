@@ -8,9 +8,9 @@ const changePassword = async (req, res, next, ChangePasswordService) => {
     const result = await ChangePasswordService.ChangePassword(req.body);
 
     if (result.success) {
-      return res.status(StatusCodes.OK).send({
-        result,
-      });
+      res.status(StatusCodes.OK);
+      res.json(result);
+      return res;
     }
     next(ApiErrorService.badRequest(result.error));
   } catch (err) {

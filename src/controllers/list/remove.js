@@ -7,7 +7,11 @@ const remove = async (req, res, next, ListService) => {
   const { id } = req.params;
   try {
     const result = await ListService.RemoveList(id);
-    if (result.success) return res.status(StatusCodes.OK).json(result);
+    if (result.success) {
+      res.status(StatusCodes.OK);
+      res.json(result);
+      return res;
+    }
 
     next(ApiErrorService.badRequest(result.error));
   } catch (err) {

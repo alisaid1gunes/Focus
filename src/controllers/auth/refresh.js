@@ -7,7 +7,11 @@ const refresh = async (req, res, next, RefreshService) => {
   try {
     const result = await RefreshService.Refresh(req.body);
 
-    if (result.success) return res.status(StatusCodes.OK).send(result);
+    if (result.success) {
+      res.status(StatusCodes.OK);
+      res.json(result);
+      return res;
+    }
 
     next(ApiErrorService.badRequest(result.error));
   } catch (err) {

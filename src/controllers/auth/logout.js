@@ -7,8 +7,12 @@ const logout = async (req, res, next, LogoutService) => {
   try {
     const result = await LogoutService.LogoutUser(req.body);
 
-    if (result.success)
-      return res.header('auth-token', '').status(StatusCodes.OK).send(result);
+    if (result.success) {
+      res.header('auth-token', '');
+      res.status(StatusCodes.OK);
+      res.json(result);
+      return res;
+    }
 
     next(ApiErrorService.badRequest(result.error));
   } catch (err) {
