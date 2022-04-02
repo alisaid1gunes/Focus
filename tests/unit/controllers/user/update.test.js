@@ -16,7 +16,7 @@ const sinon = require('sinon');
 
 const MongooseServiceInstance = new MongooseService(User);
 
-describe('User udapte controller', () => {
+describe('User update controller', () => {
   const id = new mongoose.Types.ObjectId();
   let UpdateService, req, res, next;
   next = () => {};

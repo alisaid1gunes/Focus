@@ -55,11 +55,11 @@ describe('User get controller', () => {
     mock
       .expects('json')
       .once()
-      .withExactArgs({ user: stubValue, success: true });
+      .withExactArgs({ stubValue, success: true, message: 'User found.' });
 
     const stub = sinon
       .stub(GetService, 'GetUser')
-      .returns({ user: stubValue, success: true });
+      .returns({ stubValue, success: true, message: 'User found.' });
 
     await get(req, res, next, GetService);
 
