@@ -5,7 +5,8 @@ const ApiErrorService = require('../../services/ApiError');
 // eslint-disable-next-line consistent-return
 const getOne = async (req, res, next, ListService) => {
   try {
-    const result = await ListService.GetTask(req.params.id);
+    const result = await ListService.GetList(req.params.id);
+    console.log(result);
     if (result.success) {
       res.status(StatusCodes.OK);
       res.json(result);
