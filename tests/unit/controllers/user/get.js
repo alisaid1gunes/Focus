@@ -61,7 +61,7 @@ describe('User get controller', () => {
       .stub(GetService, 'GetUser')
       .returns({ user: stubValue, success: true });
 
-    const user = await get(req, res, next, GetService);
+    await get(req, res, next, GetService);
 
     expect(stub.calledOnce).to.be.true;
 
