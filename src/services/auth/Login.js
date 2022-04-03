@@ -47,6 +47,7 @@ class Login {
       const savedToken = await this.mongooseRefreshToken.save(refreshTokenDb);
 
       return {
+        username: user.username,
         accessToken,
         refreshToken: savedToken.token,
         success: true,

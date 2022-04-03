@@ -17,7 +17,7 @@ const login = async (req, res, next, LoginService) => {
         accessToken,
         refreshToken,
         message: result.message,
-        succes: result.success,
+        success: result.success,
       });
       return res;
     }
