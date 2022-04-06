@@ -6,9 +6,7 @@ const { PORT } = require('./src/config/config.js');
 
 const startServer = async () => {
   const port = PORT;
-
   const app = express();
-
   await loaders({ expressApp: app });
 
   app
