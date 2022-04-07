@@ -1,14 +1,12 @@
 const redis = require('async-redis');
 
-
+const { REDIS_HOST } = require('../../config/config');
 
 class RedisCache {
   constructor(keyFormat, expirationTime) {
     this.keyFormat = keyFormat;
     this.expirationTime = expirationTime;
-    this.client = redis.createClient(
-     process.env.REDIS_HOST || 'redis://localhost:6379',
-    );
+    this.client = redis.createClient(REDIS_HOST || 'redis://localhost:6379');
   }
 
   async set(key, data) {
