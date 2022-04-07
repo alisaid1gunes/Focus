@@ -5,7 +5,7 @@ class RedisCache {
     this.keyFormat = keyFormat;
     this.expirationTime = expirationTime;
     this.client = redis.createClient({
-      host: process.env.REDIS_HOST || 'localhost',
+      host: process.env.REDIS_HOST,
       port: 6379,
     });
   }
