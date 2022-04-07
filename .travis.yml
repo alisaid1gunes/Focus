@@ -6,9 +6,9 @@ node_js:
   - lts/*
 services:
   - docker
-  - redis
+  - redis-server
 before_install: 
-  - docker build -t alisaidgunes/focus .
+  - docker-compose build alisaidgunes/focus
 script: 
   - docker run alisaidgunes/focus yarn test
 after_success:
