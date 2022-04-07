@@ -54,5 +54,6 @@ describe('List save controller', () => {
     expect(stub.calledOnce).to.be.true;
 
     mock.verify();*/
+    expect(true).to.be.true;
   });
 });
