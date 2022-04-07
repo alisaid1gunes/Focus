@@ -55,7 +55,7 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon index",
-    "test": "mocha 'tests/**/*.js'"
+    "test": "mocha 'tests/**/*.js' --exit"
   },
   "keywords": [],
   "author": "",
