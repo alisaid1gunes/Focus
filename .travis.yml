@@ -13,7 +13,7 @@ before_install:
   - docker build -t alisaidgunes/focus .
 
 script: 
-  - docker run alisaidgunes/focus npm test
+  - docker-compose run alisaidgunes/focus yarn test
 
 after_success:
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
