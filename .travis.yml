@@ -1,0 +1,12 @@
+sudo: required
+
+services:
+  - docker
+before_install: 
+  - docker build -t alisaidgunes/FocusBackend .
+script: 
+  - docker run alisaidgunes/FocusBackend yarn test
+after_success:
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+
+  - docker push alisaidgunes/FocusBackend
