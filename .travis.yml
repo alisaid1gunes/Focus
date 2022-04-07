@@ -1,6 +1,9 @@
 sudo: required
 
 language: node_js
+
+node_js:
+  - lts/*
 services:
   - docker
 before_install: 
