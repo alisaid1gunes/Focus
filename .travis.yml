@@ -6,7 +6,7 @@ node_js:
   - lts/*
 services:
   - docker
-  - redis-server
+  - redis
 before_install: 
   - docker build -t alisaidgunes/focus .
 script: 
