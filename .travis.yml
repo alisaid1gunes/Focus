@@ -5,7 +5,7 @@ services:
 before_install: 
   - docker build -t alisaidgunes/focusbackend .
 before_script: 
-  - sudo redis-server /etc/redis/redis.conf --port 6380 --requirepass 'secret'
+  sudo redis-server /etc/redis/redis.conf --port 6380 --requirepass 'secret'
 script: 
   - docker run alisaidgunes/focusbackend yarn test
 after_success:
