@@ -16,7 +16,7 @@ const get = async (req, res, next, UserService) => {
   } catch (err) {
     next(
       ApiErrorService.notFound(
-        `User could not be found. Request is wrong. Error:${err}`
+        `User could not be found. Request is wrong.Error:${err}`
       )
     );
   }
