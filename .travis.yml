@@ -9,7 +9,7 @@ services:
 before_install: 
   - docker-compose up --build
 script: 
-  - docker-compose run alisaidgunes/focusbackend yarn test
+  - yarn test
 after_success:
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
 
