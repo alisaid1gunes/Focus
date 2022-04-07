@@ -2,11 +2,13 @@ const redis = require('async-redis');
 
 const { REDIS_HOST } = require('../../config/config');
 
+console.log(REDIS_HOST);
 class RedisCache {
   constructor(keyFormat, expirationTime) {
     this.keyFormat = keyFormat;
     this.expirationTime = expirationTime;
     this.client = redis.createClient(REDIS_HOST);
+   
   }
 
   async set(key, data) {
