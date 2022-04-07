@@ -3,14 +3,14 @@ sudo: required
 language: node_js
 
 node_js:
-  - lts/*
+  - lts
 services:
   - docker
 before_install: 
-  - docker-compose up --build
+  - docker build -t alisaidgunes/focus .
 script: 
-  - yarn test
+  - docker run alisaidgunes/focus yarn test
 after_success:
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
 
-  - docker-compose push alisaidgunes/focusbackend
+  - docker push alisaidgunes/focus
