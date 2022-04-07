@@ -1,0 +1,43 @@
+version: '3.9'
+
+services:
+
+  mongo_db:
+    image: mongo:latest
+    container_name: db_container
+    volumes:
+      - mongo_db:/data/db
+    restart: always
+  redis:
+    image: redis:latest
+    container_name: redis_container
+    ports:
+      - 6379:6379
+    volumes:
+      - redis:/data/db
+    restart: always
+
+  api:
+    build: .
+    container_name: api_container
+    environment:
+      DB_CONNECT: mongodb+srv://alisaidgunes:VQggnChlhEXG2Fbc@todo.1fuz4.mongodb.net/todo?retryWrites=true&w=majority
+      ACCESS_TOKEN_SECRET: aithb1aef5b1av1a6p6mn651x3dwe9hj
+      REFRESH_TOKEN_SECRET: asofdsjuhfyuvdncjkcsdokcuvhnuds
+      SENDGRID_API_KEY: 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
+      VERIFIED_SENDER: canvaproc9@gmail.com
+      GOOGLE_CLIENT_ID: 1087749142450-3dbmuhutjjkqf8jp5458vkfn6nht7n2b.apps.googleusercontent.com
+      GOOGLE_CLIENT_SECRET: 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
+      CLOUDINARY_CLOUD_NAME: dzi4g0acr
+      CLOUDINARY_API_KEY: 154143382896523
+      CLOUDINARY_API_SECRET: IqEJeIUDKJwd2ER2FipqhHom3C4
+      PORT: 5000
+    ports:
+      - "5000:5000"
+    depends_on:
+      - mongo_db
+      - redis
+    restart: always
+volumes:
+  mongo_db: {}
+  redis: {}

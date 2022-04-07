@@ -4,7 +4,7 @@ class RedisCache {
   constructor(keyFormat, expirationTime) {
     this.keyFormat = keyFormat;
     this.expirationTime = expirationTime;
-    this.client = redis.createClient(6379);
+    this.client = redis.createClient({host: 'redis', port: 6379});
   }
 
   async set(key, data) {
