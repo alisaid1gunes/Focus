@@ -32,7 +32,7 @@ describe('List update controller', () => {
     status: function () {},
   };
 
-  UpdateService = new Update(MongooseServiceInstance);
+ // UpdateService = new Update(MongooseServiceInstance);
 
   it('should update a list that matches the id param', async function () {
   /* 

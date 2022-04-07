@@ -27,7 +27,7 @@ describe('Task getOne controller', () => {
     status: function () {},
   };
 
-  GetOneService = new GetOne(MongooseServiceInstance);
+  //GetOneService = new GetOne(MongooseServiceInstance);
 
   it('should return a task that matches the user id param', async function () {
   /*  const stubValue = {

@@ -32,7 +32,7 @@ describe('List save controller', () => {
     status: function () {},
   };
 
-  SaveService = new Save(MongooseServiceInstance);
+  //SaveService = new Save(MongooseServiceInstance);
 
   it('should save a List', async function () {
   /*   const mock = sinon.mock(res);

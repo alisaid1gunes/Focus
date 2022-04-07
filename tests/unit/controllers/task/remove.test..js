@@ -27,7 +27,7 @@ describe('Task remove controller', () => {
     status: function () {},
   };
 
-  RemoveService = new Remove(MongooseServiceInstance);
+ // RemoveService = new Remove(MongooseServiceInstance);
 
   it('should remove a task that matches the user id param', async function () {
     /* const stubValue = {

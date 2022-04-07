@@ -33,7 +33,7 @@ describe('Task update controller', () => {
     status: function () {},
   };
 
-  UpdateService = new Update(MongooseServiceInstance);
+  //UpdateService = new Update(MongooseServiceInstance);
 
   it('should update a task that matches the id param', async function () {
   /*

@@ -27,7 +27,7 @@ describe('List getOne controller', () => {
     status: function () {},
   };
 
-  GetOneService = new GetOne(MongooseServiceInstance);
+  //GetOneService = new GetOne(MongooseServiceInstance);
 
   it('should return a list that matches the user id param', async function () {
    /*  const stubValue = {
