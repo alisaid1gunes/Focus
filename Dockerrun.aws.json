@@ -1,0 +1,28 @@
+{
+    "AWSEBSDockerrunVersion": "2",
+    "containerDefinitions": [
+        {
+            "cpu": 10,
+            "essential": true,
+            "image": "mongo:latest",
+            "memory": 128,
+            "memoryReservation": 64,
+            "name": "mongo",
+            "portMappings": [
+                {
+                    "containerPort": 27017,
+                    "hostPort": 0,
+                    "protocol": "tcp"
+                }
+            ],
+            "logConfiguration": {
+                "logDriver": "awslogs",
+                "options": {
+                    "awslogs-group": "ecs-logs",
+                    "awslogs-region": "us-east-1",
+                    "awslogs-stream-prefix": "ecs"
+                }
+            }
+        }
+    ]
+}

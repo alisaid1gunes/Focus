@@ -55,7 +55,12 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon index",
-    "test": "mocha 'tests/**/*.js' --exit"
+    "test": "mocha 'tests/**/*.js' ",
+    "ci:test": "mocha 'tests/**/*.js' --exit",
+    "docker:build": "docker build -t alisaidgunes/focus .",
+    "docker:login": "docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD",
+    "docker:push": "docker push alisaidgunes/focus",
+    "ci:docker": "npm run docker:build && npm run docker:login && npm run docker:push"
   },
   "keywords": [],
   "author": "",
