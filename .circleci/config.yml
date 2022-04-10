@@ -3,7 +3,7 @@ jobs:
   build:
     docker:
       - image: node:alpine
-      - image: circleci/mongo:latest
+      - image: mongo:latest
       - image: redis:latest
 
     working_directory: ~/repo

@@ -1,6 +1,6 @@
 const dotenv = require('dotenv');
 
-dotenv.config();
+dotenv.config({ path: 'src/config/.env' });
 
 const env = {
   DB_CONNECT: process.env.DB_CONNECT,
