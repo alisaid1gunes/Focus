@@ -1,7 +1,7 @@
 const dotenv = require('dotenv');
 
 dotenv.config();
-//{ path: 'src/config/.env' }
+
 const env = {
   DB_CONNECT: process.env.DB_CONNECT,
   ACCESS_TOKEN_SECRET: process.env.ACCESS_TOKEN_SECRET,
