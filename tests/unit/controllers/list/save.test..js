@@ -32,10 +32,10 @@ describe('List save controller', () => {
     status: function () {},
   };
 
-  //SaveService = new Save(MongooseServiceInstance);
+  SaveService = new Save(MongooseServiceInstance);
 
   it('should save a List', async function () {
-  /*   const mock = sinon.mock(res);
+    const mock = sinon.mock(res);
     mock.expects('status').once().withExactArgs(200);
 
     mock.expects('json').once().withExactArgs({
@@ -53,7 +53,7 @@ describe('List save controller', () => {
 
     expect(stub.calledOnce).to.be.true;
 
-    mock.verify();*/
+    mock.verify();
     expect(true).to.be.true;
   });
 });

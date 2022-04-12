@@ -27,10 +27,10 @@ describe('User remove controller', () => {
     status: function () {},
   };
 
-  //RemoveService = new Remove(MongooseServiceInstance);
+  RemoveService = new Remove(MongooseServiceInstance);
 
   it('should remove a user that matches the id param', async function () {
-  /*  const stubValue = {
+   const stubValue = {
       message: 'User deleted',
       success: true,
     };
@@ -49,6 +49,6 @@ describe('User remove controller', () => {
 
     expect(stub.calledOnce).to.be.true;
 
-    mock.verify();*/
+    mock.verify();
   });
 });

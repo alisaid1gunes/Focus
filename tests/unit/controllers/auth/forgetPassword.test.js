@@ -31,10 +31,10 @@ describe('forgetPassword controller', () => {
     message: 'Verification code sent your email to change your password',
   };
 
-  //ForgetPasswordService = new ForgetPassword(MongooseServiceInstance);
+  ForgetPasswordService = new ForgetPassword(MongooseServiceInstance);
 
   it('should send verification code mail to user that matches the id', async function () {
-    /* const mock = sinon.mock(res);
+    const mock = sinon.mock(res);
     mock.expects('status').once().withExactArgs(200);
 
     mock.expects('json').once().withExactArgs(returnValue);
@@ -47,7 +47,7 @@ describe('forgetPassword controller', () => {
 
     expect(stub.calledOnce).to.be.true;
 
-    mock.verify();*/
+    mock.verify();
     expect(true).to.be.true;
   });
 });

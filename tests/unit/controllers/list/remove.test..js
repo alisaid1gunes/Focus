@@ -27,10 +27,10 @@ describe('List remove controller', () => {
     status: function () {},
   };
 
-  //RemoveService = new Remove(MongooseServiceInstance);
+  RemoveService = new Remove(MongooseServiceInstance);
 
   it('should remove a list that matches the user id param', async function () {
- /*    const stubValue = {
+     const stubValue = {
       _id: id,
       name: hoaxer.internet.userName(),
       userId: id,
@@ -58,7 +58,7 @@ describe('List remove controller', () => {
 
     expect(stub.calledOnce).to.be.true;
 
-    mock.verify();*/
+    mock.verify();
     expect(true).to.be.true;
   });
 });

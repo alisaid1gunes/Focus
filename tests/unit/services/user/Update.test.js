@@ -12,13 +12,13 @@ const { User } = require('../../../../src/models');
 
 const MongooseServiceInstance = new MongooseService(User);
 
-//const UpdateService = new Update(MongooseServiceInstance);
+const UpdateService = new Update(MongooseServiceInstance);
 
 const mongoose = require('mongoose');
 
 describe('UpdateService Unit Tests', () => {
   describe('UpdateUser Functionality', () => {
-   /* it('it should successfuly update a user if id is valid', async () => {
+   it('it should successfuly update a user if id is valid', async () => {
       const id = new mongoose.Types.ObjectId();
       const stubValue = {
         _id: id,
@@ -57,7 +57,7 @@ describe('UpdateService Unit Tests', () => {
       expect(getStub.calledOnce).to.be.true;
       expect(result.success).to.equal(true);
       expect(result.message).to.equal(returnValue.message);
-    });*/
+    });
     expect(true).to.be.true;
   });
 });

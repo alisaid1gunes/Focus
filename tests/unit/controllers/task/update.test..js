@@ -33,10 +33,9 @@ describe('Task update controller', () => {
     status: function () {},
   };
 
-  //UpdateService = new Update(MongooseServiceInstance);
+  UpdateService = new Update(MongooseServiceInstance);
 
   it('should update a task that matches the id param', async function () {
-  /*
     const mock = sinon.mock(res);
     mock.expects('status').once().withExactArgs(200);
 
@@ -54,7 +53,7 @@ describe('Task update controller', () => {
 
     expect(stub.calledOnce).to.be.true;
 
-    mock.verify();*/
+    mock.verify();
     expect(true).to.be.true;
   });
 });

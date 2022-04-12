@@ -27,10 +27,10 @@ describe('Task remove controller', () => {
     status: function () {},
   };
 
- // RemoveService = new Remove(MongooseServiceInstance);
+ RemoveService = new Remove(MongooseServiceInstance);
 
   it('should remove a task that matches the user id param', async function () {
-    /* const stubValue = {
+     const stubValue = {
       _id: id,
       name: hoaxer.internet.userName(),
       done: false,
@@ -59,7 +59,7 @@ describe('Task remove controller', () => {
 
     expect(stub.calledOnce).to.be.true;
 
-    mock.verify();*/
+    mock.verify();
     expect(true).to.be.true;
   });
 });
