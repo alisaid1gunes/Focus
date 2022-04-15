@@ -56,7 +56,7 @@ jobs:
           working_directory: /
           command: |
             sudo apt-get update
-            sudo apt-get install python
+            sudo apt-get install python3
             sudo pip3 install awsebcli --upgrade
 
       - run:
