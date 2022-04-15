@@ -43,7 +43,7 @@ jobs:
             mv /tmp/docker/* /usr/bin
 
       - run: yarn ci:docker
-  
+
   deploy:
     working_directory: ~/app
     docker:
@@ -55,10 +55,8 @@ jobs:
           name: Installing deployment dependencies
           working_directory: /
           command: |
-            sudo apt-get -y -qq update
-            sudo apt-get install python-pip python-dev
-            pip install setuptools
-            sudo pip install awsebcli==3.14.11
+             sudo pip install --upgrade setuptools
+             sudo pip install awsebcli --upgrade
       - run:
           name: Deploying
           command: eb deploy $CIRCLE_BRANCH-my-application
@@ -67,7 +65,7 @@ workflows:
   version: 2
   build:
     jobs:
-     - build
-     - deploy:
-        requires: 
-          - build
+      - build
+      - deploy:
+          requires:
+            - build
