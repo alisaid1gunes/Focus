@@ -57,8 +57,8 @@ jobs:
           name: Installing deployment dependencies
           working_directory: /
           command: |
-             sudo apt-get install python-pip python-dev
-             sudo pip install awsebcli==3.14.11
+              apt-get install python-pip python-dev
+              pip install awsebcli==3.14.11
       - run:
           name: Deploying
           command: eb deploy $CIRCLE_BRANCH-my-application
