@@ -45,6 +45,8 @@ jobs:
       - run: yarn ci:docker
 
   deploy:
+    machine:
+      image: ubuntu-2004:202010-01
     working_directory: ~/app
     docker:
       - image: circleci/ruby:2.4.3
@@ -55,9 +57,8 @@ jobs:
           name: Installing deployment dependencies
           working_directory: /
           command: |
-            sudo apt-get -y -qq update
-            sudo apt-get install python3-setuptools
-            sudo easy_install3 pip
+            sudo apt-get update
+            sudo apt install python3-pip
             sudo pip3 install awsebcli --upgrade
 
       - run:
