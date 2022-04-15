@@ -56,7 +56,7 @@ jobs:
           working_directory: /
           command: |
             sudo apt-get update
-            sudo apt install python3-pip
+            sudo apt install python3.7
             sudo pip3 install awsebcli --upgrade
 
       - run:
@@ -68,6 +68,4 @@ workflows:
   build:
     jobs:
       - build
-      - deploy:
-          requires:
-            - build
+      - deploy
