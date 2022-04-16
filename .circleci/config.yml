@@ -57,7 +57,9 @@ jobs:
           name: Install Python
           command:
           sudo apt-get -y -qq update
-          sudo apt-get -y -qq install python3.4-dev\necho 'export PATH=/root/.local/bin/:$PATH' >> $BASH_ENV\necho 'export PATH=/home/circleci/.local/bin/:$PATH' >> $BASH_ENV\n"
+          sudo apt-get -y -qq install python3.4-dev
+          echo export PATH=/root/.local/bin/:$PATH >> $BASH_ENV
+          echo export PATH=/home/circleci/.local/bin/:$PATH >> $BASH_ENV
       - run:
           name: Install pip
           command: 
