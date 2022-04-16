@@ -78,7 +78,7 @@ jobs:
             sudo pip3 install --upgrade setuptools
             sudo pip3 install --upgrade pip
             sudo pip3 install --upgrade distlib
-            sudo pip3 install awsebcli --upgrade
+            
       - run:
           name: Deploying
           command: eb deploy $CIRCLE_BRANCH-my-application
