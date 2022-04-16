@@ -55,9 +55,9 @@ jobs:
           name: Installing deployment dependencies
           working_directory: /
           command: |
-            sudo apt-get update
-            sudo apt-get install python3
-            sudo pip install awsebcli --ignore-installed setuptools
+            sudo apt-get -y -qq update
+            sudo apt-get install python3-pip python3-dev build-essential
+            sudo pip3 install awsebcli --ignore-installed setuptools
 
       - run:
           name: Deploying
