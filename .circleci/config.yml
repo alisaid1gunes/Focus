@@ -55,7 +55,7 @@ jobs:
       - run:
           name: Install AWS EB CLI & S3 CLI
           command: |
-           python get-pip.py
+           python -m ensurepip --upgrade
            pip install virtualenv 
            virtualenv -p python3.7 virtenv
            cd virtenv
