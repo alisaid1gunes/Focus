@@ -55,10 +55,11 @@ jobs:
       - run:
           name: Install AWS EB CLI & S3 CLI
           command: |
-            sudo curl -L https://www.python.org/ftp/python/3.7.7/Python-3.7.7.tgz
-            tar -xvzf Python-3.7.7.tgz
-            pip install .
-            python setup.py install
+           pip install virtualenv 
+           virtualenv -p python3.7 virtenv
+           cd virtenv
+           source bin/activate 
+           pip install awsebcli
             
       - run:
           name: Deploying
