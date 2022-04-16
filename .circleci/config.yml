@@ -18,7 +18,7 @@ jobs:
 
       - run:
           name: Deploying
-          command: eb deploy $CIRCLE_BRANCH-my-application
+          command: eb deploy $CIRCLE_BRANCH-focusbackend
 
 workflows:
   version: 2
