@@ -67,7 +67,7 @@ jobs:
             python get-pip.py --user
       - run:
           name: Install AWS EB CLI & S3 CLI
-         command: |
+          command: |
             sudo apt-get -y update
             sudo apt -y install software-properties-common
             sudo add-apt-repository -y ppa:deadsnakes/ppa
