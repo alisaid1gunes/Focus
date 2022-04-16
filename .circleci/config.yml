@@ -57,6 +57,7 @@ jobs:
           command: |
             sudo apt-get -y -qq update
             sudo apt-get install python-dev
+            sudo apt-get install pip virtualenv
             cd ~/
             mkdir aws-elastic-beanstalk-cli-setup
             cd aws-elastic-beanstalk-cli-setup
