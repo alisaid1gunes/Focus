@@ -59,7 +59,7 @@ jobs:
             sudo apt-get update && apt-get install -y --no-install-recommends apt-utils
             sudo apt install python3-pip virtualenv
             cd ~/
-            mkdir aws-elastic-beanstalk-cli-setup
+            sudo mkdir aws-elastic-beanstalk-cli-setup
             cd aws-elastic-beanstalk-cli-setup
             git clone https://github.com/aws/aws-elastic-beanstalk-cli-setup.git
             python ./aws-elastic-beanstalk-cli-setup/scripts/ebcli_installer.py
