@@ -54,13 +54,21 @@ jobs:
       - checkout
 
       - run:
-          name: Installing deployment dependencies
-          working_directory: /
-          command: |
-            sudo apt install -y python3-pip
-            sudo pip3 install --upgrade pip
-            sudo pip3 install --upgrade awscli
-            sudo pip3 install --upgrade awsebcli
+          name: Install Python
+          command:
+          sudo apt-get -y -qq update
+          sudo apt-get -y -qq install python3.4-dev\necho 'export PATH=/root/.local/bin/:$PATH' >> $BASH_ENV\necho 'export PATH=/home/circleci/.local/bin/:$PATH' >> $BASH_ENV\n"
+      - run:
+          name: Install pip
+          command: 
+          curl -O https://bootstrap.pypa.io/get-pip.py
+          python3.4 get-pip.py --user\n
+      - run:
+          name: Install AWS EB CLI & S3 CLI
+          command: 
+          pip install awsebcli --upgrade --user
+          pip install awscli --upgrade --user
+      -
       - run:
           name: Deploying
           command: eb deploy $CIRCLE_BRANCH-my-application
