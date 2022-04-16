@@ -1,6 +1,4 @@
 version: 2
-orbs:
-  eb: circleci/aws-elastic-beanstalk@1.0.0
 jobs:
   build:
     docker:
@@ -47,8 +45,23 @@ jobs:
       - run: yarn ci:docker
 
   deploy:
-    environment-name: $CIRCLE_BRANCH-focusbackend
-    label: version-<<pipeline.number>>
+    working_directory: ~/app
+    docker:
+      - image: circleci/ruby:2.4.3
+    steps:
+      - checkout
+
+      - run:
+          name: Installing deployment dependencies
+          working_directory: /
+          command: |
+            sudo apt-get update
+            sudo apt-get install python3
+            sudo pip install awsebcli --ignore-installed setuptools
+
+      - run:
+          name: Deploying
+          command: eb deploy $CIRCLE_BRANCH-my-application
 
 workflows:
   version: 2
