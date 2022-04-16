@@ -64,7 +64,7 @@ jobs:
           name: Install pip
           command: 
           curl -O https://bootstrap.pypa.io/get-pip.py
-          python3.4 get-pip.py --user\n
+          python3.4 get-pip.py --user
       - run:
           name: Install AWS EB CLI & S3 CLI
           command: 
