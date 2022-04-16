@@ -70,7 +70,6 @@ jobs:
           command: 
             pip install awsebcli --upgrade --user
             pip install awscli --upgrade --user
-      -
       - run:
           name: Deploying
           command: eb deploy $CIRCLE_BRANCH-my-application
