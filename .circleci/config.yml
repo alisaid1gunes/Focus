@@ -6,6 +6,7 @@ jobs:
       - image: mongo:latest
       - image: redis:latest
       - image: gradientco/node-elastic-beanstalk:7.10.0
+      - image: circleci/python:3.7-node-browsers-legacy
 
     working_directory: ~/repo
 
@@ -56,6 +57,7 @@ jobs:
           name: Installing deployment dependencies
           working_directory: /
           command: |
+           python --version
            eb --version
       - run:
           name: Deploying
