@@ -55,11 +55,8 @@ jobs:
           name: Installing deployment dependencies
           working_directory: /
           command: |
-           sudo apt-get update
-           sudo apt-get install build-essential libpq-dev libssl-dev OpenSSL libffi-dev zlib1g-dev
-           sudo apt-get install python3.7
-           python3.7 --version
-           curl -O https://bootstrap.pypa.io/get-pip.py
+           sudo apt-get -y -qq update
+           sudo apt-get install python-pip python-dev build-essential 
            pip install awsebcli --upgrade
            eb --version
       - run:
