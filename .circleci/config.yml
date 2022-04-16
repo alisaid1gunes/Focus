@@ -56,6 +56,8 @@ jobs:
           working_directory: /
           command: |
             sudo apt-get update
+            sudo apt install software-properties-common
+            sudo add-apt-repository ppa:deadsnakes/ppa
             sudo apt-get install python3.7
             sudo python3 --version
             sudo curl -O https://bootstrap.pypa.io/get-pip.py
