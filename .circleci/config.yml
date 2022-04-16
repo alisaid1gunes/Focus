@@ -55,6 +55,7 @@ jobs:
           name: Installing deployment dependencies
           working_directory: /
           command: |
+           sudo apt-get install python-distutils-extra
            sudo apt-get install python3.7
            curl -O https://bootstrap.pypa.io/get-pip.py
            pip install awsebcli --upgrade
