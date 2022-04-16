@@ -47,8 +47,8 @@ jobs:
       - run: yarn ci:docker
 
   deploy:
-      environment-name: $CIRCLE_BRANCH-focusbackend
-      label: version-<<pipeline.number>>
+    environment-name: $CIRCLE_BRANCH-focusbackend
+    label: version-<<pipeline.number>>
 
 workflows:
   version: 2
