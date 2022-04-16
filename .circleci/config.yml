@@ -56,8 +56,10 @@ jobs:
           working_directory: /
           command: |
             sudo apt-get update
-            sudo apt-get install python3
-            sudo pip install awsebcli --upgrade
+            sudo apt-get install python3.7
+            sudo python3 --version
+            sudo curl -O https://bootstrap.pypa.io/get-pip.py
+            sudo pip install awsebcli --upgrade --user
 
       - run:
           name: Deploying
