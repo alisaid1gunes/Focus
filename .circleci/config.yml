@@ -1,8 +1,9 @@
 version: 2
+machine:
+    image: circleci/classic:201808-01
 jobs:
   build:
-    machine:
-      image: circleci/classic:201808-01
+   
     docker:
       - image: node:alpine
       - image: mongo:latest
@@ -50,8 +51,6 @@ jobs:
 
   deploy:
     working_directory: ~/app
-    machine:
-      image: circleci/classic:201808-01
     docker:
       - image: circleci/ruby:2.4.3
     steps:
