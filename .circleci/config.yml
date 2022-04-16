@@ -1,12 +1,53 @@
 version: 2
 
 jobs:
-  deploy:
+  docker:
+    - image: node:alpine
+    - image: mongo:latest
+    - image: redis:latest
+    - image: gradientco/node-elastic-beanstalk:7.10.0
+    - image: circleci/python:3.7-node-browsers-legacy
+    
+  machine:
+    image: circleci/classic:201808-01
+  build_deploy:
+   - checkout
     working_directory: ~/app
-    machine:
-      image: circleci/classic:201808-01
-    steps:
-      - checkout
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "package.json" }}
+            # fallback to using the latest cache if no exact match is found
+            - v1-dependencies-
+
+      - run: yarn install
+
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
+
+      # run tests!
+      - run: yarn ci:test
+
+      - setup_remote_docker:
+          version: 19.03.13
+          docker_layer_caching: true
+
+      - run:
+          name: Install Docker client
+          command: |
+            apk update && apk add curl curl-dev
+            set -x
+            VER="19.03.13"
+            curl -L -o /tmp/docker-$VER.tgz https://download.docker.com/linux/static/stable/x86_64/docker-$VER.tgz
+            tar -xz -C /tmp -f /tmp/docker-$VER.tgz
+            mv /tmp/docker/* /usr/bin
+
+      - run: yarn ci:docker
+  
+   
+  
       - run:
           name: Install AWS EB CLI & S3 CLI
           command: |
@@ -24,4 +65,4 @@ workflows:
   version: 2
   build:
     jobs:
-      - deploy
+      - build_deploy
