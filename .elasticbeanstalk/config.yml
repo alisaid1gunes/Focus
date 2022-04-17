@@ -4,6 +4,5 @@ branch-defaults:
 global:
   application_name: FocusBackend
   default_ec2_keyname: XXXXXX
-  default_platform: 64bit Amazon Linux 2017.09 v2.6.2 running Ruby 2.4 (Passenger Standalone)
-  default_region: eu-west-1
+  default_platform: 64bit Amazon Linux 2017.09 v2.6.2 running Nodejs
   sc: git
