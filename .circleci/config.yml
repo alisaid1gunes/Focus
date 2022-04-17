@@ -56,7 +56,7 @@ jobs:
           name: Installing deployment dependencies
           working_directory: /
           command: |
-           sudo pip install pipenv
+           pip install pipenv
            pipenv install
            python --version
            eb --version
