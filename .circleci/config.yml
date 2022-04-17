@@ -56,10 +56,10 @@ jobs:
           name: Installing deployment dependencies
           working_directory: /
           command: |
-           pip install pipenv
-           pipenv install
-           python --version
-           eb --version
+            pyenv versions
+            pyenv global 3.7.0
+            pip install --upgrade pip
+            pip install awsebcli
       - run:
           name: Deploying
           command: eb deploy $CIRCLE_BRANCH-my-application
