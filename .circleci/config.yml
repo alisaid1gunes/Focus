@@ -1,9 +1,10 @@
 version: 2
-machine:
-    image: circleci/classic:201808-01
+
 jobs:
   
   build:
+    machine:
+      image: circleci/classic:201808-01
     docker:
       - image: node:alpine
       - image: mongo:latest
@@ -51,6 +52,8 @@ jobs:
   deploy:
    
     working_directory: ~/app
+    machine:
+      image: circleci/classic:201808-01
     docker:
       - image: python:3.7.13-bullseye
     steps:
