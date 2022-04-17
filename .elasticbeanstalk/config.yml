@@ -5,5 +5,5 @@ global:
   application_name: FocusBackend
   default_ec2_keyname: XXXXXX
   default_platform: 64bit Amazon Linux 2017.09 v2.6.2 running Nodejs 
-  default_region: eu-east-1
+  default_region: us-east-1
   sc: git
