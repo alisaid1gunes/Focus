@@ -1,7 +1,8 @@
 version: 2
-jobs:
-  machine:
+machine:
     image: circleci/classic:201808-01
+jobs:
+  
   build:
     docker:
       - image: node:alpine
