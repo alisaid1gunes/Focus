@@ -1,6 +1,6 @@
 branch-defaults:
   master:
-    environment: $CIRCLE_BRANCH-focusbackend
+    environment: $CIRCLE_BRANCH-my-application
 global:
   application_name: FocusBackend
   default_ec2_keyname: XXXXXX
