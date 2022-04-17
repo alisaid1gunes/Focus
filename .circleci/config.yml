@@ -1,5 +1,7 @@
 version: 2
 jobs:
+  machine:
+    image: circleci/classic:201808-01
   build:
     docker:
       - image: node:alpine
@@ -46,8 +48,7 @@ jobs:
       - run: yarn ci:docker
 
   deploy:
-    machine:
-      image: circleci/classic:201808-01
+   
     working_directory: ~/app
     docker:
       - image: python:3.7.13-bullseye
