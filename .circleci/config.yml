@@ -48,7 +48,6 @@ jobs:
   deploy:
     working_directory: ~/app
     docker:
-      - image: circleci/ruby:2.4.3
       - image: python:3.7.13-bullseye
     steps:
       - checkout
@@ -57,6 +56,8 @@ jobs:
           name: Installing deployment dependencies
           working_directory: /
           command: |
+           sudo pip install pipenv
+           pipenv install
            python --version
            eb --version
       - run:
