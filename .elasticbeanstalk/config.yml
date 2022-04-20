@@ -1,9 +1,9 @@
 branch-defaults:
   master:
-    environment: BRANCHNAME-my-application
+    environment: Focusbackend-env-1
 global:
-  application_name: FocusBackend
+  application_name: Focus(backend)
   default_ec2_keyname: XXXXXX
-  default_platform: Node.js 16 running on 64bit Amazon Linux 2
+  default_platform: ECS running on 64bit Amazon Linux 2
   default_region: us-east-1
   sc: git

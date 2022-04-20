@@ -61,7 +61,7 @@ jobs:
              pip install awsebcli
       - run:
           name: Deploying
-          command: eb deploy BRANCHNAME-my-application
+          command: eb deploy Focusbackend-env-1
 
 workflows:
   version: 2

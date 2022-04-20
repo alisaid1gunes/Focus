@@ -1,0 +1,59 @@
+{
+    "AWSEBDockerrunVersion": 2,
+    "volumes": [
+        {
+            "name": "mongo-vol",
+            "host": {
+                "sourcePath": "mongo_db:/data/db"
+            }
+        },
+        {
+            "name": "redis-vol",
+            "host": {
+                "sourcePath": "redis:/data/db"
+            }
+        },
+        {
+            "name": "web-vol",
+            "host": {
+                "sourcePath": "/var/app/web-vol"
+            }
+        }
+    ],
+    "containerDefinitions": [
+        {
+            "name": "mongo",
+            "image": "mongo:latest",
+            "essential": false,
+            "memory": 128
+        },
+        {
+            "name": "redis",
+            "image": "redis:latest",
+            "essential": false,
+            "memory": 128
+        },
+        {
+            "name": "web",
+            "image": "alisaidgunes/focus",
+            "essential": true,
+            "memory": 128,
+            "portMappings": [
+                {
+                    "hostPort": 80,
+                    "containerPort": 5000
+                }
+            ],
+            "links": [
+                "mongo", "redis"
+            ],
+            "mountPoints": [
+                {
+                    "sourceVolume": "web-vol",
+                    "containerPath": "/web-data",
+                    "readOnly": false
+                }
+            ]
+        }
+    ]
+    }
