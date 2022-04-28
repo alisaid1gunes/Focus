@@ -6,11 +6,11 @@ This is a web project that helps people focus and manage their day.
 
 ## Tech Stack
 
-**Server:** Node, Express, MongoDB, Redis 
+**Backend:** Node, Express, MongoDB, Redis 
 
 **DevOps:** Docker, Amazon Aws, CircleCI
 
-**Client:** React, Redux, TailwindCSS
+**Frontend:** React, Redux, TailwindCSS
 
 
 
