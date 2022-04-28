@@ -17,7 +17,7 @@ This is a web project that helps people focus and manage their day.
 
 ## Installation
 
-Install my-project with yarn
+Install Focus with yarn
 
 ```bash
   yarn install
