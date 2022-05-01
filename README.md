@@ -1,49 +1,62 @@
-<h1 align="center">Welcome to Focus 👋</h1>
-<p>
-  <img alt="Version" src="https://img.shields.io/badge/version-1.0.0-blue.svg?cacheSeconds=2592000" />
-  <a href="#" target="_blank">
-    <img alt="License: ISC" src="https://img.shields.io/badge/License-ISC-yellow.svg" />
-  </a>
-  <a href="https://twitter.com/alisaidguness" target="_blank">
-    <img alt="Twitter: alisaidguness" src="https://img.shields.io/twitter/follow/alisaidguness.svg?style=social" />
-  </a>
-</p>
 
-> This is a web project that helps people focus and manage their day.
+# Focus
 
-### 🏠 [Homepage](Here)
+This is a web project that helps people focus and manage their day.
 
-### ✨ [Demo](Here)
 
-## Install
+## Tech Stack
 
-```sh
-yarn install
+**Backend:** Node, Express, MongoDB, Redis 
+
+**DevOps:** Docker, Amazon Aws, CircleCI
+
+**Frontend:** React, Redux, TailwindCSS
+
+
+
+
+## Installation
+
+Install Focus with yarn
+
+```bash
+  yarn install
+```
+    
+## Running Tests
+
+To run tests, run the following command
+
+```bash
+  yarn run test
 ```
 
-## Usage
 
-```sh
-yarn run start
-```
+## Environment Variables
 
-## Run tests
+To run this project, you will need to add the following environment variables to your .env file
 
-```sh
-yarn run test
-```
+`DB_CONNECT` 
+`ACCESS_TOKEN_SECRET`
+`REFRESH_TOKEN_SECRET` 
+`SENDGRID_API_KEY` 
+`VERIFIED_SENDER` 
+`GOOGLE_CLIENT_ID`
+`GOOGLE_CLIENT_SECRET `
+`CLOUDINARY_CLOUD_NAME`
+`CLOUDINARY_API_KEY `
+`CLOUDINARY_API_SECRET `
+`PORT`
 
-## Author
+## License
 
-👤 **Ali Said Güneş**
+[MIT](https://choosealicense.com/licenses/mit/)
 
-* Twitter: [@alisaidguness](https://twitter.com/alisaidguness)
-* Github: [@alisaid1gunes](https://github.com/alisaid1gunes)
-* LinkedIn: [@alisaidgunes](https://linkedin.com/in/alisaidgunes)
+
+## 🔗 Links
+[![https://www.linkedin.com/in/alisaidgunes/](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/)
+[![https://twitter.com/alisaidguness](https://img.shields.io/badge/twitter-1DA1F2?style=for-the-badge&logo=twitter&logoColor=white)](https://twitter.com/)
 
 ## Show your support
 
 Give a ⭐️ if this project helped you!
-
-***
-_This README was generated with ❤️ by [readme-md-generator](https://github.com/kefranabg/readme-md-generator)_
