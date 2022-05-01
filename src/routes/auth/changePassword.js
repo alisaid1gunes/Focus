@@ -15,7 +15,7 @@ const ChangePasswordService = new ChangePassword(new MongooseService(User));
 router.post(
   '/password/change',
   verify,
-  (req, res, next, ChangePasswordService) =>
+  (req, res, next) =>
     authController.changePassword(req, res, next, ChangePasswordService)
 );
 

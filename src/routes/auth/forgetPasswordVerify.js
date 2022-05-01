@@ -12,15 +12,13 @@ const ForgetPasswordVerifyService = new ForgetPasswordVerify(
   new MongooseService(User)
 );
 
-router.post(
-  '/password/forget/verify',
-  (req, res, next, ForgetPasswordVerifyService) =>
-    authController.forgetPasswordVerify(
-      req,
-      res,
-      next,
-      ForgetPasswordVerifyService
-    )
+router.post('/password/forget/verify', (req, res, next) =>
+  authController.forgetPasswordVerify(
+    req,
+    res,
+    next,
+    ForgetPasswordVerifyService
+  )
 );
 
 module.exports = router;

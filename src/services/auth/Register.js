@@ -14,6 +14,7 @@ class Register {
 
   async RegisterUser(req) {
     const bodyIn = req.body;
+
     const { file } = req;
     if (!file)
       return {
@@ -26,7 +27,7 @@ class Register {
     if (error) return { message: error.details[0].message, success: false };
 
     const emailExist = await this.mongooseUser.get({ email: bodyIn.email });
-
+   
     if (emailExist) return { message: 'Email already exists', success: false };
 
     const salt = await bcrypt.genSalt(10);
@@ -42,6 +43,7 @@ class Register {
       code,
       expireDate,
     };
+
     const fileUrl = req.file.path;
 
     bodyIn.profileUrl = fileUrl;

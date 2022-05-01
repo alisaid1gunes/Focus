@@ -12,7 +12,7 @@ const { Task } = require('../../models');
 
 const TaskService = new Update(new MongooseService(Task));
 
-router.put('/:id', verify, (req, res, next, TaskService) =>
+router.put('/:id', verify, (req, res, next) =>
   taskController.update(req, res, next, TaskService)
 );
 

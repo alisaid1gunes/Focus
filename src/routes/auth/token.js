@@ -10,7 +10,7 @@ const { RefreshToken } = require('../../models');
 
 const RefreshService = new Refresh(new MongooseService(RefreshToken));
 
-router.post('/token', (req, res, next, RefreshService) =>
+router.post('/token', (req, res, next) =>
   authController.refresh(req, res, next, RefreshService)
 );
 

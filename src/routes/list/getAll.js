@@ -12,7 +12,7 @@ const { List } = require('../../models');
 
 const ListService = new GetAll(new MongooseService(List));
 
-router.get('/all/:id', verify, (req, res, next, ListService) =>
+router.get('/all/:id', verify, (req, res, next) =>
   listController.getAll(req, res, next, ListService)
 );
 

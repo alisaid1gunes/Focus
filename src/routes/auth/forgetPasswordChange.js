@@ -14,7 +14,7 @@ const ForgetPasswordChangeService = new ForgetPasswordChange(
 
 router.post(
   '/password/forget/change',
-  (req, res, next, ForgetPasswordChangeService) =>
+  (req, res, next) =>
     authController.forgetPasswordChange(
       req,
       res,

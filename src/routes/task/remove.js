@@ -12,7 +12,7 @@ const { Task } = require('../../models');
 
 const TaskService = new Remove(new MongooseService(Task));
 
-router.delete('/:id', verify, (req, res, next, TaskService) =>
+router.delete('/:id', verify, (req, res, next) =>
   taskController.remove(req, res, next, TaskService)
 );
 

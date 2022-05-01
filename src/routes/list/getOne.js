@@ -12,7 +12,7 @@ const { List } = require('../../models');
 
 const ListService = new GetOne(new MongooseService(List));
 
-router.get('/:id', verify, verify, (req, res, next, ListService) =>
+router.get('/:id', verify, (req, res, next) =>
   listController.getOne(req, res, next, ListService)
 );
 

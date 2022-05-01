@@ -31,7 +31,7 @@ class Login {
         return { message: 'Email or password is wrong', success: false };
 
       const validPass = await bcrypt.compare(body.password, user.password);
-
+      console.log(body.password, user.password);
       if (!validPass) return { message: 'Invalid password', success: false };
 
       if (!user.activation.isActivated)

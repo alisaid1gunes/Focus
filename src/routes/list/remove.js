@@ -12,7 +12,7 @@ const { List } = require('../../models');
 
 const ListService = new Remove(new MongooseService(List));
 
-router.delete('/:id', verify, (req, res, next, ListService) =>
+router.delete('/:id', verify, (req, res, next) =>
   listController.remove(req, res, next, ListService)
 );
 

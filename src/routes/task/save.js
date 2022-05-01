@@ -12,7 +12,7 @@ const { Task } = require('../../models');
 
 const TaskService = new Save(new MongooseService(Task));
 
-router.post('/', verify, (req, res, next, TaskService) =>
+router.post('/', verify, (req, res, next) =>
   taskController.save(req, res, next, TaskService)
 );
 

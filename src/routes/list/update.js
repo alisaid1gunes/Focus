@@ -12,7 +12,7 @@ const { List } = require('../../models');
 
 const ListService = new Update(new MongooseService(List));
 
-router.put('/:id', verify, (req, res, next, ListService) =>
+router.put('/:id', verify, (req, res, next) =>
   listController.update(req, res, next, ListService)
 );
 

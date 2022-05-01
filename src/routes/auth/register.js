@@ -15,7 +15,7 @@ const RegisterService = new Register(new MongooseService(User));
 router.post(
   '/register',
   upload.single('profile'),
-  (req, res, next, RegisterService) =>
+  (req, res, next) =>
     authController.register(req, res, next, RegisterService)
 );
 

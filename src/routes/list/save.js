@@ -12,7 +12,7 @@ const { List } = require('../../models');
 
 const ListService = new Save(new MongooseService(List));
 
-router.post('/', verify, (req, res, next, ListService) =>
+router.post('/', verify, (req, res, next) =>
   listController.save(req, res, next, ListService)
 );
 

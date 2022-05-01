@@ -13,7 +13,7 @@ const GoogleAuthService = new GoogleAuth(
   new MongooseService(RefreshToken)
 );
 
-router.post('/google', (req, res, next, GoogleAuthService) =>
+router.post('/google', (req, res, next) =>
   authController.googleAuth(req, res, next, GoogleAuthService)
 );
 

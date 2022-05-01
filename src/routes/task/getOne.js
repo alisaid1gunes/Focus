@@ -12,7 +12,7 @@ const { Task } = require('../../models');
 
 const TaskService = new GetOne(new MongooseService(Task));
 
-router.get('/:id', verify, verify, (req, res, next, TaskService) =>
+router.get('/:id', verify, (req, res, next) =>
   taskController.getOne(req, res, next, TaskService)
 );
 

@@ -13,7 +13,7 @@ const register = async (req, res, next, RegisterService) => {
       return res;
     }
 
-    next(ApiErrorService.badRequest(result.error));
+    next(ApiErrorService.badRequest(result.message));
   } catch (err) {
     next(
       ApiErrorService.badRequest(

@@ -13,7 +13,7 @@ const LoginService = new Login(
   new MongooseService(RefreshToken)
 );
 
-router.post('/login', (req, res, next, LoginService) =>
+router.post('/login', (req, res, next) =>
   authController.login(req, res, next, LoginService)
 );
 

@@ -10,7 +10,7 @@ const { User } = require('../../models');
 
 const ActivateService = new Activate(new MongooseService(User));
 
-router.post('/activate', (req, res, next, ActivateService) =>
+router.post('/activate', (req, res, next) =>
   authController.activate(req, res, next, ActivateService)
 );
 

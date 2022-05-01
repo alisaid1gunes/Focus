@@ -12,7 +12,7 @@ const { User } = require('../../models');
 
 const ForgetPasswordService = new ForgetPassword(new MongooseService(User));
 
-router.post('/password/forget', (req, res, next, ForgetPasswordService) =>
+router.post('/password/forget', (req, res, next) =>
   authController.forgetPassword(req, res, next, ForgetPasswordService)
 );
 
